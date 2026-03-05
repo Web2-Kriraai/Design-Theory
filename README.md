@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# The Design Theory — Interior Design & Architecture Studio
 
-## Getting Started
+A premium, responsive website built with Next.js 16 (App Router), featuring a luxury aesthetic, dynamic content sections, and a MongoDB-integrated enquiry system.
 
-First, run the development server:
+## Project Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This project follows a professional `client-server` architecture for clear separation of concerns:
+
+```text
+/
+├── client/
+│   └── frontend/          # Main Next.js 16 Application
+│       ├── app/           # App Router pages and API routes
+│       ├── components/    # Reusable UI components (Header, Footer, etc.)
+│       ├── lib/           # Shared utilities (MongoDB Client)
+│       └── public/        # Optimized images and assets
+├── server/
+│   └── backend/           # Future backend service extensions / DB models
+├── package.json           # Root workspace configuration
+└── README.md              # Documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup Instructions
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 1. Prerequisites
+- **Node.js**: v18.0.0 or higher
+- **MongoDB**: Local instance running at `mongodb://127.0.0.1:27017`
+- **MongoDB Compass**: For database management
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Installation
+From the root directory, run:
+```bash
+npm install
+```
+This will install dependencies for the entire workspace using the built-in workspace support.
 
-## Learn More
+### 3. Running the Development Server
+To start the frontend application:
+```bash
+npm run dev
+```
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Build for Production
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## MongoDB & Compass Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The Inquiry form stores data in a local MongoDB database named `The_design_Theory`.
 
-## Deploy on Vercel
+### Steps to setup Compass:
+1.  **Download Compass**: Install [MongoDB Compass](https://www.mongodb.com/products/compass).
+2.  **Connect**: Open Compass and use this connection string:
+    `mongodb://127.0.0.1:27017`
+3.  **Explore Data**:
+    - Select the **The_design_Theory** database.
+    - Open the **enquiry** collection.
+    - Here you can view, edit, or export all submitted form data (Name, Email, Phone, Project Type, etc.).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
+- **Modern UI**: Dark/Light theme transitions, serif/sans-serif typography (Cormorant Garamond & Montserrat).
+- **Responsive Navigation**: Transitions from transparent to sticky with a shrinking logo effect.
+- **Portfolio filtering**: Client-side project filtering (Residential, Commercial, Architecture).
+- **Inquiry Form**: Real-time validation, 10-digit phone enforcement, and MongoDB persistence.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Created for The Design Theory.*

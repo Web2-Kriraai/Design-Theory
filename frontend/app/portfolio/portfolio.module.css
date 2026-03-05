@@ -1,0 +1,236 @@
+/* ==========================================
+   PORTFOLIO PAGE — The Design Theory
+   ========================================== */
+
+.page {
+    background: var(--bg-primary, #F9F8F6);
+    min-height: 100vh;
+}
+
+/* ── PAGE HEADER ── */
+.pageHeader {
+    text-align: center;
+    padding: 160px 48px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pageLabel {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-gold, #B89E7B);
+    margin-bottom: 12px;
+}
+
+.pageTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 3.8rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    margin-bottom: 0;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+}
+
+/* ── FILTERS ── */
+.filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 0 24px 60px;
+    animation: fadeUp 0.8s ease 0.1s both;
+}
+
+.filterBtn {
+    background: transparent;
+    border: none;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted, #6B6560);
+    cursor: pointer;
+    padding-bottom: 4px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.filterBtn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent-gold, #B89E7B);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.filterBtn:hover {
+    color: var(--text-primary, #3A3530);
+}
+
+.filterBtnActive {
+    color: var(--text-primary, #3A3530);
+}
+
+.filterBtnActive::after {
+    transform: scaleX(1);
+}
+
+.filterBtn:not(.filterBtnActive):hover::after {
+    transform: scaleX(0.5);
+}
+
+/* ── GRID ── */
+.gridWrap {
+    padding: 0 48px 100px;
+    background: #ffffff;
+    min-height: 50vh;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1400px;
+    margin: -40px auto 0;
+    /* Pull up into the beige area slightly */
+    position: relative;
+    z-index: 2;
+}
+
+.projectItem {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    cursor: pointer;
+    animation: fadeUp 0.8s ease both;
+}
+
+/* Base class for filtering, handled in JS via animation delay */
+
+.projectImage {
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.projectOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(58, 53, 48, 0.8) 0%,
+            rgba(58, 53, 48, 0.2) 40%,
+            transparent 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+}
+
+.projectItem:hover .projectImage {
+    transform: scale(1.05);
+}
+
+.projectItem:hover .projectOverlay {
+    opacity: 1;
+}
+
+.projectName {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: #ffffff;
+    margin-bottom: 8px;
+    transform: translateY(12px);
+    transition: transform 0.5s ease;
+}
+
+.projectCategory {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-gold-light, #d4c4a8);
+    transform: translateY(12px);
+    transition: transform 0.5s ease 0.05s;
+}
+
+.projectItem:hover .projectName,
+.projectItem:hover .projectCategory {
+    transform: translateY(0);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pageHeader {
+        padding: 140px 24px 40px;
+    }
+
+    .pageTitle {
+        font-size: 3rem;
+    }
+
+    .gridWrap {
+        padding: 0 24px 80px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: -20px;
+    }
+
+    .filters {
+        gap: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pageTitle {
+        font-size: 2.2rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projectItem {
+        aspect-ratio: 1 / 1;
+    }
+}

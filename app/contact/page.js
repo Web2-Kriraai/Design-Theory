@@ -10,19 +10,91 @@ export default function ContactPage() {
         firstName: "",
         lastName: "",
         email: "",
-        phone: "",
+        phoneNumber: "",
         projectType: "",
         message: "",
     });
+    const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [globalError, setGlobalError] = useState("");
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        // Clear field error when user starts typing
+        if (errors[name]) {
+            setErrors({ ...errors, [name]: "" });
+        }
+        if (globalError) setGlobalError("");
     };
 
-    const handleSubmit = (e) => {
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
+        if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!formData.email || !emailRegex.test(formData.email)) {
+            newErrors.email = "Please enter a valid email address";
+        }
+
+        const phoneRegex = /^\d{10,15}$/;
+        if (!formData.phoneNumber || !phoneRegex.test(formData.phoneNumber.replace(/\s/g, ''))) {
+            newErrors.phoneNumber = "Please enter a valid 10-15 digit phone number";
+        }
+
+        if (!formData.projectType) newErrors.projectType = "Please select a project type";
+        if (!formData.message.trim() || formData.message.trim().length < 10) {
+            newErrors.message = "Message must be at least 10 characters";
+        }
+
+        return newErrors;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
+
+        const validationErrors = validateForm();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
+        setIsLoading(true);
+        setGlobalError("");
+
+        try {
+            const response = await fetch("/api/enquiry", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setSubmitted(true);
+                setFormData({
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    phoneNumber: "",
+                    projectType: "",
+                    message: "",
+                });
+            } else {
+                if (data.errors) {
+                    setErrors(data.errors);
+                } else {
+                    setGlobalError(data.message || "Something went wrong. Please try again.");
+                }
+            }
+        } catch (error) {
+            setGlobalError("Unable to connect to the server. Please check your connection.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -108,6 +180,12 @@ export default function ContactPage() {
                         <form className={styles.form} onSubmit={handleSubmit} noValidate>
                             <h2 className={styles.formHeading}>Send Enquiry</h2>
 
+                            {globalError && (
+                                <div style={{ color: '#d9534f', fontSize: '0.85rem', marginBottom: '15px', fontFamily: 'var(--font-sans)' }}>
+                                    {globalError}
+                                </div>
+                            )}
+
                             <div className={styles.formRow}>
                                 <div className={styles.formGroup}>
                                     <label className={styles.label} htmlFor="firstName">First Name <span className={styles.req}>*</span></label>
@@ -116,11 +194,12 @@ export default function ContactPage() {
                                         name="firstName"
                                         type="text"
                                         required
-                                        className={styles.input}
+                                        className={`${styles.input} ${errors.firstName ? styles.inputError : ""}`}
                                         value={formData.firstName}
                                         onChange={handleChange}
                                         placeholder="Rachitha"
                                     />
+                                    {errors.firstName && <span style={{ color: '#d9534f', fontSize: '0.7rem', marginTop: '4px', fontFamily: 'var(--font-sans)' }}>{errors.firstName}</span>}
                                 </div>
                                 <div className={styles.formGroup}>
                                     <label className={styles.label} htmlFor="lastName">Last Name <span className={styles.req}>*</span></label>
@@ -129,11 +208,12 @@ export default function ContactPage() {
                                         name="lastName"
                                         type="text"
                                         required
-                                        className={styles.input}
+                                        className={`${styles.input} ${errors.lastName ? styles.inputError : ""}`}
                                         value={formData.lastName}
                                         onChange={handleChange}
                                         placeholder="Modupalli"
                                     />
+                                    {errors.lastName && <span style={{ color: '#d9534f', fontSize: '0.7rem', marginTop: '4px', fontFamily: 'var(--font-sans)' }}>{errors.lastName}</span>}
                                 </div>
                             </div>
 
@@ -145,32 +225,35 @@ export default function ContactPage() {
                                         name="email"
                                         type="email"
                                         required
-                                        className={styles.input}
+                                        className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
                                         value={formData.email}
                                         onChange={handleChange}
                                         placeholder="hello@example.com"
                                     />
+                                    {errors.email && <span style={{ color: '#d9534f', fontSize: '0.7rem', marginTop: '4px', fontFamily: 'var(--font-sans)' }}>{errors.email}</span>}
                                 </div>
                                 <div className={styles.formGroup}>
-                                    <label className={styles.label} htmlFor="phone">Phone Number</label>
+                                    <label className={styles.label} htmlFor="phoneNumber">Phone Number <span className={styles.req}>*</span></label>
                                     <input
-                                        id="phone"
-                                        name="phone"
+                                        id="phoneNumber"
+                                        name="phoneNumber"
                                         type="tel"
-                                        className={styles.input}
-                                        value={formData.phone}
+                                        required
+                                        className={`${styles.input} ${errors.phoneNumber ? styles.inputError : ""}`}
+                                        value={formData.phoneNumber}
                                         onChange={handleChange}
                                         placeholder="+91 XXXXX XXXXX"
                                     />
+                                    {errors.phoneNumber && <span style={{ color: '#d9534f', fontSize: '0.7rem', marginTop: '4px', fontFamily: 'var(--font-sans)' }}>{errors.phoneNumber}</span>}
                                 </div>
                             </div>
 
                             <div className={styles.formGroup}>
-                                <label className={styles.label} htmlFor="projectType">Project Type</label>
+                                <label className={styles.label} htmlFor="projectType">Project Type <span className={styles.req}>*</span></label>
                                 <select
                                     id="projectType"
                                     name="projectType"
-                                    className={`${styles.input} ${styles.select}`}
+                                    className={`${styles.input} ${styles.select} ${errors.projectType ? styles.inputError : ""}`}
                                     value={formData.projectType}
                                     onChange={handleChange}
                                 >
@@ -183,23 +266,25 @@ export default function ContactPage() {
                                     <option value="turnkey">Turnkey Project</option>
                                     <option value="consultation">Consultation</option>
                                 </select>
+                                {errors.projectType && <span style={{ color: '#d9534f', fontSize: '0.7rem', marginTop: '4px', fontFamily: 'var(--font-sans)' }}>{errors.projectType}</span>}
                             </div>
 
                             <div className={styles.formGroup}>
-                                <label className={styles.label} htmlFor="message">Your Message</label>
+                                <label className={styles.label} htmlFor="message">Your Message <span className={styles.req}>*</span></label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     rows={5}
-                                    className={`${styles.input} ${styles.textarea}`}
+                                    className={`${styles.input} ${styles.textarea} ${errors.message ? styles.inputError : ""}`}
                                     value={formData.message}
                                     onChange={handleChange}
                                     placeholder="Tell us about your project, timeline, and any specific requirements…"
                                 />
+                                {errors.message && <span style={{ color: '#d9534f', fontSize: '0.7rem', marginTop: '4px', fontFamily: 'var(--font-sans)' }}>{errors.message}</span>}
                             </div>
 
-                            <button type="submit" className={styles.submitBtn}>
-                                Send Enquiry <span className={styles.btnArrow}>→</span>
+                            <button type="submit" className={styles.submitBtn} disabled={isLoading}>
+                                {isLoading ? "Sending..." : "Send Enquiry"} <span className={styles.btnArrow}>→</span>
                             </button>
 
                             <p className={styles.privacyNote}>

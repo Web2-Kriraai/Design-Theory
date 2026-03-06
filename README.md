@@ -4,19 +4,17 @@ A premium, responsive website built with Next.js 16 (App Router), featuring a lu
 
 ## Project Structure
 
-This project follows a professional `client-server` architecture for clear separation of concerns:
+This project is built as a unified Next.js 16 application:
 
 ```text
 /
-├── client/
-│   └── frontend/          # Main Next.js 16 Application
-│       ├── app/           # App Router pages and API routes
-│       ├── components/    # Reusable UI components (Header, Footer, etc.)
-│       ├── lib/           # Shared utilities (MongoDB Client)
-│       └── public/        # Optimized images and assets
-├── server/
-│   └── backend/           # Future backend service extensions / DB models
-├── package.json           # Root workspace configuration
+├── frontend/              # Main Next.js 16 Application
+│   ├── app/               # App Router pages and unified API routes
+│   ├── components/        # Reusable UI components
+│   ├── lib/               # Shared utilities (MongoDB Client)
+│   ├── models/            # Mongoose models for DB
+│   └── public/            # Optimized images and assets
+├── package.json           # Root configuration
 └── README.md              # Documentation
 ```
 

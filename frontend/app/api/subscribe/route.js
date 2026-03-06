@@ -1,29 +1,34 @@
+import Newsletter from '@/models/Newsletter';
+import connectDB from '@/lib/mongodb';
 import { NextResponse } from 'next/server';
 
+// POST /api/subscribe — public newsletter subscription
 export async function POST(request) {
     try {
-        const body = await request.json();
-        const { email } = body;
+        const { email } = await request.json();
 
-        // Basic validation
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             return NextResponse.json(
-                { message: 'Invalid email address' },
+                { message: 'Please enter a valid email address.' },
                 { status: 400 }
             );
         }
 
-        // Mock saving the email to a database (e.g., MongoDB)
-        // In a real scenario, you'd insert the user here and handle duplicates, perhaps tracking timestamps to avoid spam.
-        // await db.collection('subscriptions').insertOne({ email, subscribedAt: new Date() });
+        await connectDB();
 
-        // Artificial delay to simulate network request
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        const existing = await Newsletter.findOne({ email: email.trim().toLowerCase() });
+        if (existing) {
+            return NextResponse.json(
+                { message: 'You are already subscribed.' },
+                { status: 400 }
+            );
+        }
 
-        // Return success
+        await Newsletter.create({ email: email.trim().toLowerCase() });
+
         return NextResponse.json(
             { message: 'Thank you for subscribing to The Design Theory.' },
-            { status: 200 }
+            { status: 201 }
         );
     } catch (error) {
         console.error('Subscription error:', error);

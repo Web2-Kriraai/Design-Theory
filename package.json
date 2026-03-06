@@ -1,21 +1,12 @@
 {
-    "name": "design-theory-workspace",
+    "name": "design-theory",
     "version": "1.0.0",
     "private": true,
     "scripts": {
+        "dev": "npm run dev --prefix frontend",
         "build": "npm run build --prefix frontend",
-        "start": "node backend/server.js",
-        "dev:server": "node backend/server.js",
-        "dev:client": "npm run dev --prefix frontend",
-        "install:all": "npm install --prefix frontend && npm install --prefix backend"
-    },
-    "dependencies": {
-        "bcryptjs": "^3.0.3",
-        "clsx": "^2.1.1",
-        "framer-motion": "^12.35.0",
-        "lucide-react": "^0.577.0",
-        "mongoose": "^9.2.4",
-        "next-auth": "^4.24.13",
-        "tailwind-merge": "^3.5.0"
+        "start": "npm run start --prefix frontend",
+        "lint": "npm run lint --prefix frontend",
+        "install:all": "npm install --prefix frontend"
     }
 }

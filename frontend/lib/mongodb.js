@@ -1,33 +1,38 @@
-import { MongoClient } from "mongodb";
-import dns from "dns";
+import mongoose from 'mongoose';
 
-// Force Google DNS so MongoDB Atlas SRV records resolve correctly
-// (local router DNS does not support SRV lookups which +srv requires)
-dns.setServers(["8.8.8.8", "8.8.4.4", "1.1.1.1"]);
+const MONGODB_URI = process.env.MONGODB_URI;
 
-const uri = process.env.MONGODB_URI;
-
-if (!uri) {
-    throw new Error(
-        "Please define the MONGODB_URI environment variable in .env.local"
-    );
+if (!MONGODB_URI) {
+    throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
 }
 
-const options = {};
+/**
+ * Global is used here to maintain a cached connection across hot reloads
+ * in development. This prevents connections growing exponentially
+ * during API Route usage.
+ */
+let cached = global.mongoose;
 
-let client;
-let clientPromise;
+if (!cached) {
+    cached = global.mongoose = { conn: null, promise: null };
+}
 
-if (process.env.NODE_ENV === "development") {
-    // Reuse client across hot-reloads in dev
-    if (!global._mongoClientPromise) {
-        client = new MongoClient(uri, options);
-        global._mongoClientPromise = client.connect();
+async function connectDB() {
+    if (cached.conn) {
+        return cached.conn;
     }
-    clientPromise = global._mongoClientPromise;
-} else {
-    client = new MongoClient(uri, options);
-    clientPromise = client.connect();
+
+    if (!cached.promise) {
+        const opts = {
+            bufferCommands: false,
+        };
+
+        cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+            return mongoose;
+        });
+    }
+    cached.conn = await cached.promise;
+    return cached.conn;
 }
 
-export default clientPromise;
+export default connectDB;

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import AboutTeaser from "./components/AboutTeaser";
 import styles from "./home.module.css";
 
@@ -35,13 +36,25 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [testimonials.length]);
 
+  const SECTION_ANIM = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8 }
+  };
+
   return (
     <div>
       {/* ==========================================
           SECTION 1 — HERO
           ========================================== */}
       <section className={styles.hero}>
-        <div className={styles.heroImageWrap}>
+        <motion.div
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className={styles.heroImageWrap}
+        >
           <Image
             src="/assets/hero/hero1.jpg"
             alt="The Design Theory — Editorial Interior"
@@ -50,20 +63,28 @@ export default function Home() {
             priority
             sizes="100vw"
           />
-        </div>
+        </motion.div>
         <div className={styles.heroOverlay} />
-        <div className={styles.heroText}>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className={styles.heroText}
+        >
           <h1 className={styles.heroTitle}>The Design Theory</h1>
           <p className={styles.heroTagline}>
             Designing thoughtful spaces for modern living.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* ==========================================
           SECTION 2 — INTRODUCTORY TEXT
           ========================================== */}
-      <section className={styles.intro}>
+      <motion.section
+        {...SECTION_ANIM}
+        className={styles.intro}
+      >
         <div className={styles.introInner}>
           <p className={styles.introText}>
             The Design Theory is a young, dynamic interior and architectural
@@ -74,15 +95,21 @@ export default function Home() {
             thoughtful planning, attention to detail, and timeless design.
           </p>
         </div>
-      </section>
+      </motion.section>
 
       {/* ==========================================
           SECTION 3 — FEATURED PROJECTS
           ========================================== */}
-      <section className={styles.featuredProjects}>
+      <motion.section
+        {...SECTION_ANIM}
+        className={styles.featuredProjects}
+      >
         <div className={styles.fpInner}>
           <div className={styles.fpImages}>
-            <div className={styles.fpImageWrap}>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className={styles.fpImageWrap}
+            >
               <Image
                 src="/assets/styles/high-living.jpg"
                 alt="Featured Project — High Living"
@@ -90,8 +117,11 @@ export default function Home() {
                 height={600}
                 className={styles.fpImg}
               />
-            </div>
-            <div className={styles.fpImageWrap}>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className={styles.fpImageWrap}
+            >
               <Image
                 src="/assets/styles/tailor-made.jpg"
                 alt="Featured Project — Tailor Made"
@@ -99,7 +129,7 @@ export default function Home() {
                 height={600}
                 className={styles.fpImg}
               />
-            </div>
+            </motion.div>
           </div>
           <div className={styles.fpContent}>
             <p className={styles.sectionLabel}>Our Work</p>
@@ -115,15 +145,21 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ==========================================
           SECTION 4 — DESIGN PHILOSOPHY
           ========================================== */}
-      <section className={styles.philosophy}>
+      <motion.section
+        {...SECTION_ANIM}
+        className={styles.philosophy}
+      >
         <div className={styles.philoInner}>
           <div className={styles.philoImages}>
-            <div className={styles.philoImgWrap}>
+            <motion.div
+              whileHover={{ rotate: -1 }}
+              className={styles.philoImgWrap}
+            >
               <Image
                 src="/assets/services/decor.jpg"
                 alt="Design Philosophy — Decor Detail"
@@ -131,8 +167,11 @@ export default function Home() {
                 height={360}
                 className={styles.philoImg}
               />
-            </div>
-            <div className={styles.philoImgWrap}>
+            </motion.div>
+            <motion.div
+              whileHover={{ rotate: 1 }}
+              className={styles.philoImgWrap}
+            >
               <Image
                 src="/assets/services/furniture-carte.jpg"
                 alt="Design Philosophy — Furniture"
@@ -140,7 +179,7 @@ export default function Home() {
                 height={360}
                 className={styles.philoImg}
               />
-            </div>
+            </motion.div>
           </div>
           <div className={styles.philoText}>
             <p className={styles.sectionLabel}>Our Approach</p>
@@ -158,26 +197,38 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ==========================================
           SECTION 5 — TESTIMONIALS
           ========================================== */}
-      <section className={styles.testimonials}>
+      <motion.section
+        {...SECTION_ANIM}
+        className={styles.testimonials}
+      >
         <div className={styles.testiInner}>
           <h2 className={styles.testiHeading}>Client Testimonials</h2>
-          <div className={styles.testiSlider} key={testiIndex}>
-            <div className={styles.testiSlide}>
-              <p className={styles.testiQuote}>
-                {testimonials[testiIndex].quote}
-              </p>
-              <p className={styles.testiAuthor}>
-                {testimonials[testiIndex].author}
-              </p>
-              <p className={styles.testiRole}>
-                {testimonials[testiIndex].role}
-              </p>
-            </div>
+          <div className={styles.testiSlider}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={testiIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.5 }}
+                className={styles.testiSlide}
+              >
+                <p className={styles.testiQuote}>
+                  {testimonials[testiIndex].quote}
+                </p>
+                <p className={styles.testiAuthor}>
+                  {testimonials[testiIndex].author}
+                </p>
+                <p className={styles.testiRole}>
+                  {testimonials[testiIndex].role}
+                </p>
+              </motion.div>
+            </AnimatePresence>
           </div>
           <div className={styles.testiDots}>
             {testimonials.map((_, i) => (
@@ -190,14 +241,20 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ==========================================
           SECTION 6 — FEATURED PROJECT
           ========================================== */}
-      <section className={styles.featuredProject}>
+      <motion.section
+        {...SECTION_ANIM}
+        className={styles.featuredProject}
+      >
         <div className={styles.fpSingleInner}>
-          <div className={styles.fpSingleImgWrap}>
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            className={styles.fpSingleImgWrap}
+          >
             <Image
               src="/assets/styles/easy-care.jpg"
               alt="Featured Project — Easy Care"
@@ -205,7 +262,7 @@ export default function Home() {
               height={800}
               className={styles.fpSingleImg}
             />
-          </div>
+          </motion.div>
           <div className={styles.fpSingleText}>
             <p className={styles.sectionLabel}>Spotlight</p>
             <h2 className={styles.serifHeading}>Featured Project</h2>
@@ -220,7 +277,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ==========================================
           SECTION 7 — ABOUT TEASER
@@ -230,7 +287,10 @@ export default function Home() {
       {/* ==========================================
           SECTION 8 — UTILITY GRID
           ========================================== */}
-      <section className={styles.utilityGrid}>
+      <motion.section
+        {...SECTION_ANIM}
+        className={styles.utilityGrid}
+      >
         <div className={styles.ugInner}>
           {/* Block 1 */}
           <div className={styles.ugBlock}>
@@ -280,7 +340,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

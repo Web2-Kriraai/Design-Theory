@@ -1,325 +1,210 @@
 .page {
-    background: var(--bg-primary, #F9F8F6);
+    background: var(--bg-primary);
     min-height: 100vh;
+    padding-top: 140px;
 }
 
-/* ── HEADER ── */
-.pageHeader {
+.header {
     text-align: center;
-    padding: 160px 48px 100px;
-    max-width: 900px;
+    padding: 0 48px 100px;
+    max-width: 1000px;
     margin: 0 auto;
-    animation: fadeUp 0.8s ease both;
 }
 
-.pageLabel {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--accent-gold, #B89E7B);
-    margin-bottom: 16px;
-}
-
-.pageTitle {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 4rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary, #3A3530);
-    margin-bottom: 32px;
+.title {
+    font-size: 5rem;
+    margin-top: 20px;
+    line-height: 1.1;
 }
 
 .introText {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--text-muted, #6B6560);
-    max-width: 700px;
-    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 40px auto 0;
+    line-height: 1.8;
 }
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ── SERVICE SECTIONS ── */
+/* Stacked Cards */
 .sectionsWrapper {
+    padding: 0 48px 150px;
+}
+
+.cardContainer {
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-}
-
-.serviceSection {
-    padding: 100px 0;
-    background: white;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.serviceSection:nth-child(even) {
-    background: var(--bg-primary, #F9F8F6);
-}
-
-.sectionInner {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
     align-items: center;
-    gap: 80px;
-    padding: 0 48px;
+    justify-content: center;
+    position: sticky;
+    top: 0;
 }
 
-.reverse .sectionInner {
-    grid-template-columns: 1.1fr 1fr;
+.card {
+    width: 100%;
+    max-width: 1500px;
+    height: 80vh;
+    background: white;
+    border-radius: 4px;
+    padding: 80px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
 }
 
-.reverse .textContent {
-    order: 1;
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
 }
 
-.reverse .imageContent {
-    order: 0;
-}
-
-/* TEXT CONTENT */
-.textContent {
-    animation: fadeUp 0.8s ease both;
+.cardIndex {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    color: var(--accent-gold);
+    opacity: 0.4;
 }
 
 .sectionLabel {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
     text-transform: uppercase;
-    color: var(--accent-gold, #B89E7B);
-    margin-bottom: 16px;
+    letter-spacing: 0.3em;
+    color: var(--accent-gold);
+}
+
+.cardBody {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 100px;
+    height: calc(100% - 100px);
 }
 
 .sectionTitle {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2.8rem;
-    font-weight: 300;
-    color: var(--text-primary, #3A3530);
-    margin-bottom: 24px;
-    line-height: 1.2;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 30px;
 }
 
 .sectionDescription {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-muted);
     line-height: 1.8;
-    color: var(--text-muted, #6B6560);
-    margin-bottom: 32px;
+    margin-bottom: 50px;
 }
 
 .detailsList {
     list-style: none;
-    padding: 0;
-    margin: 0 0 48px 0;
+    margin-bottom: 60px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 20px;
 }
 
 .detailItem {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.85rem;
-    color: var(--text-primary, #3A3530);
-    font-weight: 400;
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    gap: 12px;
 }
 
 .bullet {
-    color: var(--accent-gold, #B89E7B);
-    font-size: 0.75rem;
+    color: var(--accent-gold);
 }
 
 .sectionLink {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--text-primary, #3A3530);
-    text-decoration: none;
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
     font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--accent-gold, #B89E7B);
-    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.sectionLink:hover {
-    color: var(--accent-gold, #B89E7B);
-    gap: 18px;
-}
-
-/* IMAGE CONTENT */
-.imageContent {
+.cardImageInner {
     position: relative;
-    height: 600px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 }
 
-.imageOverlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.05);
-    z-index: 1;
-}
-
-.sectionImage {
+.sectionImg {
     object-fit: cover;
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.sectionInner:hover .sectionImage {
-    transform: scale(1.05);
-}
-
-.imageNumber {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 5rem;
-    color: rgba(255, 255, 255, 0.4);
-    z-index: 2;
-    line-height: 1;
-    font-style: italic;
-}
-
-/* ── CTA BANNER ── */
-.ctaBanner {
-    padding: 140px 48px;
-    background: var(--text-primary, #3A3530);
-    color: white;
+/* Newsletter (Footer CTA) */
+.newsletter {
+    background: #FAF9F6;
+    padding: 150px 48px;
     text-align: center;
+    border-top: 1px solid var(--border-color);
 }
 
-.ctaInner {
-    max-width: 800px;
+.nsTitle {
+    font-size: 3rem;
+    max-width: 600px;
+    margin: 30px auto 60px;
+}
+
+.nsForm {
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
     margin: 0 auto;
+    border-bottom: 1px solid var(--text-primary);
 }
 
-.ctaHeading {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 3.2rem;
-    font-style: italic;
-    margin-bottom: 20px;
+.nsInput {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 15px 0;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    outline: none;
 }
 
-.ctaText {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 1.1rem;
-    opacity: 0.7;
-    margin-bottom: 48px;
-}
-
-.goldBtn {
-    display: inline-block;
-    background: var(--accent-gold, #B89E7B);
-    color: white;
-    padding: 20px 50px;
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.8rem;
-    font-weight: 600;
+.nsBtn {
+    background: none;
+    border: none;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    text-decoration: none;
-    transition: all 0.3s ease;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
 }
 
-.goldBtn:hover {
-    background: #a68c6a;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1200px) {
-    .sectionTitle {
-        font-size: 2.22rem;
-    }
-
-    .sectionInner {
-        gap: 40px;
-    }
-
-    .imageContent {
-        height: 500px;
-    }
-}
-
+/* Responsive */
 @media (max-width: 1024px) {
-    .sectionInner {
-        grid-template-columns: 1fr;
+    .sectionTitle {
+        font-size: 2.5rem;
+    }
+
+    .cardBody {
         gap: 40px;
-    }
-
-    .reverse .sectionInner {
-        grid-template-columns: 1fr;
-    }
-
-    .reverse .textContent {
-        order: 0;
-    }
-
-    .reverse .imageContent {
-        order: 1;
-    }
-
-    .imageContent {
-        order: -1 !important;
-        /* Image first on mobile */
     }
 }
 
 @media (max-width: 768px) {
-    .pageHeader {
-        padding: 120px 24px 60px;
+    .card {
+        height: 95vh;
+        padding: 40px;
     }
 
-    .pageTitle {
-        font-size: 2.8rem;
-    }
-
-    .serviceSection {
-        padding: 60px 0;
-    }
-
-    .sectionInner {
-        padding: 0 24px;
-    }
-
-    .sectionTitle {
-        font-size: 2rem;
-    }
-
-    .detailsList {
+    .cardBody {
         grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        gap: 30px;
     }
 
-    .ctaBanner {
-        padding: 80px 24px;
+    .cardImageInner {
+        height: 300px;
+        order: -1;
     }
 
-    .ctaHeading {
+    .nsTitle {
         font-size: 2.2rem;
     }
 }

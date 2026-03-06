@@ -1,8 +1,15 @@
 "use client";
+
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
+    const pathname = usePathname();
+    const isAdminPage = pathname?.startsWith("/admin");
+
+    // if (isAdminPage) return null;
+
     return (
         <footer className={styles.footer}>
             {/* Top Border Accent */}
@@ -66,7 +73,7 @@ export default function Footer() {
                         <ul className={styles.linkList}>
                             <li><Link href="/services/#residential">Residential Interior Design</Link></li>
                             <li><Link href="/services/#commercial">Commercial Interior Design</Link></li>
-                            <li><Link href="/services/#architectural">Architectural Design</Link></li>
+                            <li><Link href="/services/#architecture">Architectural Design</Link></li>
                             <li><Link href="/services/#visualization">3D Visualization & Rendering</Link></li>
                             <li><Link href="/services/#turnkey">Turnkey Solutions</Link></li>
                         </ul>

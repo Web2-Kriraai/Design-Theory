@@ -65,7 +65,7 @@ export default function ContactPage() {
         setGlobalError("");
 
         try {
-            const response = await fetch("/api/enquiry", {
+            const response = await fetch("/api/enquiries", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),

@@ -3,177 +3,149 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./blog.module.css";
 
-const CATEGORIES = [
-  "All",
-  "Interior Design",
-  "Modular Kitchen",
-  "Bedroom Ideas",
-  "Living Room",
-  "Home Decor",
-  "Architecture",
-];
-
-const BLOG_POSTS = [
+const blogPosts = [
   {
     id: 1,
-    category: "Architecture",
-    title: "The Honesty of Stone: Sourcing Arabescato Marble",
-    excerpt: "Exploring the emotional resonance of natural marble in contemporary architectural design and how it defines luxury.",
-    date: "Jan 12, 2026",
-    image: "/assets/blog/blog1.webp",
-    featured: true,
+    slug: "the-art-of-minimalism",
+    title: "The Art of Multi-Sensory Minimalism",
+    category: "Interior Design",
+    date: "March 15, 2024",
+    image: "/assets/hero/hero3.jpg",
+    excerpt: "Exploring how textures and light redefine spatial luxury in modern homes.",
+    featured: true
   },
   {
     id: 2,
-    category: "Interior Design",
-    title: "Light as a Building Material",
-    excerpt: "How light shapes space, mood, and the human experience within modern minimalist architecture.",
-    date: "Jan 05, 2026",
-    image: "/assets/blog/blog2.jpg",
+    slug: "curating-bespoke-furniture",
+    title: "Curating Bespoke Furniture for Luxury Living",
+    category: "Furniture",
+    date: "March 10, 2024",
+    image: "/assets/services/furniture-carte.jpg",
+    excerpt: "How custom-made pieces ground a room and provide effortless character."
   },
   {
     id: 3,
-    category: "Home Decor",
-    title: "The Studio Notebook: Winter Textiles",
-    excerpt: "A visual diary of textile experiments and material discoveries from our studio this season.",
-    date: "Dec 28, 2025",
-    image: "/assets/blog/blog3.jpg",
+    slug: "architectural-rhythm",
+    title: "Architectural Rhythm & Structural Integrity",
+    category: "Architecture",
+    date: "March 05, 2024",
+    image: "/assets/process/design-in-progress.jpg",
+    excerpt: "A study on the balance between form and the raw materials that define it."
   },
   {
     id: 4,
-    category: "Bedroom Ideas",
-    title: "Minimalist Master Bedrooms",
-    excerpt: "Creating a sanctuary with neutral palettes and intentional functional furniture selections.",
-    date: "Dec 20, 2025",
-    image: "/assets/styles/high-living.jpg",
-  },
-  {
-    id: 5,
-    category: "Modular Kitchen",
-    title: "Future of Modular Kitchens",
-    excerpt: "Smart appliances and hidden storage solutions that are revolutionizing modern kitchen design in 2026.",
-    date: "Dec 15, 2025",
-    image: "/assets/services/appliances.jpg",
-  },
-  {
-    id: 6,
-    category: "Living Room",
-    title: "Open Concept Living: A Guide",
-    excerpt: "Balancing privacy and social flow in open-plan residential designs for multi-generational homes.",
-    date: "Dec 10, 2025",
-    image: "/assets/services/service-works.jpg",
+    slug: "the-psychology-of-lighting",
+    title: "The Subtle Psychology of Mood Lighting",
+    category: "Interior Design",
+    date: "Feb 28, 2024",
+    image: "/assets/services/decor.jpg",
+    excerpt: "Transforming environments through the intentional use of shadow and illumination."
   }
 ];
+
+const categories = ["All", "Interior Design", "Architecture", "Furniture"];
+
+const BlogCard = ({ post, index }) => {
+  const isFeatured = post.featured;
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: index * 0.1 }}
+      className={isFeatured ? styles.featuredCard : styles.postCard}
+    >
+      <Link href={`/blog/${post.slug}`} className={styles.cardLink}>
+        <div className={styles.imageWrap}>
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className={styles.cardImage}
+            sizes={isFeatured ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
+          />
+        </div>
+        <div className={styles.cardInfo}>
+          <div className={styles.cardMeta}>
+            <span className={styles.category}>{post.category}</span>
+            <span className={styles.date}>{post.date}</span>
+          </div>
+          <h3 className={styles.cardTitle}>{post.title}</h3>
+          <p className={styles.excerpt}>{post.excerpt}</p>
+          <div className={styles.readMore}>
+            Read Article <span className={styles.arrow}>→</span>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filteredPosts = activeCategory === "All" 
-    ? BLOG_POSTS 
-    : BLOG_POSTS.filter(post => post.category === activeCategory);
-
-  const featuredPost = BLOG_POSTS.find(post => post.featured);
+  const filteredPosts = activeCategory === "All"
+    ? blogPosts
+    : blogPosts.filter(p => p.category === activeCategory);
 
   return (
-    <main className={styles.page}>
-      {/* ── HEADER ── */}
+    <main className={styles.blogPage}>
+      {/* Header Section */}
       <header className={styles.header}>
-        <p className={styles.label}>Journal & Insights</p>
-        <h1 className={styles.title}>The Design Blog</h1>
-        <p className={styles.subtitle}>
-          Inspiring stories, professional tips, and deep dives into the world of bespoke design.
-        </p>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="script-font"
+        >
+          The Journal
+        </motion.span>
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className={styles.title}
+        >
+          Perspectives in <br /> <i>Intentional Design</i>
+        </motion.h1>
       </header>
 
-      {/* ── FEATURED POST ── */}
-      {activeCategory === "All" && featuredPost && (
-        <section className={styles.featuredSection}>
-          <div className={styles.featuredCard}>
-            <div className={styles.featuredImageWrap}>
-              <Image 
-                src={featuredPost.image} 
-                alt={featuredPost.title}
-                fill
-                className={styles.image}
-                priority
-              />
-            </div>
-            <div className={styles.featuredContent}>
-              <span className={styles.tag}>{featuredPost.category}</span>
-              <h2 className={styles.featuredTitle}>{featuredPost.title}</h2>
-              <p className={styles.featuredExcerpt}>{featuredPost.excerpt}</p>
-              <div className={styles.meta}>
-                <span>{featuredPost.date}</span>
-                <Link href={`/blog/${featuredPost.id}`} className={styles.readMore}>
-                  READ ARTICLE →
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── CATEGORY FILTER ── */}
-      <nav className={styles.filterBar}>
-        <div className={styles.filterInner}>
-          {CATEGORIES.map(cat => (
-            <button 
-              key={cat}
-              className={`${styles.filterBtn} ${activeCategory === cat ? styles.active : ""}`}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+      {/* Filter Navigation */}
+      <nav className={styles.filterNav}>
+        {categories.map(cat => (
+          <button
+            key={cat}
+            onClick={() => setActiveCategory(cat)}
+            className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterActive : ""}`}
+          >
+            {cat}
+          </button>
+        ))}
       </nav>
 
-      {/* ── POST GRID ── */}
-      <section className={styles.gridSection}>
+      {/* Posts Grid */}
+      <section className={styles.gridContainer}>
         <div className={styles.grid}>
-          {filteredPosts.filter(p => !p.featured || activeCategory !== "All").map(post => (
-            <article key={post.id} className={styles.postCard}>
-              <div className={styles.cardImageWrap}>
-                <Image 
-                  src={post.image} 
-                  alt={post.title}
-                  fill
-                  className={styles.image}
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <span className={styles.cardTag}>{post.category}</span>
-              </div>
-              <div className={styles.cardContent}>
-                <span className={styles.cardDate}>{post.date}</span>
-                <h3 className={styles.cardTitle}>{post.title}</h3>
-                <p className={styles.cardExcerpt}>{post.excerpt}</p>
-                <Link href={`/blog/${post.id}`} className={styles.cardLink}>
-                  Continue Reading
-                </Link>
-              </div>
-            </article>
-          ))}
+          <AnimatePresence mode="popLayout">
+            {filteredPosts.map((post, index) => (
+              <BlogCard key={post.id} post={post} index={index} />
+            ))}
+          </AnimatePresence>
         </div>
-        
-        {filteredPosts.length === 0 && (
-          <div className={styles.emptyState}>
-            <p>No articles found in this category.</p>
-            <button onClick={() => setActiveCategory("All")} className={styles.resetBtn}>View All</button>
-          </div>
-        )}
       </section>
 
-      {/* ── NEWSLETTER CTA ── */}
+      {/* Newsletter Subscription */}
       <section className={styles.newsletter}>
         <div className={styles.newsletterInner}>
-          <h2 className={styles.newsletterTitle}>Never Miss An Inspiration.</h2>
-          <p className={styles.newsletterText}>Get our latest design journals delivered straight to your inbox.</p>
-          <div className={styles.subscribeBox}>
-             <p className={styles.subscribedNote}>Join our community of design enthusiasts.</p>
-             <Link href="#subscribe" className={styles.goldBtn}>Subscribe Now</Link>
-          </div>
+          <span className="script-font">Join the inner circle</span>
+          <h2 className={styles.nsTitle}>Occasional insights delivered to your inbox</h2>
+          <form className={styles.nsForm}>
+            <input type="email" placeholder="Your email address" className={styles.nsInput} />
+            <button type="submit" className={styles.nsBtn}>Subscribe</button>
+          </form>
         </div>
       </section>
     </main>

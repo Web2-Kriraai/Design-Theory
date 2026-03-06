@@ -10,23 +10,22 @@ export default function SubscriptionPopup() {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        // Check if user has already seen or subscribed
-        const hasSeenPopup = localStorage.getItem("tdt_popup_seen");
+        // Only suppress for users who already subscribed
+        const hasSubscribed = localStorage.getItem("tdt_subscribed");
+        if (hasSubscribed) return;
 
-        if (!hasSeenPopup) {
-            // Show popup after 5 seconds delay
-            const timer = setTimeout(() => {
-                setIsVisible(true);
-            }, 5000);
+        // Show popup after 3 seconds on every page load/refresh
+        const timer = setTimeout(() => {
+            setIsVisible(true);
+        }, 3000);
 
-            return () => clearTimeout(timer);
-        }
+        return () => clearTimeout(timer);
     }, []);
 
     const closePopup = () => {
         setIsVisible(false);
-        // Mark as seen so it doesn't bother them constantly
-        localStorage.setItem("tdt_popup_seen", "true");
+        // Don't mark as seen - popup will show again on next page load
+        // Only subscribing permanently suppresses it
     };
 
     const handleSubmit = async (e) => {
@@ -42,7 +41,7 @@ export default function SubscriptionPopup() {
         setErrorMessage("");
 
         try {
-            const res = await fetch("/api/subscribe", {
+            const res = await fetch("/api/newsletter", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -54,13 +53,13 @@ export default function SubscriptionPopup() {
 
             if (res.ok) {
                 setStatus("success");
-                // Mark as subscribed/seen so it never shows again
-                localStorage.setItem("tdt_popup_seen", "true");
+                // Mark as subscribed so popup never shows again
+                localStorage.setItem("tdt_subscribed", "true");
 
-                // Optional: Auto close after success
+                // Auto close after success
                 setTimeout(() => {
                     setIsVisible(false);
-                }, 4000);
+                }, 3000);
             } else {
                 setStatus("error");
                 setErrorMessage(data.message || "Failed to subscribe. Please try again.");

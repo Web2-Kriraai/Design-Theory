@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import SessionWrapper from "./components/SessionWrapper";
 import SubscriptionPopup from "./components/SubscriptionPopup";
 
 export const metadata = {
@@ -12,9 +13,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body style={{ margin: 0, padding: 0 }}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <SessionWrapper>
+          <Header />
+          {children}
+          <Footer />
+        </SessionWrapper>
         <SubscriptionPopup />
       </body>
     </html>

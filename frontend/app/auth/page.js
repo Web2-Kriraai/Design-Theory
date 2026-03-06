@@ -156,7 +156,7 @@ export default function AuthPage() {
             <div className="auth-grid" style={{ display: "grid", gridTemplateColumns: "1fr", minHeight: "100vh" }}>
 
                 {/* LEFT – Form Panel */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 40px", background: "#F9F7F2", position: "relative", overflow: "hidden" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "140px 40px 60px", background: "#F9F7F2", position: "relative", overflow: "hidden" }}>
 
                     {/* Decorative blobs */}
                     <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "240px", height: "240px", background: "rgba(184,158,123,0.07)", borderRadius: "50%", filter: "blur(40px)" }} />
@@ -166,7 +166,7 @@ export default function AuthPage() {
                         initial={{ opacity: 0, y: 32 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ width: "100%", maxWidth: "420px", position: "relative", zIndex: 1 }}
+                        style={{ width: "100%", maxWidth: "420px", position: "relative", zIndex: 1, margin: "0 auto" }}
                     >
                         {/* Brand */}
                         <div style={{ marginBottom: "40px" }}>

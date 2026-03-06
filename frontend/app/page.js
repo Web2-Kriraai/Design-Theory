@@ -335,9 +335,16 @@ export default function Home() {
               Sign up to receive studio updates, project reveals, design
               inspiration, and exclusive insights from The Design Theory.
             </p>
-            <Link href="#newsletter" className={styles.goldCta}>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                window.dispatchEvent(new Event('open-newsletter-popup'));
+              }}
+              style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+              className={styles.goldCta}
+            >
               SIGN UP <span className={styles.ctaArrow}>→</span>
-            </Link>
+            </button>
           </div>
         </div>
       </motion.section>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import AnimatedQuickStrip from "../components/AnimatedQuickStrip";
 import styles from "./contact.module.css";
 
 export default function ContactPage() {
@@ -334,23 +335,7 @@ export default function ContactPage() {
             </section>
 
             {/* ── QUICK LINKS STRIP ── */}
-            <section className={styles.quickStrip}>
-                <Link href="/portfolio" className={styles.stripLink}>
-                    View Portfolio <span>→</span>
-                </Link>
-                <span className={styles.stripDivider}>|</span>
-                <Link href="/services" className={styles.stripLink}>
-                    Our Services <span>→</span>
-                </Link>
-                <span className={styles.stripDivider}>|</span>
-                <Link href="/about-us" className={styles.stripLink}>
-                    About Us <span>→</span>
-                </Link>
-                <span className={styles.stripDivider}>|</span>
-                <Link href="/careers" className={styles.stripLink}>
-                    Careers <span>→</span>
-                </Link>
-            </section>
+            <AnimatedQuickStrip />
         </main>
     );
 }

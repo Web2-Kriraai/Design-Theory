@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -120,9 +120,9 @@ export default function Header() {
                     <div className={styles.navItem}>
                         <Link href="/careers">Careers</Link>
                     </div>
-                    <div className={styles.navItem}>
+                    {/* <div className={styles.navItem}>
                         <Link href="/faqs">FAQs</Link>
-                    </div>
+                    </div> */}
                 </nav>
 
                 {/* Studio Access Toggle */}
@@ -150,22 +150,36 @@ export default function Header() {
                             <button
                                 className={styles.iconBtn}
                                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                                style={session ? { display: "flex", alignItems: "center", gap: "8px" } : {}}
                             >
                                 <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg>
+                                {session && (
+                                    <div style={{ textAlign: "left", lineHeight: "1.2", display: "flex", flexDirection: "column" }}>
+                                        <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-primary, serif)" }}>{session.user.name.split(" ")[0]}</span>
+                                        <span style={{ fontSize: "0.5rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "#B89E7B" }}>{session.user.role}</span>
+                                    </div>
+                                )}
                             </button>
 
                             {/* User Auth Dropdown */}
                             {isUserMenuOpen && (
                                 <div className={styles.userDropdown}>
-                                    {/* <div className={styles.userDropdownHeader}>
-                                        System Authentication
-                                    </div> */}
                                     <div className={styles.userDropdownLinks}>
                                         {session ? (
-                                            <Link href="/dashboard" className={styles.userDropdownLink} onClick={() => setIsUserMenuOpen(false)}>
-                                                <span>Studio Dashboard</span>
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                                            </Link>
+                                            <>
+                                                <Link href="/dashboard" className={styles.userDropdownLink} onClick={() => setIsUserMenuOpen(false)}>
+                                                    <span>Studio Dashboard</span>
+                                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                                                </Link>
+                                                <button
+                                                    onClick={() => signOut({ callbackUrl: "/auth" })}
+                                                    className={styles.userDropdownLink}
+                                                    style={{ width: "100%", background: "transparent", border: "none", outline: "none", cursor: "pointer", textAlign: "left", color: "#c0392b", padding: "12px 16px" }}
+                                                >
+                                                    <span>Sign Out</span>
+                                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></svg>
+                                                </button>
+                                            </>
                                         ) : (
                                             <Link href="/auth" className={styles.userDropdownLink} onClick={() => setIsUserMenuOpen(false)}>
                                                 <span>Login / Sign-up</span>
@@ -182,9 +196,24 @@ export default function Header() {
             {/* Mobile Navigation Overlay */}
             <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
                 <div className={styles.mobileHeader}>
-                    <Link href={session ? "/dashboard" : "/auth"} className={styles.mobileAccessBtn} onClick={toggleMobileMenu}>
-                        {session ? "Studio Dashboard" : "Login / Sign-up"}
-                    </Link>
+                    {session ? (
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", width: "100%", paddingRight: "30px" }}>
+                            <Link href="/dashboard" className={styles.mobileAccessBtn} onClick={toggleMobileMenu} style={{ background: "#2D2926", color: "white" }}>
+                                Studio Dashboard
+                            </Link>
+                            <button
+                                className={styles.mobileAccessBtn}
+                                onClick={() => { toggleMobileMenu(); signOut({ callbackUrl: "/auth" }); }}
+                                style={{ background: "transparent", border: "1px solid #EAE6DF", color: "#c0392b" }}
+                            >
+                                Sign Out
+                            </button>
+                        </div>
+                    ) : (
+                        <Link href="/auth" className={styles.mobileAccessBtn} onClick={toggleMobileMenu}>
+                            Login / Sign-up
+                        </Link>
+                    )}
                     <button className={styles.closeBtn} onClick={toggleMobileMenu}>✕</button>
                 </div>
                 <div className={styles.mobileNavLinks}>

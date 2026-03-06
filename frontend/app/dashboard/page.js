@@ -170,7 +170,7 @@ export default function DashboardPage() {
     const router = useRouter();
 
     const [activeTab, setActiveTab] = useState("overview");
-    const [stats, setStats] = useState({ totalEnquiries: 0, totalSubscribers: 0 });
+    const [stats, setStats] = useState({ totalEnquiries: 0, totalSubscribers: 0, totalUsers: 0 });
     const [enquiries, setEnquiries] = useState([]);
     const [users, setUsers] = useState([]);
     const [subscribers, setSubscribers] = useState([]);
@@ -323,12 +323,12 @@ export default function DashboardPage() {
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
                     style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", marginBottom: "48px" }}>
                     <div>
-                        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
+                        {/* <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
                             <div style={{ width: "30px", height: "1px", background: "#B89E7B" }} />
                             <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.45em", color: "#B89E7B" }}>
                                 Studio Matrix · v1.0
                             </span>
-                        </div>
+                        </div> */}
                         <h1 style={{ fontFamily: "var(--font-primary, serif)", fontSize: "clamp(2.2rem,4.5vw,4.5rem)", color: "#2D2926", lineHeight: 1.05, letterSpacing: "-0.02em", margin: 0 }}>
                             Studio<br /><em>Dashboard</em>
                         </h1>
@@ -366,8 +366,8 @@ export default function DashboardPage() {
                 >
                     <motion.div variants={item}><StatCard icon={<MessageSquare size={20} />} label="Enquiries" value={stats.totalEnquiries} dark /></motion.div>
                     <motion.div variants={item}><StatCard icon={<Bell size={20} />} label="Subscribers" value={stats.totalSubscribers} /></motion.div>
-                    <motion.div variants={item}><StatCard icon={<Activity size={20} />} label="System Status" value="●" gold /></motion.div>
-                    <motion.div variants={item}><StatCard icon={<Users size={20} />} label="Admin Role" value={session?.user?.role || "admin"} /></motion.div>
+                    <motion.div variants={item}><StatCard icon={<Users size={20} />} label="Registered Users" value={stats.totalUsers || 0} gold /></motion.div>
+                    <motion.div variants={item}><StatCard icon={<Activity size={20} />} label="Admin Role" value={session?.user?.role || "admin"} /></motion.div>
                 </motion.div>
 
                 {/* ── TABS ── */}

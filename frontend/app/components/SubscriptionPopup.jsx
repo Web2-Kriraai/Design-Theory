@@ -22,6 +22,13 @@ export default function SubscriptionPopup() {
         return () => clearTimeout(timer);
     }, []);
 
+    // Listen for manual trigger events from other components (like the homepage button)
+    useEffect(() => {
+        const handleOpenPopup = () => setIsVisible(true);
+        window.addEventListener('open-newsletter-popup', handleOpenPopup);
+        return () => window.removeEventListener('open-newsletter-popup', handleOpenPopup);
+    }, []);
+
     const closePopup = () => {
         setIsVisible(false);
         // Don't mark as seen - popup will show again on next page load

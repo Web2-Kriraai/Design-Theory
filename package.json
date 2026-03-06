@@ -2,15 +2,12 @@
     "name": "design-theory-workspace",
     "version": "1.0.0",
     "private": true,
-    "workspaces": [
-        "client/frontend",
-        "server/backend"
-    ],
     "scripts": {
-        "dev": "npm run dev --workspace=client/frontend",
-        "build": "npm run build --workspace=client/frontend",
-        "start": "npm run start --workspace=client/frontend",
-        "install:all": "npm install && npm install --workspace=client/frontend"
+        "build": "npm run build --prefix frontend",
+        "start": "node backend/server.js",
+        "dev:server": "node backend/server.js",
+        "dev:client": "npm run dev --prefix frontend",
+        "install:all": "npm install --prefix frontend && npm install --prefix backend"
     },
     "dependencies": {
         "bcryptjs": "^3.0.3",

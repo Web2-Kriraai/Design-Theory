@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
-// Force re-reload to clear build cache
 const nextConfig = {
+    output: 'standalone',
     images: {
         unoptimized: true,
     },

@@ -105,7 +105,7 @@ export default function Header() {
                             Inspiration
                         </Link>
                         <div className={`${styles.dropdownContent} ${activeDropdown === 'inspiration' ? styles.showDropdown : ''}`}>
-                            <Link href="/press">Press</Link>
+                            <Link href="/blog">Blog</Link>
                             <Link href="https://www.instagram.com/the.designtheory/?hl=en">Instagram</Link>
                         </div>
                     </div>
@@ -114,6 +114,9 @@ export default function Header() {
                     </div>
                     <div className={styles.navItem}>
                         <Link href="/careers">Careers</Link>
+                    </div>
+                    <div className={styles.navItem}>
+                        <Link href="/faqs">FAQs</Link>
                     </div>
                 </nav>
             </div>
@@ -140,13 +143,14 @@ export default function Header() {
                         </div>
                         {activeDropdown === 'inspiration' && (
                             <div className={styles.mobileSubNav}>
-                                <Link href="/press" onClick={toggleMobileMenu}>Press</Link>
+                                <Link href="/blog" onClick={toggleMobileMenu}>Blog</Link>
                                 <Link href="https://www.instagram.com/the.designtheory/?hl=en" onClick={toggleMobileMenu}>Instagram</Link>
                             </div>
                         )}
                     </div>
                     <Link href="/contact" className={styles.mobileNavLink} onClick={toggleMobileMenu}>Contact</Link>
                     <Link href="/careers" className={styles.mobileNavLink} onClick={toggleMobileMenu}>Careers</Link>
+                    <Link href="/faqs" className={styles.mobileNavLink} onClick={toggleMobileMenu}>FAQs</Link>
                 </div>
             </div>
         </header>

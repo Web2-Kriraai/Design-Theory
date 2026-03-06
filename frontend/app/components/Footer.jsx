@@ -64,11 +64,11 @@ export default function Footer() {
                     <div className={styles.col}>
                         <h4 className={styles.colTitle}>Services</h4>
                         <ul className={styles.linkList}>
-                            <li><Link href="/services/residential">Residential Interior Design</Link></li>
-                            <li><Link href="/services/commercial">Commercial Interior Design</Link></li>
-                            <li><Link href="/services/architectural">Architectural Design</Link></li>
-                            <li><Link href="/services/visualization">3D Visualization & Rendering</Link></li>
-                            <li><Link href="/services/turnkey">Turnkey Solutions</Link></li>
+                            <li><Link href="/services/#residential">Residential Interior Design</Link></li>
+                            <li><Link href="/services/#commercial">Commercial Interior Design</Link></li>
+                            <li><Link href="/services/#architectural">Architectural Design</Link></li>
+                            <li><Link href="/services/#visualization">3D Visualization & Rendering</Link></li>
+                            <li><Link href="/services/#turnkey">Turnkey Solutions</Link></li>
                         </ul>
                     </div>
 
@@ -91,7 +91,7 @@ export default function Footer() {
                             <li><Link href="/portfolio">Portfolio</Link></li>
                             <li><Link href="/services">Services</Link></li>
                             <li><Link href="/about-us">About</Link></li>
-                            <li><Link href="/press">Press</Link></li>
+                            <li><Link href="/blog">Blog</Link></li>
                             <li>
                                 <a href="https://www.instagram.com/the.designtheory/?hl=en" target="_blank" rel="noopener noreferrer">
                                     Instagram

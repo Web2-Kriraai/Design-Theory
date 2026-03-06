@@ -1,0 +1,224 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(25, 23, 20, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: var(--text-primary, #3A3530);
+    width: 90%;
+    max-width: 500px;
+    padding: 48px;
+    position: relative;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.overlay.visible .modal {
+    transform: translateY(0);
+}
+
+.closeBtn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: transparent;
+    border: none;
+    color: var(--accent-gold-light, #d4c4a8);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.closeBtn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.heading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--accent-gold, #B89E7B);
+    margin-bottom: 12px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.subtext {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #e5e5e5;
+    margin-bottom: 24px;
+}
+
+.supportingLine {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--accent-gold-light, #d4c4a8);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+}
+
+/* ── FORM ── */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.9rem;
+    padding: 12px 0;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+}
+
+.input:focus {
+    border-color: var(--accent-gold, #B89E7B);
+}
+
+.errorText {
+    color: #d9534f;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.75rem;
+    margin-top: 6px;
+    text-align: left;
+}
+
+.submitBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: #fff;
+    border: 1px solid var(--accent-gold, #B89E7B);
+    padding: 14px 24px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: var(--accent-gold, #B89E7B);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.microText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* ── SUCCESS MESSAGE ── */
+.successWrap {
+    padding: 40px 0;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.successIcon {
+    font-size: 2.5rem;
+    color: var(--accent-gold, #B89E7B);
+    margin-bottom: 16px;
+}
+
+.successHeading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.successText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #e5e5e5;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .modal {
+        width: 100%;
+        max-width: 100%;
+        margin-top: auto;
+        /* Push to bottom */
+        padding: 40px 24px;
+        transform: translateY(100%);
+    }
+
+    .overlay {
+        align-items: flex-end;
+    }
+
+    .heading {
+        font-size: 1.8rem;
+    }
+
+    .subtext {
+        font-size: 0.85rem;
+    }
+}

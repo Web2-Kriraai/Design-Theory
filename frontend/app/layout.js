@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import SubscriptionPopup from "./components/SubscriptionPopup";
 
 export const metadata = {
   title: "Design Theory | Bespoke Architecture & Interior Design Studio",
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
         <Header />
         <main>{children}</main>
         <Footer />
+        <SubscriptionPopup />
       </body>
     </html>
   );

@@ -1,67 +1,60 @@
-# The Design Theory — Interior Design & Architecture Studio
+# The Design Theory — Unified Next.js Application
 
-A premium, responsive website built with Next.js 16 (App Router), featuring a luxury aesthetic, dynamic content sections, and a MongoDB-integrated enquiry system.
+This project has been unified into a single Next.js application, serving both the frontend and the API on a single port (3000). All backend logic from the legacy Express server has been migrated to Next.js API routes for performance and simplicity.
 
-## Project Structure
-
-This project is built as a unified Next.js 16 application:
+## 📁 Project Structure
 
 ```text
-/
-├── frontend/              # Main Next.js 16 Application
-│   ├── app/               # App Router pages and unified API routes
-│   ├── components/        # Reusable UI components
-│   ├── lib/               # Shared utilities (MongoDB Client)
-│   ├── models/            # Mongoose models for DB
-│   └── public/            # Optimized images and assets
-├── package.json           # Root configuration
-└── README.md              # Documentation
+Design-Theory/
+├── frontend/             # 🛠️ Main Application (Unified)
+│   ├── app/
+│   │   ├── api/          # 🚀 All Backend Logic (Unified API)
+│   │   │   ├── enquiries/#   - Form submissions & admin management
+│   │   │   ├── dashboard/#   - Admin statistics
+│   │   │   ├── auth/     #   - NextAuth.js configuration
+│   │   │   └── subscribe/#   - Newsletter subscriptions
+│   ├── lib/              # 🔗 Shared Utilities (e.g., MongoDB connection)
+│   ├── models/           # 📦 Mongoose Models (Unified)
+│   └── ...
+├── package.json          # 📦 Workspace scripts (proxy to frontend)
+└── .env.local            # 🔑 Environment Variables
 ```
 
-## Setup Instructions
+## 🚀 Getting Started
 
 ### 1. Prerequisites
-- **Node.js**: v18.0.0 or higher
-- **MongoDB**: Local instance running at `mongodb://127.0.0.1:27017`
-- **MongoDB Compass**: For database management
+- Node.js (v18+)
+- MongoDB Atlas account
 
-### 2. Installation
-From the root directory, run:
+### 2. Setup
+Clone the repository and install dependencies:
 ```bash
-npm install
+npm run install:all
 ```
-This will install dependencies for the entire workspace using the built-in workspace support.
 
-### 3. Running the Development Server
-To start the frontend application:
+### 3. Environment Variables
+Create a `frontend/.env.local` file with the following:
+```env
+MONGODB_URI=your_mongodb_atlas_connection_string
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+```
+
+### 4. Development
+Run the unified server in development mode:
 ```bash
 npm run dev
 ```
-The app will be available at [http://localhost:3000](http://localhost:3000).
 
-### 4. Build for Production
+### 5. Production Build
+Prepare and start the standalone production server:
 ```bash
 npm run build
+npm run start
 ```
 
-## MongoDB & Compass Configuration
-
-The Inquiry form stores data in a local MongoDB database named `The_design_Theory`.
-
-### Steps to setup Compass:
-1.  **Download Compass**: Install [MongoDB Compass](https://www.mongodb.com/products/compass).
-2.  **Connect**: Open Compass and use this connection string:
-    `mongodb://127.0.0.1:27017`
-3.  **Explore Data**:
-    - Select the **The_design_Theory** database.
-    - Open the **enquiry** collection.
-    - Here you can view, edit, or export all submitted form data (Name, Email, Phone, Project Type, etc.).
-
-## Features
-- **Modern UI**: Dark/Light theme transitions, serif/sans-serif typography (Cormorant Garamond & Montserrat).
-- **Responsive Navigation**: Transitions from transparent to sticky with a shrinking logo effect.
-- **Portfolio filtering**: Client-side project filtering (Residential, Commercial, Architecture).
-- **Inquiry Form**: Real-time validation, 10-digit phone enforcement, and MongoDB persistence.
-
----
-*Created for The Design Theory.*
+## 🛠️ Key Architectural Improvements
+- **Unified Port**: Both the client and server run on port 3000, eliminating CORS issues.
+- **Improved Security**: NextAuth.js and modern middleware manage admin access.
+- **Robustness**: Integrated DNS fix for MongoDB Atlas connectivity in local environments.
+- **Validation**: Full back-end validation on all form submissions (Enquiries).

@@ -1,4 +1,11 @@
 import mongoose from 'mongoose';
+import dns from 'dns';
+
+// Force Node.js to use Google DNS so MongoDB Atlas SRV records resolve correctly
+// (the default local router DNS often doesn't support SRV lookups properly)
+if (process.env.NODE_ENV === 'development') {
+    dns.setServers(["8.8.8.8", "8.8.4.4", "1.1.1.1"]);
+}
 
 const MONGODB_URI = process.env.MONGODB_URI;
 

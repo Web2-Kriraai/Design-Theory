@@ -16,9 +16,13 @@ export default function RootLayout({ children }) {
       <body style={{ margin: 0, padding: 0 }}>
         <SessionWrapper>
           <SmoothScroll>
-            <Header />
-            {children}
-            <Footer />
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <div className="flex-grow">
+                {children}
+              </div>
+              <Footer />
+            </div>
           </SmoothScroll>
         </SessionWrapper>
         <SubscriptionPopup />

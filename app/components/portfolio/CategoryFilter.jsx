@@ -14,37 +14,35 @@ const CATEGORIES = [
 
 export default function CategoryFilter({ active, onChange }) {
     return (
-        <div className="w-full flex flex-col items-center mb-12">
-
-            {/* Pill track */}
+        <div className="w-full flex flex-col items-center mt-24 mb-24 px-4">
             <LayoutGroup>
-                <div className="flex flex-wrap justify-center gap-1 md:gap-2 bg-[#F5F0EB] rounded-full p-1.5 md:p-2">
+                <div className="flex flex-wrap justify-center gap-4 md:gap-8 bg-[#F5F0EB]/60 backdrop-blur-sm rounded-full p-2.5 md:p-4 border border-[#E8E3DB]">
                     {CATEGORIES.map((cat) => {
                         const isActive = active === cat;
                         return (
                             <motion.button
                                 key={cat}
                                 onClick={() => onChange(cat)}
-                                whileTap={{ scale: 0.96 }}
-                                className="relative px-4 py-2 md:px-6 md:py-2.5 rounded-full focus:outline-none"
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="relative px-5 py-2.5 md:px-8 md:py-3 rounded-full focus:outline-none transition-all duration-300"
                                 style={{
                                     fontFamily: 'var(--font-sans)',
-                                    fontSize: '0.63rem',
-                                    letterSpacing: '0.2em',
-                                    fontWeight: 600,
+                                    fontSize: '0.65rem',
+                                    letterSpacing: '0.25em',
+                                    fontWeight: isActive ? 700 : 500,
                                 }}
                             >
-                                {/* Animated sliding pill */}
                                 {isActive && (
                                     <motion.span
                                         layoutId="active-pill"
-                                        className="absolute inset-0 rounded-full bg-[#2C2A28] shadow-sm"
-                                        transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                                        className="absolute inset-0 rounded-full bg-[#2C2A28] shadow-lg shadow-black/10"
+                                        transition={{ type: 'spring', stiffness: 450, damping: 35 }}
                                     />
                                 )}
 
                                 <span
-                                    className={`relative z-10 uppercase whitespace-nowrap transition-colors duration-200 ${isActive ? 'text-white' : 'text-[#8A8480] hover:text-[#2C2A28]'
+                                    className={`relative z-10 uppercase whitespace-nowrap tracking-widest transition-colors duration-300 ${isActive ? 'text-[#FCFAF7]' : 'text-[#8A8480] hover:text-[#2C2A28]'
                                         }`}
                                 >
                                     {cat}
@@ -54,9 +52,6 @@ export default function CategoryFilter({ active, onChange }) {
                     })}
                 </div>
             </LayoutGroup>
-
-            {/* Thin separator below */}
-            <div className="w-full h-[1px] bg-[#E8E3DB] mt-8" />
         </div>
     );
 }

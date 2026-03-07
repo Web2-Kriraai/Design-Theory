@@ -35,13 +35,15 @@ const SLOGANS = [
 function EditorialGrid({ images }) {
     if (!images || images.length === 0) return null;
 
+    const frameClass = "relative overflow-hidden bg-[#F0EBE3] w-full border-[10px] md:border-[16px] border-[#FCFAF7] shadow-[0_15px_35px_rgba(0,0,0,0.05)] transition-all duration-700 hover:border-[#E8E1D7]";
+
     return (
-        <div className="flex flex-col gap-6 md:gap-10">
+        <div className="flex flex-col gap-10 md:gap-16">
             {images.map((img, i) => {
                 // First image is a massive feature shot
                 if (i === 0) {
                     return (
-                        <div key={i} className="relative overflow-hidden bg-[#F0EBE3] aspect-[16/9] w-full">
+                        <div key={i} className={`${frameClass} aspect-[16/9]`}>
                             <Image
                                 src={img}
                                 alt={`Project feature image`}
@@ -58,23 +60,23 @@ function EditorialGrid({ images }) {
                 if (i % 2 !== 0) {
                     const nextImg = images[i + 1];
                     return (
-                        <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                            <div className="relative overflow-hidden bg-[#F0EBE3] aspect-[4/3] w-full group">
+                        <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                            <div className={`${frameClass} aspect-[4/3]`}>
                                 <Image
                                     src={img}
                                     alt={`Project image ${i + 1}`}
                                     fill
-                                    className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
+                                    className="object-cover transition-transform duration-1000 hover:scale-[1.03]"
                                     sizes="(max-width: 768px) 100vw, 50vw"
                                 />
                             </div>
                             {nextImg && (
-                                <div className="relative overflow-hidden bg-[#F0EBE3] aspect-[4/3] w-full group">
+                                <div className={`${frameClass} aspect-[4/3]`}>
                                     <Image
                                         src={nextImg}
                                         alt={`Project image ${i + 2}`}
                                         fill
-                                        className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
+                                        className="object-cover transition-transform duration-1000 hover:scale-[1.03]"
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                     />
                                 </div>
@@ -136,70 +138,88 @@ export default async function PortfolioDetailsPage({ params }) {
     ];
 
     return (
-        <main className="bg-[#FCFAF7] min-h-screen font-sans w-full flex flex-col items-center">
-
-            <div className="w-full pt-[220px] md:pt-[260px] lg:pt-[300px] pb-16 md:pb-24 flex flex-col items-center">
+        <main className="bg-[#FCFAF7] min-h-screen flex flex-col items-center pt-[220px] md:pt-[260px] lg:pt-[300px]" style={{ transform: "translateY(150px)", marginBottom: "150px" }}>
+            <div className="w-full pb-16 md:pb-32 flex flex-col items-center">
 
                 {/* ── SINGLE CENTERED WRAPPER — max-w-1280 ── */}
-                <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-12">
+                <div className="w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-16">
 
-                    {/* ── PDF-STYLE MINIMAL HEADER ── */}
-                    <section className="pb-16 text-center block w-full">
-                        {/* Back link */}
+                    {/* ── PREMIUM HEADER ── */}
+                    <header className="pb-24 text-center block w-full relative">
+                        {/* Elegant Back Link */}
                         <div className="flex justify-center mb-16">
                             <Link
                                 href="/portfolio"
-                                className="inline-flex items-center gap-3 text-[#9A9490] hover:text-[#2A1E2F] text-[0.65rem] font-bold uppercase tracking-[0.3em] no-underline transition-colors duration-300 group"
+                                className="inline-flex items-center gap-4 text-[#9A9490] hover:text-[#2A1E2F] text-[0.65rem] font-bold uppercase tracking-[0.4em] no-underline transition-all duration-300 group"
                             >
-                                <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
+                                <span className="w-8 h-[1px] bg-[#D6CDC4] block transition-all group-hover:w-12 group-hover:bg-[#2A1E2F]" />
                                 BACK TO PORTFOLIO
                             </Link>
                         </div>
 
                         {/* Title - Elegant Script Font */}
-                        <h1 className="font-script text-6xl md:text-7xl lg:text-[5.5rem] text-[#2C2A28] leading-[1.2] m-0 mb-6 font-normal tracking-wide">
+                        <h1
+                            style={{ fontFamily: 'var(--font-script)', lineHeight: 1 }}
+                            className="text-7xl md:text-8xl lg:text-[7.5rem] text-[#2C2A28] m-0 mb-10 font-normal tracking-tight"
+                        >
                             {project.title}
                         </h1>
 
-                        {/* Decorative Arrow Divider */}
-                        <div className="flex items-center justify-center gap-3 text-[#5A5653] mb-10 opacity-70">
-                            <span className="text-xl tracking-widest leading-none">»</span>
-                            <span className="w-12 h-[1px] bg-current block" />
-                            <span className="text-xs">✦</span>
-                            <span className="w-12 h-[1px] bg-current block" />
-                            <span className="text-xl tracking-widest leading-none">«</span>
+                        {/* Decorative Divider */}
+                        <div className="flex items-center justify-center gap-6 text-[#D6CDC4] mb-12">
+                            <span className="text-xl">»</span>
+                            <span className="w-20 h-[1px] bg-current block" />
+                            <span className="text-[0.65rem] text-[#D4AF37]">✦</span>
+                            <span className="w-20 h-[1px] bg-current block" />
+                            <span className="text-xl">«</span>
                         </div>
 
-                        {/* Centered Elegant Description */}
-                        {project.description && (
-                            <p className="text-[#5A5653] font-serif text-lg md:text-xl lg:text-[1.35rem] leading-[1.8] max-w-4xl mx-auto px-4">
-                                {project.description}
-                            </p>
-                        )}
+                        {/* Project Metadata Section */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 max-w-3xl mx-auto mb-16 py-8 border-y border-[#E8E3DB]">
+                            <div className="flex flex-col items-center gap-2">
+                                <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">Category</span>
+                                <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">{project.category || 'Architecture'}</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-2">
+                                <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">Client</span>
+                                <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">{project.clientName || 'Private Client'}</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-2 col-span-2 md:col-span-1">
+                                <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">Year</span>
+                                <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">{project.year || '2024'}</span>
+                            </div>
+                        </div>
 
-                        {/* Client Note (Subtle) */}
-                        {project.clientName && (
-                            <p className="text-[#9A9490] text-xs uppercase tracking-[0.2em] mt-8">
-                                Client: <span className="text-[#5A5653] font-medium">{project.clientName}</span>
+                        {/* Elegant Description */}
+                        {project.description && (
+                            <p className="text-[#5A5653] font-serif text-xl md:text-2xl lg:text-[1.65rem] leading-[1.8] max-w-4xl mx-auto font-light italic">
+                                &ldquo;{project.description}&rdquo;
                             </p>
                         )}
-                    </section>
+                    </header>
 
                     {/* ── EDITORIAL PHOTO GRID ── */}
-                    <section className="pb-6">
+                    <section className="pb-20">
                         <EditorialGrid images={allImages} />
                     </section>
 
 
-                    {/* ── MINIMAL FOOTER ── */}
-                    <section className="py-24 text-center block w-full">
-                        <Link
-                            href="/portfolio"
-                            className="inline-flex items-center gap-3 text-[#9A9490] hover:text-[#2A1E2F] text-[0.65rem] font-bold uppercase tracking-[0.3em] no-underline transition-colors duration-300 group"
+                    {/* ── FINAL CTA ── */}
+                    <section className="py-24 text-center block w-full border-t border-[#E8E3DB]">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            className="flex flex-col items-center gap-8"
                         >
-                            <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
-                            BACK TO PORTFOLIO
-                        </Link>
+                            <h4 className="font-serif text-2xl italic text-[#5A5653]">Interested in a similar project?</h4>
+                            <Link
+                                href="/portfolio"
+                                className="inline-flex items-center gap-4 text-[#9A9490] hover:text-[#2A1E2F] text-[0.65rem] font-bold uppercase tracking-[0.4em] no-underline transition-all duration-300 group"
+                            >
+                                <span className="w-12 h-[1px] bg-[#D6CDC4] block transition-all group-hover:w-16 group-hover:bg-[#2A1E2F]" />
+                                EXPLORE MORE WORK
+                            </Link>
+                        </motion.div>
                     </section>
 
                 </div>{/* end centered wrapper */}

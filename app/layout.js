@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SessionWrapper from "./components/SessionWrapper";
 import SubscriptionPopup from "./components/SubscriptionPopup";
+import SmoothScroll from "./components/SmoothScroll";
 
 export const metadata = {
   title: "The Design Theory",
@@ -14,9 +15,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body style={{ margin: 0, padding: 0 }}>
         <SessionWrapper>
-          <Header />
-          {children}
-          <Footer />
+          <SmoothScroll>
+            <Header />
+            {children}
+            <Footer />
+          </SmoothScroll>
         </SessionWrapper>
         <SubscriptionPopup />
       </body>

@@ -6,8 +6,9 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import {
     ArrowUpRight, MessageSquare, Bell, LogOut,
-    Activity, Users, Trash2, Eye, X, ChevronLeft, ChevronRight
+    Activity, Users, Trash2, Eye, X, ChevronLeft, ChevronRight, Briefcase, Plus, Edit
 } from "lucide-react";
+import UploadForm from "../components/UploadForm";
 
 /* ── tiny reusable stat card ── */
 function StatCard({ icon, label, value, dark, gold }) {
@@ -101,7 +102,7 @@ function DetailModal({ item, type, onClose }) {
 }
 
 /* ── data table ── */
-function DataTable({ rows, columns, onDelete, onView, loading, emptyText = "No records found." }) {
+function DataTable({ rows, columns, onDelete, onEdit, onView, loading, emptyText = "No records found." }) {
     if (loading) {
         return (
             <div style={{ padding: "60px", textAlign: "center" }}>
@@ -149,9 +150,16 @@ function DataTable({ rows, columns, onDelete, onView, loading, emptyText = "No r
                                             <Eye size={13} />
                                         </button>
                                     )}
-                                    <button onClick={() => onDelete(row._id)} title="Delete" style={{ padding: "6px 12px", background: "#fff0f0", border: "1px solid #fecaca", cursor: "pointer", color: "#c0392b", display: "flex", alignItems: "center", gap: "4px", transition: "all 0.2s" }}>
-                                        <Trash2 size={13} />
-                                    </button>
+                                    {onEdit && (
+                                        <button onClick={() => onEdit(row)} title="Edit" style={{ padding: "6px 12px", background: "#F9F7F2", border: "1px solid #EAE6DF", cursor: "pointer", color: "#f59e0b", display: "flex", alignItems: "center", gap: "4px", transition: "all 0.2s" }}>
+                                            <Edit size={13} />
+                                        </button>
+                                    )}
+                                    {onDelete && (
+                                        <button onClick={() => onDelete(row._id)} title="Delete" style={{ padding: "6px 12px", background: "#fff0f0", border: "1px solid #fecaca", cursor: "pointer", color: "#c0392b", display: "flex", alignItems: "center", gap: "4px", transition: "all 0.2s" }}>
+                                            <Trash2 size={13} />
+                                        </button>
+                                    )}
                                 </div>
                             </td>
                         </motion.tr>
@@ -174,6 +182,9 @@ export default function DashboardPage() {
     const [enquiries, setEnquiries] = useState([]);
     const [users, setUsers] = useState([]);
     const [subscribers, setSubscribers] = useState([]);
+    const [portfolioProjects, setPortfolioProjects] = useState([]);
+    const [showUploadForm, setShowUploadForm] = useState(false);
+    const [editingProject, setEditingProject] = useState(null);
     const [loadingStats, setLoadingStats] = useState(true);
     const [loadingTab, setLoadingTab] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -233,12 +244,23 @@ export default function DashboardPage() {
         } catch { } finally { setLoadingTab(false); }
     }, []);
 
+    /* fetch portfolio */
+    const fetchPortfolio = useCallback(async () => {
+        setLoadingTab(true);
+        try {
+            const r = await fetch("/api/portfolio");
+            const d = await r.json();
+            setPortfolioProjects(d.projects || []);
+        } catch { } finally { setLoadingTab(false); }
+    }, []);
+
     /* tab change */
     useEffect(() => {
         if (status !== "authenticated") return;
         if (activeTab === "enquiries") fetchEnquiries(enquiryPage);
         if (activeTab === "users") fetchUsers();
         if (activeTab === "subscribers") fetchSubscribers();
+        if (activeTab === "portfolio") fetchPortfolio();
     }, [activeTab, status]);
 
     /* pagination */
@@ -266,6 +288,17 @@ export default function DashboardPage() {
         fetchStats();
     };
 
+    const deletePortfolioProject = async (id) => {
+        if (!confirm("Are you sure you want to delete this portfolio project forever?")) return;
+        await fetch(`/api/portfolio?id=${id}`, { method: "DELETE" });
+        fetchPortfolio();
+    };
+
+    const handleEditProject = (project) => {
+        setEditingProject(project);
+        setShowUploadForm(true);
+    };
+
     const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
     const item = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.165, 0.84, 0.44, 1] } } };
 
@@ -280,11 +313,25 @@ export default function DashboardPage() {
         );
     }
 
+    // ── ROLE BASED TABS ──
+    const isAdmin = session?.user?.role === "admin";
+
     const tabs = [
         { key: "overview", label: "Overview" },
         { key: "enquiries", label: `Enquiries${stats.totalEnquiries ? ` (${stats.totalEnquiries})` : ""}` },
         { key: "users", label: "Users" },
         { key: "subscribers", label: `Subscribers${stats.totalSubscribers ? ` (${stats.totalSubscribers})` : ""}` },
+    ];
+
+    if (isAdmin) {
+        tabs.push({ key: "portfolio", label: "Portfolio" });
+    }
+
+    const portfolioCols = [
+        { key: "title", label: "Title" },
+        { key: "clientName", label: "Client" },
+        { key: "category", label: "Category" },
+        { key: "createdAt", label: "Created", render: v => v ? new Date(v).toLocaleDateString() : "—" },
     ];
 
     const enquiryCols = [
@@ -536,6 +583,44 @@ export default function DashboardPage() {
                                         emptyText="No subscribers yet."
                                     />
                                 </div>
+                            </motion.div>
+                        )}
+
+                        {/* ── PORTFOLIO TAB ── */}
+                        {activeTab === "portfolio" && (
+                            <motion.div key="portfolio" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+                                {showUploadForm ? (
+                                    <UploadForm
+                                        initialData={editingProject}
+                                        onSuccess={() => { setShowUploadForm(false); setEditingProject(null); fetchPortfolio(); }}
+                                        onCancel={() => { setShowUploadForm(false); setEditingProject(null); }}
+                                    />
+                                ) : (
+                                    <div style={{ background: "white", border: "1px solid #EAE6DF" }}>
+                                        <div style={{ padding: "24px 32px", borderBottom: "1px solid #EAE6DF", display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <div>
+                                                <h2 style={{ fontFamily: "var(--font-primary, serif)", fontSize: "1.4rem", color: "#2D2926", margin: 0 }}>Portfolio Projects</h2>
+                                                <p style={{ fontFamily: "sans-serif", fontSize: "0.7rem", color: "#999", margin: "4px 0 0", letterSpacing: "0.05em" }}>Manage your showcased work</p>
+                                            </div>
+                                            <button
+                                                onClick={() => { setEditingProject(null); setShowUploadForm(true); }}
+                                                style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px', background: '#2D2926', color: 'white', border: 'none', fontFamily: 'sans-serif', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', cursor: 'pointer', transition: 'background 0.3s' }}
+                                                onMouseEnter={e => e.currentTarget.style.background = '#7C3AED'}
+                                                onMouseLeave={e => e.currentTarget.style.background = '#2D2926'}
+                                            >
+                                                <Plus size={16} /> New Project
+                                            </button>
+                                        </div>
+                                        <DataTable
+                                            rows={portfolioProjects}
+                                            columns={portfolioCols}
+                                            onDelete={deletePortfolioProject}
+                                            onEdit={handleEditProject}
+                                            loading={loadingTab}
+                                            emptyText="No projects added yet."
+                                        />
+                                    </div>
+                                )}
                             </motion.div>
                         )}
                     </AnimatePresence>

@@ -1,187 +1,72 @@
-'use client';
+import React from 'react';
+import PortfolioCard from '../components/PortfolioCard';
+import connectMongo from '@/lib/mongodb';
+import Portfolio from '@/lib/models/Portfolio';
 
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import styles from "./portfolio.module.css";
+export const revalidate = 60; // ISR cache revalidation
 
-const projectsData = [
-    {
-        id: "high-living-residence",
-        title: "High Living Residence",
-        category: "Residential",
-        image: "/assets/styles/high-living.jpg",
-        type: "hero",
-        year: "2023"
-    },
-    {
-        id: "tailor-made-office",
-        title: "The Tailor Made Office",
-        category: "Commercial",
-        image: "/assets/styles/tailor-made.jpg",
-        type: "portrait",
-        year: "2023"
-    },
-    {
-        id: "easy-care-villa",
-        title: "Easy Care Villa",
-        category: "Architecture",
-        image: "/assets/styles/easy-care.jpg",
-        type: "square",
-        year: "2024"
-    },
-    {
-        id: "modern-minimalist",
-        title: "Modern Minimalist",
-        category: "Commercial",
-        image: "/assets/hero/hero1.jpg",
-        type: "portrait",
-        year: "2022"
-    },
-    {
-        id: "heritage-refurb",
-        title: "Heritage Refurbishment",
-        category: "Architecture",
-        image: "/assets/hero/hero2.jpg",
-        type: "hero",
-        year: "2023"
+export default async function PortfolioPage() {
+    let projects = [];
+    try {
+        await connectMongo();
+        const docs = await Portfolio.find().sort({ createdAt: -1 });
+        projects = JSON.parse(JSON.stringify(docs)); // serialize for client transmission
+    } catch (err) {
+        console.error('Error fetching portfolio:', err);
     }
-];
 
-const categories = ["All", "Residential", "Commercial", "Architecture"];
-
-const ProjectCard = ({ project, index }) => {
     return (
-        <motion.div
-            layout
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-            className={`${styles.projectCard} ${styles[project.type]}`}
-        >
-            <Link href={`/portfolio/${project.id}`} className={styles.cardLink}>
-                <div className={styles.imageWrap}>
-                    <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className={styles.projectImage}
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                </div>
-                <div className={styles.projectInfo}>
-                    <div className={styles.meta}>
-                        <span className={styles.category}>{project.category}</span>
-                        <span className={styles.year}>{project.year}</span>
+        <main style={{ background: '#FCFAF7', minHeight: '100vh', paddingTop: '160px', paddingBottom: '100px' }}>
+            <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 24px' }}>
+
+                {/* ── HEADER ── */}
+                <header style={{ marginBottom: '80px', textAlign: 'center' }}>
+                    <span style={{ fontFamily: 'var(--font-secondary, sans-serif)', fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.3em', color: '#7C3AED', display: 'block', marginBottom: '16px' }}>
+                        Our Work
+                    </span>
+                    <h1 style={{ fontFamily: 'var(--font-primary, serif)', fontSize: 'clamp(3rem, 6vw, 5.5rem)', color: '#2C2A28', lineHeight: 1.1, margin: '0 0 24px 0' }}>
+                        Selected <i>Projects</i>
+                    </h1>
+                    <p style={{ fontFamily: 'var(--font-secondary, sans-serif)', fontSize: '1rem', color: '#5A5653', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
+                        Explore a curated collection of our finest architectural and interior design
+                        endeavors, transforming visions into tangible masterpieces.
+                    </p>
+                </header>
+
+                {/* ── GRID ── */}
+                {projects.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+                        {projects.map((project, index) => {
+                            // Define staggered grid logic:
+                            // 0: 8 columns, 1: 4 columns
+                            // 2: 6 columns, 3: 6 columns
+                            // 4: 12 columns
+                            // 5: 4 columns, 6: 8 columns
+
+                            const patternIndex = index % 5;
+                            let colSpan = "md:col-span-6"; // default
+
+                            switch (patternIndex) {
+                                case 0: colSpan = "md:col-span-12 lg:col-span-8"; break;
+                                case 1: colSpan = "md:col-span-12 lg:col-span-4"; break;
+                                case 2: colSpan = "md:col-span-12 lg:col-span-6"; break;
+                                case 3: colSpan = "md:col-span-12 lg:col-span-6"; break;
+                                case 4: colSpan = "md:col-span-12"; break;
+                            }
+
+                            return (
+                                <div key={project._id} className={colSpan}>
+                                    <PortfolioCard project={project} index={index} />
+                                </div>
+                            );
+                        })}
                     </div>
-                    <h3 className={styles.projectTitle}>{project.title}</h3>
-                </div>
-            </Link>
-        </motion.div>
-    );
-};
-
-export default function PortfolioPage() {
-    const [activeFilter, setActiveFilter] = useState("All");
-    const [email, setEmail] = useState("");
-    const [status, setStatus] = useState("idle");
-
-    const handleSubscribe = async (e) => {
-        e.preventDefault();
-        if (!email) return;
-        setStatus("loading");
-        try {
-            const res = await fetch("/api/newsletter", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
-            });
-            if (res.ok) {
-                setStatus("success");
-                setEmail("");
-            } else {
-                setStatus("error");
-            }
-        } catch (err) {
-            setStatus("error");
-        }
-    };
-
-    const filteredProjects = activeFilter === "All"
-        ? projectsData
-        : projectsData.filter(p => p.category === activeFilter);
-
-    return (
-        <main className={styles.portfolioPage}>
-            <header className={styles.header}>
-                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="script-font">
-                    Curated Works
-                </motion.span>
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className={styles.title}
-                >
-                    The <i>Archive</i>
-                </motion.h1>
-            </header>
-
-            <nav className={styles.filterNav}>
-                {categories.map(cat => (
-                    <button
-                        key={cat}
-                        onClick={() => setActiveFilter(cat)}
-                        className={`${styles.filterBtn} ${activeFilter === cat ? styles.filterActive : ""}`}
-                    >
-                        {cat}
-                    </button>
-                ))}
-            </nav>
-
-            <section className={styles.gridContainer}>
-                <div className={styles.grid}>
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project, index) => (
-                            <ProjectCard key={project.id} project={project} index={index} />
-                        ))}
-                    </AnimatePresence>
-                </div>
-            </section>
-
-            {/* Newsletter Subscription (Consistent Footer CTA) */}
-            {/* <section className={styles.newsletter}>
-                <div className={styles.newsletterInner}>
-                    <span className="script-font">Join the inner circle</span>
-                    <h2 className={styles.nsTitle}>
-                        {status === "success"
-                            ? "Thank you for joining us."
-                            : "Occasional insights delivered to your inbox"}
-                    </h2>
-
-                    {status !== "success" && (
-                        <form className={styles.nsForm} onSubmit={handleSubscribe}>
-                            <input
-                                type="email"
-                                placeholder={status === "error" ? "Try again..." : "Your email address"}
-                                className={styles.nsInput}
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                            <button
-                                type="submit"
-                                className={styles.nsBtn}
-                                disabled={status === "loading"}
-                            >
-                                {status === "loading" ? "..." : "Subscribe"}
-                            </button>
-                        </form>
-                    )}
-                </div>
-            </section> */}
+                ) : (
+                    <div style={{ textAlign: 'center', padding: '100px 0', color: '#999' }}>
+                        <p style={{ fontFamily: 'var(--font-secondary, sans-serif)', fontSize: '1.2rem' }}>No projects found yet. Admin can upload projects via the Dashboard.</p>
+                    </div>
+                )}
+            </div>
         </main>
     );
 }

@@ -14,60 +14,64 @@ export default function PortfolioCard({ project, index, className = "" }) {
     });
 
     // Parallax effect for the image
-    const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
     return (
         <motion.div
             ref={containerRef}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 1, delay: index * 0.05, ease: [0.215, 0.61, 0.355, 1] }}
-            className={`group relative overflow-hidden rounded-[32px] bg-white border border-[#EAE6DF] ${className}`}
-            style={{ height: '100%', minHeight: '450px' }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: index * 0.05, ease: "easeOut" }}
+            className={`group relative bg-white border border-[#D6CDC4] rounded-sm overflow-hidden transition-shadow duration-500 hover:shadow-xl ${className}`}
+            style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
         >
-            <Link href={`/portfolio/${project._id}`} className="block h-full w-full no-underline relative overflow-hidden">
-                {/* Image Container with Parallax */}
-                <div className="absolute inset-0 overflow-hidden">
-                    <motion.div style={{ y, height: '130%', top: '-15%' }} className="relative w-full">
+            <Link href={`/portfolio/${project._id}`} className="flex flex-col h-full w-full no-underline">
+                {/* Image Container */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-[#FCFAF7] border-b border-[#D6CDC4]">
+                    {project.coverImage ? (
                         <Image
                             src={project.coverImage}
                             alt={project.title}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
-                    </motion.div>
-                    {/* Overlay Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#2C2A28]/80 via-[#2C2A28]/20 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
+                    ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-[#5A5653] font-sans text-sm">
+                            Image Unavailable
+                        </div>
+                    )}
                 </div>
 
-                {/* Content Overlay */}
-                <div className="absolute inset-0 p-8 flex flex-col justify-end text-white">
-                    <div className="transform transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                        <div className="flex items-center gap-3 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                            <span className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-[#7C3AED] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                {/* Content Area */}
+                <div className="p-6 md:p-8 flex flex-col flex-grow justify-between bg-white">
+                    <div>
+                        {/* Meta */}
+                        <div className="flex items-center gap-3 mb-4">
+                            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#7C3AED]">
                                 {project.category}
                             </span>
-                            <div className="w-8 h-[1px] bg-white/30" />
-                            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/70">
-                                {project.clientName}
-                            </span>
+                            {project.clientName && (
+                                <>
+                                    <span className="text-[#D6CDC4] text-[10px]">|</span>
+                                    <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-[#5A5653]">
+                                        {project.clientName}
+                                    </span>
+                                </>
+                            )}
                         </div>
 
-                        <h3 className="font-serif text-3xl md:text-4xl leading-tight mb-2 group-hover:text-white transition-colors duration-300">
+                        {/* Title */}
+                        <h3 className="font-serif text-2xl md:text-3xl text-[#2C2A28] leading-[1.2] m-0 group-hover:text-[#7C3AED] transition-colors duration-300">
                             {project.title}
                         </h3>
-
-                        <div className="flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.1em] text-white/0 group-hover:text-white/100 transition-all duration-500 delay-200">
-                            View Project <ArrowUpRight size={16} />
-                        </div>
                     </div>
-                </div>
 
-                {/* Floating Badge (Original Style) */}
-                <div className="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-500 ease-[0.34,1.56,0.64,1]">
-                    <ArrowUpRight size={20} />
+                    {/* Action Link */}
+                    <div className="mt-8 flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#2C2A28] group-hover:text-[#7C3AED] transition-colors duration-300">
+                        Explore <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </div>
                 </div>
             </Link>
         </motion.div>

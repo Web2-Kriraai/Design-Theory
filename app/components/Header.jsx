@@ -115,6 +115,7 @@ export default function Header() {
                         <div className={`${styles.dropdownContent} ${activeDropdown === 'inspiration' ? styles.showDropdown : ''}`}>
                             <Link href="/blog">Blog</Link>
                             <a href="https://www.instagram.com/the.designtheory/?hl=en" target="_blank" rel="noopener noreferrer">Instagram</a>
+                            <a href="https://in.linkedin.com/company/the-design-theory-in" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                         </div>
                     </div>
 
@@ -209,6 +210,7 @@ export default function Header() {
                             <div className={styles.mobileSubNav}>
                                 <Link href="/blog" onClick={toggleMobileMenu}>Blog</Link>
                                 <a href="https://www.instagram.com/the.designtheory/?hl=en" target="_blank" rel="noopener noreferrer" onClick={toggleMobileMenu}>Instagram</a>
+                                <a href="https://in.linkedin.com/company/the-design-theory-in" target="_blank" rel="noopener noreferrer" onClick={toggleMobileMenu}>LinkedIn</a>
                             </div>
                         )}
                     </div>

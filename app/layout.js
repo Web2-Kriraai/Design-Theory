@@ -2,7 +2,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SessionWrapper from "./components/SessionWrapper";
-import SubscriptionPopup from "./components/SubscriptionPopup";
+// import SubscriptionPopup from "./components/SubscriptionPopup";
 import SmoothScroll from "./components/SmoothScroll";
 
 export const metadata = {
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
             </div>
           </SmoothScroll>
         </SessionWrapper>
-        <SubscriptionPopup />
+        {/* <SubscriptionPopup /> */}
       </body>
     </html>
   );

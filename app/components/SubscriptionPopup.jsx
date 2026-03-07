@@ -9,6 +9,7 @@ export default function SubscriptionPopup() {
     const [status, setStatus] = useState("idle"); // idle, loading, success, error
     const [errorMessage, setErrorMessage] = useState("");
 
+    /* 
     useEffect(() => {
         // Only suppress for users who already subscribed
         const hasSubscribed = localStorage.getItem("tdt_subscribed");
@@ -21,6 +22,7 @@ export default function SubscriptionPopup() {
 
         return () => clearTimeout(timer);
     }, []);
+    */
 
     // Listen for manual trigger events from other components (like the homepage button)
     useEffect(() => {

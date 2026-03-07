@@ -115,16 +115,17 @@
     margin-bottom: 16px;
     font-style: normal;
     color: #ffffff;
+    line-height: 1.1;
 }
 
 .heroTagline {
-    font-family: var(--font-serif);
-    font-size: 1.15rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
     font-weight: 300;
-    font-style: italic;
-    letter-spacing: 0.04em;
+    font-style: normal;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     opacity: 0.85;
-    text-transform: none;
     color: #ffffff;
     margin: 0;
 }
@@ -300,7 +301,7 @@
    ========================================== */
 .testimonials {
     padding: 120px 48px;
-    background: #ffffff;
+    background: var(--bg-soft, #E8E1D7);
 }
 
 .testiInner {
@@ -476,7 +477,7 @@
 }
 
 .ugBlock:hover {
-    background-color: #faf8f5;
+    background-color: var(--bg-primary);
 }
 
 .ugHeading {
@@ -532,7 +533,7 @@
     }
 
     .heroTagline {
-        font-size: 0.95rem;
+        font-size: 0.78rem;
     }
 
     .intro {
@@ -588,7 +589,7 @@
     }
 
     .heroTagline {
-        font-size: 0.82rem;
+        font-size: 0.72rem;
     }
 
     .introText {

@@ -1,21 +1,19 @@
 /* ==========================================
    FOOTER — The Design Theory
+   Purple/Yellow Theme
    ========================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;600&display=swap');
-
-/* ---- Root / Tokens ---- */
 .footer {
-    background-color: #0f0f0f;
-    color: #c8c3bb;
-    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #1A1030 0%, #150D28 100%);
+    color: #c8c0d8;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.82rem;
     letter-spacing: 0.06em;
     position: relative;
     overflow: hidden;
 }
 
-/* subtle background texture grain */
+/* subtle noise texture */
 .footer::before {
     content: '';
     position: absolute;
@@ -26,10 +24,10 @@
     z-index: 0;
 }
 
-/* ---- Gold top accent ---- */
+/* ---- Yellow top accent ---- */
 .topAccent {
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, #B89E7B 30%, #e8d5a3 60%, transparent 100%);
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #E8C547 25%, #F5DC78 50%, #E8C547 75%, transparent 100%);
 }
 
 /* ---- Container ---- */
@@ -49,7 +47,7 @@
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: 48px 40px;
     padding-bottom: 64px;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    border-bottom: 1px solid rgba(232, 197, 71, 0.12);
 }
 
 /* ---- Column base ---- */
@@ -57,8 +55,6 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    /* scroll fade-in via CSS @keyframes — triggered by IntersectionObserver class in JSX
-     We use animation-play-state to keep it paused until visible */
     animation: fadeSlideUp 0.7s ease both;
 }
 
@@ -88,15 +84,15 @@
 
 /* ---- Column Title ---- */
 .colTitle {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #B89E7B;
+    color: #E8C547;
     margin-bottom: 24px;
     padding-bottom: 12px;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    border-bottom: 1px solid rgba(232, 197, 71, 0.18);
     position: relative;
 }
 
@@ -106,19 +102,19 @@
     bottom: -1px;
     left: 0;
     width: 28px;
-    height: 1px;
-    background: #B89E7B;
+    height: 2px;
+    background: #E8C547;
 }
 
 /* ==========================================
    COLUMN 1 — GET IN TOUCH
    ========================================== */
 .brandName {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
     font-size: 1.25rem;
     font-weight: 300;
     font-style: italic;
-    color: #f0ebe3;
+    color: #f0eaf8;
     margin-bottom: 22px;
     letter-spacing: 0.04em;
 }
@@ -136,25 +132,25 @@
     align-items: flex-start;
     gap: 10px;
     line-height: 1.7;
-    color: #9e9690;
+    color: #9e94b0;
 }
 
 .addrIcon {
     flex-shrink: 0;
     margin-top: 3px;
-    color: #B89E7B;
+    color: #E8C547;
     opacity: 0.8;
 }
 
 .contactLink {
-    color: #b8b2aa;
+    color: #b8aed0;
     text-decoration: none;
     border-bottom: none;
     transition: color 0.25s ease;
 }
 
 .contactLink:hover {
-    color: #B89E7B;
+    color: #E8C547;
     border-bottom: none;
 }
 
@@ -171,18 +167,18 @@
     justify-content: center;
     width: 36px;
     height: 36px;
-    border: 1px solid rgba(201, 168, 76, 0.3);
+    border: 1px solid rgba(232, 197, 71, 0.3);
     border-radius: 50%;
-    color: #B89E7B;
+    color: #E8C547;
     text-decoration: none;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.3) !important;
+    border-bottom: 1px solid rgba(232, 197, 71, 0.3) !important;
     transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
 .socialLink:hover {
-    background-color: #B89E7B;
-    border-color: #B89E7B;
-    color: #0f0f0f;
+    background-color: #E8C547;
+    border-color: #E8C547;
+    color: #1A1030;
     transform: translateY(-2px);
 }
 
@@ -209,7 +205,7 @@
 .linkList a {
     display: block;
     padding: 9px 0;
-    color: #9e9690;
+    color: #9e94b0;
     text-decoration: none;
     border-bottom: none;
     position: relative;
@@ -223,12 +219,12 @@
     bottom: 8px;
     width: 0;
     height: 1px;
-    background: #B89E7B;
+    background: #E8C547;
     transition: width 0.3s ease;
 }
 
 .linkList a:hover {
-    color: #e8d5a3;
+    color: #F5DC78;
     padding-left: 10px;
     border-bottom: none;
 }
@@ -251,7 +247,7 @@
 
 .copyright {
     font-size: 0.75rem;
-    color: #5a554f;
+    color: #5a4f6e;
     margin: 0;
     letter-spacing: 0.05em;
     line-height: 1;
@@ -266,7 +262,7 @@
 
 .legalLinks a {
     font-size: 0.75rem;
-    color: #5a554f;
+    color: #5a4f6e;
     text-decoration: none;
     border-bottom: none;
     transition: color 0.25s ease;
@@ -274,17 +270,17 @@
 }
 
 .legalLinks a:hover {
-    color: #B89E7B;
+    color: #E8C547;
     border-bottom: none;
 }
 
 .divider {
-    color: #3a3632;
+    color: #3a3252;
     font-size: 0.7rem;
 }
 
 /* ==========================================
-   RESPONSIVE — TABLET (≤ 900px)
+   RESPONSIVE
    ========================================== */
 @media (max-width: 900px) {
     .container {
@@ -296,15 +292,11 @@
         gap: 40px 32px;
     }
 
-    /* Let col 1 span full width so address breathes */
     .col:first-child {
         grid-column: 1 / -1;
     }
 }
 
-/* ==========================================
-   RESPONSIVE — MOBILE (≤ 600px)
-   ========================================== */
 @media (max-width: 600px) {
     .container {
         padding: 48px 20px 0;

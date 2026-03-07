@@ -188,9 +188,14 @@
 }
 
 @media (max-width: 768px) {
+    .header {
+        padding: 0 24px 60px;
+    }
+
     .card {
-        height: 95vh;
-        padding: 40px;
+        height: auto;
+        min-height: 85vh;
+        padding: 40px 24px;
     }
 
     .cardBody {
@@ -206,5 +211,44 @@
 
     .nsTitle {
         font-size: 2.2rem;
+    }
+
+    .newsletter {
+        padding: 80px 24px;
+    }
+
+    .sectionTitle {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        min-height: auto;
+        padding: 32px 16px;
+    }
+
+    .sectionTitle {
+        font-size: 1.6rem;
+    }
+
+    .cardNum {
+        font-size: 4rem;
+    }
+
+    .cardTitle {
+        font-size: 1.3rem;
+    }
+
+    .cardText {
+        font-size: 0.85rem;
+    }
+
+    .cardImageInner {
+        height: 220px;
+    }
+
+    .nsTitle {
+        font-size: 1.8rem;
     }
 }

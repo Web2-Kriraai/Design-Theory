@@ -546,6 +546,24 @@
         font-size: 3rem;
     }
 
+    .filterNav {
+        justify-content: flex-start;
+        gap: 24px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 16px 24px 40px;
+        scrollbar-width: none;
+    }
+
+    .filterNav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filterBtn {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
     .grid {
         grid-template-columns: 1fr;
     }
@@ -564,11 +582,45 @@
         font-size: 2.2rem;
     }
 
+    .featuredContent {
+        padding: 40px 24px;
+    }
+
     .newsletterTitle {
         font-size: 2.5rem;
     }
 
     .cardImageWrap {
         height: 350px;
+    }
+
+    .cardContent {
+        padding: 24px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 100px 16px 48px;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .overlayText .featuredTitle {
+        font-size: 1.6rem;
+    }
+
+    .newsletterTitle {
+        font-size: 2rem;
+    }
+
+    .cardTitle {
+        font-size: 1.3rem;
+    }
+
+    .cardImageWrap {
+        height: 280px;
     }
 }

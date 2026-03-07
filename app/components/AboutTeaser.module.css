@@ -1,12 +1,10 @@
 /* ==========================================
-   ABOUT TEASER SECTION
+   ABOUT TEASER SECTION — The Design Theory
    ========================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;600&display=swap');
 
 .section {
     padding: 120px 48px;
-    background-color: #F9F8F6;
+    background-color: var(--bg-primary, #FCFAF7);
     overflow: hidden;
 }
 
@@ -67,15 +65,15 @@
 .cornerTL {
     top: -6px;
     left: -6px;
-    border-top: 2px solid #B89E7B;
-    border-left: 2px solid #B89E7B;
+    border-top: 2px solid var(--accent-gold, #C6A87D);
+    border-left: 2px solid var(--accent-gold, #C6A87D);
 }
 
 .cornerBR {
     bottom: -6px;
     right: -6px;
-    border-bottom: 2px solid #B89E7B;
-    border-right: 2px solid #B89E7B;
+    border-bottom: 2px solid var(--accent-gold, #C6A87D);
+    border-right: 2px solid var(--accent-gold, #C6A87D);
 }
 
 /* ---- Text Side ---- */
@@ -98,21 +96,21 @@
 }
 
 .label {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #B89E7B;
+    color: var(--accent-gold, #C6A87D);
     margin-bottom: 12px;
 }
 
 .heading {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
     font-size: 3.5rem;
     font-weight: 300;
     font-style: italic;
-    color: #222;
+    color: var(--text-primary, #2C2A28);
     margin-bottom: 28px;
     line-height: 1.1;
     text-transform: none;
@@ -120,11 +118,11 @@
 }
 
 .body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.92rem;
     font-weight: 300;
     line-height: 1.9;
-    color: #555;
+    color: var(--text-muted, #5A5653);
     margin-bottom: 36px;
     text-transform: none;
     letter-spacing: 0.02em;
@@ -132,7 +130,7 @@
 
 .body strong {
     font-weight: 500;
-    color: #333;
+    color: var(--text-primary, #2C2A28);
 }
 
 /* ---- CTA Link ---- */
@@ -140,12 +138,12 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #333;
+    color: var(--text-primary, #2C2A28);
     text-decoration: none;
     border-bottom: none;
     position: relative;
@@ -161,14 +159,14 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: #B89E7B;
+    background: var(--accent-gold, #C6A87D);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
 }
 
 .cta:hover {
-    color: #B89E7B;
+    color: var(--accent-gold, #C6A87D);
     border-bottom: none;
 }
 
@@ -186,7 +184,7 @@
 }
 
 /* ==========================================
-   RESPONSIVE — TABLET (≤ 900px)
+   RESPONSIVE
    ========================================== */
 @media (max-width: 900px) {
     .section {
@@ -208,9 +206,6 @@
     }
 }
 
-/* ==========================================
-   RESPONSIVE — MOBILE (≤ 600px)
-   ========================================== */
 @media (max-width: 600px) {
     .section {
         padding: 60px 20px;

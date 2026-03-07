@@ -152,7 +152,7 @@ export default function PortfolioPage() {
             </section>
 
             {/* Newsletter Subscription (Consistent Footer CTA) */}
-            <section className={styles.newsletter}>
+            {/* <section className={styles.newsletter}>
                 <div className={styles.newsletterInner}>
                     <span className="script-font">Join the inner circle</span>
                     <h2 className={styles.nsTitle}>
@@ -181,7 +181,7 @@ export default function PortfolioPage() {
                         </form>
                     )}
                 </div>
-            </section>
+            </section> */}
         </main>
     );
 }

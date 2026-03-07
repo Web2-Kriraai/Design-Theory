@@ -115,7 +115,7 @@ export default function Footer() {
                         &copy; 2024 – 2028 The Design Theory. All Rights Reserved.
                     </p>
                     <div className={styles.legalLinks}>
-                        <Link href="/terms">Terms &amp; Conditions</Link>
+                        <Link href="/terms-conditions">Terms &amp; Conditions</Link>
                         <span className={styles.divider}>|</span>
                         <Link href="/privacy-policy">Privacy Policy</Link>
                         <span className={styles.divider}>|</span>

@@ -5,7 +5,7 @@ import SessionWrapper from "./components/SessionWrapper";
 import SubscriptionPopup from "./components/SubscriptionPopup";
 
 export const metadata = {
-  title: "Design Theory | Bespoke Architecture & Interior Design Studio",
+  title: "The Design Theory",
   description: "Intellectual Luxury meets Editorial Design",
 };
 

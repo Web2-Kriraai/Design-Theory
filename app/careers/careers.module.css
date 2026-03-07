@@ -153,7 +153,7 @@
 
 .bulletItem::before {
     content: '✦';
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     font-size: 0.85rem;
     margin-top: 1px;
 }
@@ -264,13 +264,13 @@
 }
 
 .accordionToggle:hover .jobTitle {
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
 }
 
 .plusIcon {
     font-size: 1.8rem;
     font-weight: 300;
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     transition: transform 0.3s ease;
 }
 
@@ -306,7 +306,7 @@
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     margin-bottom: 12px;
 }
 
@@ -339,7 +339,7 @@
 
 .roleList li::before {
     content: '·';
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     font-weight: bold;
 }
 
@@ -364,8 +364,8 @@
 }
 
 .goldBtnDark:hover {
-    background: var(--accent-gold, #B89E7B);
-    border-color: var(--accent-gold, #B89E7B);
+    background: var(--accent-purple, #7C3AED);
+    border-color: var(--accent-purple, #7C3AED);
     color: #fff;
 }
 
@@ -384,7 +384,7 @@
     font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 1.1rem;
     font-weight: 400;
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     text-transform: none;
@@ -432,7 +432,7 @@
 }
 
 .goldLink {
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     text-decoration: none;
     font-style: italic;
     transition: opacity 0.3s ease;
@@ -462,8 +462,8 @@
 }
 
 .goldBtn:hover {
-    background: var(--accent-gold, #B89E7B);
-    border-color: var(--accent-gold, #B89E7B);
+    background: var(--accent-purple, #7C3AED);
+    border-color: var(--accent-purple, #7C3AED);
     color: #fff;
 }
 
@@ -529,7 +529,7 @@
     font-weight: 300;
     font-style: italic;
     line-height: 1.5;
-    color: var(--accent-gold-light, #d4c4a8);
+    color: var(--accent-purple-light, #d4c4a8);
     margin-bottom: 0;
     text-transform: none;
     letter-spacing: 0.02em;

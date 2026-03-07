@@ -11,7 +11,7 @@ import {
 
 /* ── tiny reusable stat card ── */
 function StatCard({ icon, label, value, dark, gold }) {
-    const bg = dark ? "#2D2926" : gold ? "#B89E7B" : "white";
+    const bg = dark ? "#2D2926" : gold ? "#7C3AED" : "white";
     const fg = dark || gold ? "white" : "#2D2926";
     const accent = dark || gold ? "rgba(255,255,255,0.2)" : "#EAE6DF";
 
@@ -26,13 +26,13 @@ function StatCard({ icon, label, value, dark, gold }) {
             }}
         >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "28px" }}>
-                <div style={{ color: dark || gold ? "rgba(255,255,255,0.45)" : "#B89E7B" }}>{icon}</div>
+                <div style={{ color: dark || gold ? "rgba(255,255,255,0.45)" : "#7C3AED" }}>{icon}</div>
                 <ArrowUpRight size={14} color={dark || gold ? "rgba(255,255,255,0.2)" : "#ccc"} />
             </div>
             <div style={{ fontFamily: "var(--font-primary, serif)", fontSize: "clamp(2.5rem,4vw,4rem)", color: fg, lineHeight: 1, marginBottom: "10px" }}>
                 {value}
             </div>
-            <div style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.35em", color: dark || gold ? "rgba(255,255,255,0.5)" : "#B89E7B" }}>
+            <div style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.35em", color: dark || gold ? "rgba(255,255,255,0.5)" : "#7C3AED" }}>
                 {label}
             </div>
         </motion.div>
@@ -80,8 +80,8 @@ function DetailModal({ item, type, onClose }) {
                     <X size={18} />
                 </button>
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "32px" }}>
-                    <div style={{ width: "24px", height: "1px", background: "#B89E7B" }} />
-                    <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#B89E7B" }}>
+                    <div style={{ width: "24px", height: "1px", background: "#7C3AED" }} />
+                    <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#7C3AED" }}>
                         {type.charAt(0).toUpperCase() + type.slice(1)} Details
                     </span>
                 </div>
@@ -105,8 +105,8 @@ function DataTable({ rows, columns, onDelete, onView, loading, emptyText = "No r
     if (loading) {
         return (
             <div style={{ padding: "60px", textAlign: "center" }}>
-                <div style={{ width: "32px", height: "1px", background: "#B89E7B", margin: "0 auto 16px" }} />
-                <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#B89E7B" }}>Loading…</span>
+                <div style={{ width: "32px", height: "1px", background: "#7C3AED", margin: "0 auto 16px" }} />
+                <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#7C3AED" }}>Loading…</span>
             </div>
         );
     }
@@ -145,7 +145,7 @@ function DataTable({ rows, columns, onDelete, onView, loading, emptyText = "No r
                             <td style={{ padding: "14px 16px", textAlign: "right", whiteSpace: "nowrap" }}>
                                 <div style={{ display: "inline-flex", gap: "8px" }}>
                                     {onView && (
-                                        <button onClick={() => onView(row)} title="View details" style={{ padding: "6px 12px", background: "#F9F7F2", border: "1px solid #EAE6DF", cursor: "pointer", color: "#B89E7B", display: "flex", alignItems: "center", gap: "4px", transition: "all 0.2s" }}>
+                                        <button onClick={() => onView(row)} title="View details" style={{ padding: "6px 12px", background: "#F9F7F2", border: "1px solid #EAE6DF", cursor: "pointer", color: "#7C3AED", display: "flex", alignItems: "center", gap: "4px", transition: "all 0.2s" }}>
                                             <Eye size={13} />
                                         </button>
                                     )}
@@ -273,8 +273,8 @@ export default function DashboardPage() {
         return (
             <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#F9F7F2" }}>
                 <div style={{ textAlign: "center" }}>
-                    <div style={{ width: "48px", height: "1px", background: "#B89E7B", margin: "0 auto 16px" }} />
-                    <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5em", color: "#B89E7B" }}>Initializing</span>
+                    <div style={{ width: "48px", height: "1px", background: "#7C3AED", margin: "0 auto 16px" }} />
+                    <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5em", color: "#7C3AED" }}>Initializing</span>
                 </div>
             </div>
         );
@@ -298,7 +298,7 @@ export default function DashboardPage() {
     const userCols = [
         { key: "name", label: "Name" },
         { key: "email", label: "Email" },
-        { key: "role", label: "Role", render: v => <span style={{ padding: "3px 10px", background: v === "admin" ? "#2D2926" : "#F9F7F2", color: v === "admin" ? "#B89E7B" : "#999", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase" }}>{v}</span> },
+        { key: "role", label: "Role", render: v => <span style={{ padding: "3px 10px", background: v === "admin" ? "#2D2926" : "#F9F7F2", color: v === "admin" ? "#7C3AED" : "#999", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase" }}>{v}</span> },
         { key: "createdAt", label: "Created", render: v => v ? new Date(v).toLocaleDateString() : "—" },
     ];
 
@@ -324,8 +324,8 @@ export default function DashboardPage() {
                     style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: "24px", marginBottom: "48px" }}>
                     <div>
                         {/* <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
-                            <div style={{ width: "30px", height: "1px", background: "#B89E7B" }} />
-                            <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.45em", color: "#B89E7B" }}>
+                            <div style={{ width: "30px", height: "1px", background: "#7C3AED" }} />
+                            <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.45em", color: "#7C3AED" }}>
                                 Studio Matrix · v1.0
                             </span>
                         </div> */}
@@ -334,7 +334,7 @@ export default function DashboardPage() {
                         </h1>
                         {session?.user?.name && (
                             <p style={{ marginTop: "10px", fontFamily: "sans-serif", fontSize: "0.75rem", color: "#999", letterSpacing: "0.08em" }}>
-                                Signed in as <strong style={{ color: "#B89E7B" }}>{session.user.name}</strong>
+                                Signed in as <strong style={{ color: "#7C3AED" }}>{session.user.name}</strong>
                             </p>
                         )}
                     </div>
@@ -379,7 +379,7 @@ export default function DashboardPage() {
                                 onClick={() => setActiveTab(t.key)}
                                 style={{
                                     padding: "14px 24px", background: "none", border: "none",
-                                    borderBottom: activeTab === t.key ? "2px solid #B89E7B" : "2px solid transparent",
+                                    borderBottom: activeTab === t.key ? "2px solid #7C3AED" : "2px solid transparent",
                                     marginBottom: "-2px", cursor: "pointer", fontFamily: "sans-serif",
                                     fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase",
                                     letterSpacing: "0.35em", whiteSpace: "nowrap",
@@ -400,8 +400,8 @@ export default function DashboardPage() {
                                     {/* Studio Brand */}
                                     <div style={{ background: "white", border: "1px solid #EAE6DF", padding: "40px" }}>
                                         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-                                            <div style={{ width: "24px", height: "1px", background: "#B89E7B" }} />
-                                            <span style={{ fontFamily: "sans-serif", fontSize: "0.55rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.35em", color: "#B89E7B" }}>The Studio</span>
+                                            <div style={{ width: "24px", height: "1px", background: "#7C3AED" }} />
+                                            <span style={{ fontFamily: "sans-serif", fontSize: "0.55rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.35em", color: "#7C3AED" }}>The Studio</span>
                                         </div>
                                         <h3 style={{ fontFamily: "var(--font-primary, serif)", fontSize: "1.8rem", color: "#2D2926", lineHeight: 1.15, marginBottom: "16px" }}>
                                             The Design<br /><em>Theory</em>
@@ -419,11 +419,11 @@ export default function DashboardPage() {
                                         <div style={{ fontFamily: "sans-serif", fontSize: "0.55rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.35em", color: "#ccc", marginBottom: "20px" }}>Administrator</div>
                                         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
                                             <div style={{ width: "52px", height: "52px", background: "#2D2926", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                                                <Users size={22} color="#B89E7B" />
+                                                <Users size={22} color="#7C3AED" />
                                             </div>
                                             <div>
                                                 <div style={{ fontFamily: "var(--font-primary, serif)", fontSize: "1.1rem", color: "#2D2926" }}>{session?.user?.name || "Studio Admin"}</div>
-                                                <div style={{ fontFamily: "sans-serif", fontSize: "0.7rem", color: "#B89E7B", letterSpacing: "0.08em", marginTop: "2px" }}>{session?.user?.email}</div>
+                                                <div style={{ fontFamily: "sans-serif", fontSize: "0.7rem", color: "#7C3AED", letterSpacing: "0.08em", marginTop: "2px" }}>{session?.user?.email}</div>
                                             </div>
                                         </div>
                                         <div style={{ padding: "10px 16px", background: "#F9F7F2", display: "inline-flex", alignItems: "center", gap: "8px" }}>
@@ -446,7 +446,7 @@ export default function DashboardPage() {
                                             {[["enquiries", "View Enquiries"], ["users", "Manage Users"], ["subscribers", "Subscribers"]].map(([tab, lbl]) => (
                                                 <button key={tab} onClick={() => setActiveTab(tab)}
                                                     style={{ padding: "12px 16px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.3em", cursor: "pointer", textAlign: "left", transition: "all 0.2s" }}
-                                                    onMouseEnter={e => e.currentTarget.style.background = "rgba(184,158,123,0.2)"}
+                                                    onMouseEnter={e => e.currentTarget.style.background = "rgba(124,58,237,0.2)"}
                                                     onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.08)"}
                                                 >
                                                     {lbl} →

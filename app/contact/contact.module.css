@@ -35,7 +35,7 @@
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     margin-bottom: 12px;
 }
 
@@ -104,7 +104,7 @@
 .detailIcon {
     flex-shrink: 0;
     margin-top: 2px;
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
 }
 
 .address {
@@ -138,7 +138,7 @@
 }
 
 .contactLink:hover {
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     border-bottom: none;
 }
 
@@ -188,7 +188,7 @@
 }
 
 .req {
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
 }
 
 .input {
@@ -215,7 +215,7 @@
 }
 
 .input:focus {
-    border-bottom-color: var(--accent-gold, #B89E7B);
+    border-bottom-color: var(--accent-purple, #7C3AED);
 }
 
 .inputError {
@@ -256,8 +256,8 @@
 }
 
 .submitBtn:hover {
-    background: var(--accent-gold, #B89E7B);
-    border-color: var(--accent-gold, #B89E7B);
+    background: var(--accent-purple, #7C3AED);
+    border-color: var(--accent-purple, #7C3AED);
     color: #fff;
 }
 
@@ -280,7 +280,7 @@
 }
 
 .privacyLink {
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     text-decoration: none;
     border-bottom: none;
     transition: opacity 0.2s;
@@ -306,8 +306,8 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 1px solid var(--accent-gold, #B89E7B);
-    color: var(--accent-gold, #B89E7B);
+    border: 1px solid var(--accent-purple, #7C3AED);
+    color: var(--accent-purple, #7C3AED);
     font-size: 1.6rem;
     display: flex;
     align-items: center;
@@ -419,7 +419,7 @@
 }
 
 .stripLink:hover {
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
 }
 
 .stripDivider {

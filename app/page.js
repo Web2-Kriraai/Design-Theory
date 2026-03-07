@@ -135,10 +135,8 @@ export default function Home() {
             <p className={styles.sectionLabel}>Our Work</p>
             <h2 className={styles.serifHeading}>Selected Projects</h2>
             <p className={styles.bodyText}>
-              Each project begins with understanding the people who inhabit a
-              space. From intimate residences to expansive commercial interiors,
-              we craft environments that tell a story — rooted in purpose,
-              elevated by design.
+              A curated selection of our architectural and interior design projects,
+              showcaseing our approach to space, materiality, and detail.
             </p>
             <Link href="/portfolio" className={styles.goldCta}>
               VIEW PORTFOLIO <span className={styles.ctaArrow}>→</span>
@@ -185,12 +183,11 @@ export default function Home() {
             <p className={styles.sectionLabel}>Our Approach</p>
             <h2 className={styles.serifHeading}>Design Philosophy</h2>
             <p className={styles.bodyText}>
-              We believe design should be intentional — a harmonious balance
-              between form and function, beauty and comfort. Every material,
-              texture, and spatial decision is guided by purpose. Our philosophy
-              centres on creating spaces that are not only visually striking but
-              deeply personal, reflecting the unique essence of those who
-              inhabit them.
+              At The Design Theory, we believe every space should tell a story.
+              Our design approach is collaborative, client-focused, and driven by
+              innovation. From concept to execution, we ensure that every project
+              reflects the client's vision while maintaining functionality,
+              comfort, and elegance.
             </p>
             <Link href="/services" className={styles.goldCta}>
               LEARN MORE <span className={styles.ctaArrow}>→</span>
@@ -267,10 +264,9 @@ export default function Home() {
             <p className={styles.sectionLabel}>Spotlight</p>
             <h2 className={styles.serifHeading}>Featured Project</h2>
             <p className={styles.bodyText}>
-              A contemporary residence designed to embrace natural light and
-              fluid living. Clean lines, warm materials, and curated details
-              come together to create a home that feels both sophisticated and
-              deeply comfortable — a true reflection of modern living.
+              A thoughtfully designed residential interior that blends modern
+              aesthetics with everyday functionality. Each element was curated to
+              reflect the client's lifestyle, preferences, and budget.
             </p>
             <Link href="/portfolio" className={styles.goldCta}>
               VIEW PROJECT <span className={styles.ctaArrow}>→</span>
@@ -296,8 +292,8 @@ export default function Home() {
           <div className={styles.ugBlock}>
             <h3 className={styles.ugHeading}>Contact Us</h3>
             <p className={styles.ugBody}>
-              Get in touch to discuss your project. We'd love to hear about your
-              vision and explore how we can bring it to life.
+              Get in touch to discuss your project, design requirements, or
+              general enquiries.
             </p>
             <Link href="/contact" className={styles.goldCta}>
               VIEW DETAILS <span className={styles.ctaArrow}>→</span>
@@ -308,8 +304,8 @@ export default function Home() {
           <div className={styles.ugBlock}>
             <h3 className={styles.ugHeading}>Our Process</h3>
             <p className={styles.ugBody}>
-              Learn about our workflow — from initial consultation and concept
-              development through to execution and final handover.
+              Learn about our workflow, design stages, and how we bring
+              concepts to life.
             </p>
             <Link href="/services" className={styles.goldCta}>
               VIEW DETAILS <span className={styles.ctaArrow}>→</span>
@@ -321,7 +317,7 @@ export default function Home() {
             <h3 className={styles.ugHeading}>Design Services</h3>
             <p className={styles.ugBody}>
               Explore our residential, commercial, architectural, and turnkey
-              design offerings tailored to your unique needs.
+              solutions.
             </p>
             <Link href="/services" className={styles.goldCta}>
               VIEW DETAILS <span className={styles.ctaArrow}>→</span>
@@ -332,8 +328,7 @@ export default function Home() {
           <div className={styles.ugBlock}>
             <h3 className={styles.ugHeading}>Newsletter</h3>
             <p className={styles.ugBody}>
-              Sign up to receive studio updates, project reveals, design
-              inspiration, and exclusive insights from The Design Theory.
+              Sign up to receive studio updates, design inspiration, and project highlights.
             </p>
             <button
               onClick={(e) => {

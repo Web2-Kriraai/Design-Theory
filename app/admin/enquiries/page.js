@@ -44,7 +44,7 @@ export default function EnquiriesPage() {
         <div className="max-w-7xl mx-auto">
             <header className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                 <div>
-                    <span className="script-font text-[#B89E7B] text-2xl block mb-2">Management</span>
+                    <span className="script-font text-[#7C3AED] text-2xl block mb-2">Management</span>
                     <h1 className="text-4xl font-serif text-[#2D2926]">Project Enquiries</h1>
                 </div>
 
@@ -53,7 +53,7 @@ export default function EnquiriesPage() {
                     <input
                         type="text"
                         placeholder="Search by email..."
-                        className="w-full pl-12 pr-4 py-3 bg-white border border-[#EAE6DF] focus:border-[#B89E7B] outline-none rounded font-sans text-sm transition-colors"
+                        className="w-full pl-12 pr-4 py-3 bg-white border border-[#EAE6DF] focus:border-[#7C3AED] outline-none rounded font-sans text-sm transition-colors"
                         value={search}
                         onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                     />
@@ -88,16 +88,16 @@ export default function EnquiriesPage() {
                                         </td>
                                         <td className="px-6 py-5 space-y-1">
                                             <div className="flex items-center gap-2 text-xs text-[#6B6560]">
-                                                <Mail size={12} className="text-[#B89E7B]" />
+                                                <Mail size={12} className="text-[#7C3AED]" />
                                                 {enquiry.email}
                                             </div>
                                             <div className="flex items-center gap-2 text-xs text-[#6B6560]">
-                                                <Phone size={12} className="text-[#B89E7B]" />
+                                                <Phone size={12} className="text-[#7C3AED]" />
                                                 {enquiry.phoneNumber}
                                             </div>
                                         </td>
                                         <td className="px-6 py-5">
-                                            <span className="text-[10px] uppercase tracking-widest px-2 py-1 bg-[#F9F7F2] text-[#B89E7B] border border-[#EAE6DF] rounded font-bold">
+                                            <span className="text-[10px] uppercase tracking-widest px-2 py-1 bg-[#F9F7F2] text-[#7C3AED] border border-[#EAE6DF] rounded font-bold">
                                                 {enquiry.projectType}
                                             </span>
                                         </td>
@@ -126,7 +126,7 @@ export default function EnquiriesPage() {
 
                 {enquiries.length === 0 && !loading && (
                     <div className="py-20 text-center">
-                        <span className="script-font text-[#B89E7B] text-2xl block mb-2">Quiet Studio</span>
+                        <span className="script-font text-[#7C3AED] text-2xl block mb-2">Quiet Studio</span>
                         <p className="text-xs uppercase tracking-widest text-[#999]">No enquiries found matching your criteria</p>
                     </div>
                 )}

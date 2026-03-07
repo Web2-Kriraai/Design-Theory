@@ -98,7 +98,7 @@ export default function AuthPage() {
                     transition: border-color 0.3s ease;
                     box-sizing: border-box;
                 }
-                .auth-input:focus { border-bottom-color: #B89E7B; }
+                .auth-input:focus { border-bottom-color: #7C3AED; }
                 .auth-input::placeholder { color: #ccc; }
                 .auth-btn {
                     width: 100%;
@@ -116,7 +116,7 @@ export default function AuthPage() {
                     position: relative;
                     overflow: hidden;
                 }
-                .auth-btn:hover:not(:disabled) { background: #B89E7B; }
+                .auth-btn:hover:not(:disabled) { background: #EAB308; }
                 .auth-btn:disabled { opacity: 0.55; cursor: not-allowed; }
                 .tab-btn {
                     flex: 1;
@@ -134,7 +134,7 @@ export default function AuthPage() {
                 }
                 .tab-btn.active {
                     color: #2D2926;
-                    border-bottom-color: #B89E7B;
+                    border-bottom-color: #7C3AED;
                 }
                 .tab-btn:not(.active) {
                     color: #bbb;
@@ -159,7 +159,7 @@ export default function AuthPage() {
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "140px 40px 60px", background: "#F9F7F2", position: "relative", overflow: "hidden" }}>
 
                     {/* Decorative blobs */}
-                    <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "240px", height: "240px", background: "rgba(184,158,123,0.07)", borderRadius: "50%", filter: "blur(40px)" }} />
+                    <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "240px", height: "240px", background: "rgba(124,58,237,0.07)", borderRadius: "50%", filter: "blur(40px)" }} />
                     <div style={{ position: "absolute", bottom: "-80px", left: "-80px", width: "300px", height: "300px", background: "rgba(45,41,38,0.04)", borderRadius: "50%", filter: "blur(50px)" }} />
 
                     <motion.div
@@ -171,8 +171,8 @@ export default function AuthPage() {
                         {/* Brand */}
                         <div style={{ marginBottom: "40px" }}>
                             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-                                <div style={{ width: "30px", height: "1px", background: "#B89E7B" }} />
-                                <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#B89E7B" }}>
+                                <div style={{ width: "30px", height: "1px", background: "#7C3AED" }} />
+                                <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#7C3AED" }}>
                                     Studio Access
                                 </span>
                             </div>
@@ -256,7 +256,7 @@ export default function AuthPage() {
                                     </button>
                                     <p style={{ fontFamily: "sans-serif", fontSize: "0.65rem", textAlign: "center", color: "#aaa", letterSpacing: "0.15em" }}>
                                         No account?{" "}
-                                        <button type="button" onClick={() => switchMode("signup")} style={{ background: "none", border: "none", color: "#B89E7B", fontWeight: 700, cursor: "pointer", letterSpacing: "0.15em", fontSize: "0.65rem", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                                        <button type="button" onClick={() => switchMode("signup")} style={{ background: "none", border: "none", color: "#7C3AED", fontWeight: 700, cursor: "pointer", letterSpacing: "0.15em", fontSize: "0.65rem", textDecoration: "underline", textUnderlineOffset: "3px" }}>
                                             Register here
                                         </button>
                                     </p>
@@ -309,7 +309,7 @@ export default function AuthPage() {
                                     </button>
                                     <p style={{ fontFamily: "sans-serif", fontSize: "0.65rem", textAlign: "center", color: "#aaa", letterSpacing: "0.15em" }}>
                                         Already a member?{" "}
-                                        <button type="button" onClick={() => switchMode("login")} style={{ background: "none", border: "none", color: "#B89E7B", fontWeight: 700, cursor: "pointer", letterSpacing: "0.15em", fontSize: "0.65rem", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                                        <button type="button" onClick={() => switchMode("login")} style={{ background: "none", border: "none", color: "#7C3AED", fontWeight: 700, cursor: "pointer", letterSpacing: "0.15em", fontSize: "0.65rem", textDecoration: "underline", textUnderlineOffset: "3px" }}>
                                             Sign in
                                         </button>
                                     </p>
@@ -343,7 +343,7 @@ export default function AuthPage() {
                         </motion.div>
 
                         <motion.div initial={{ opacity: 0, x: -24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.9 }}>
-                            <div style={{ width: "32px", height: "1px", background: "#B89E7B", marginBottom: "24px" }} />
+                            <div style={{ width: "32px", height: "1px", background: "#7C3AED", marginBottom: "24px" }} />
                             <h2 style={{ fontFamily: "var(--font-primary, serif)", fontSize: "clamp(2.5rem, 4vw, 4rem)", color: "white", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
                                 Bespoke<br /><em>Excellence</em>
                             </h2>

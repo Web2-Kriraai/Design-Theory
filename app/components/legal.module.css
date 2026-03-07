@@ -1,0 +1,364 @@
+/* Shared Styles for Legal Pages */
+
+.legalPage {
+    background-color: var(--bg-primary, #FCFAF7);
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    color: var(--text-primary, #2C2A28);
+    line-height: 1.7;
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+.legalContainer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 24px;
+}
+
+.legalHero {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeSlideUp 0.8s ease;
+}
+
+.legalHero h1 {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--text-primary, #2C2A28);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.legalHero h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background-color: var(--accent-purple, #7C3AED);
+}
+
+.lastUpdated {
+    font-size: 0.9rem;
+    color: var(--text-muted, #5A5653);
+    margin-top: 20px;
+    letter-spacing: 0.02em;
+}
+
+.introText {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-top: 30px;
+}
+
+/* Section Styling */
+.legalSection {
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-color, #D6CDC4);
+    padding-bottom: 30px;
+    animation: fadeSlideUp 0.8s ease backwards;
+}
+
+.legalSection h2 {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-primary, #2C2A28);
+    margin-bottom: 20px;
+    border-left: 3px solid var(--accent-purple, #7C3AED);
+    padding-left: 15px;
+}
+
+.legalSection h3 {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-primary, #2C2A28);
+    margin: 25px 0 15px;
+}
+
+.legalSection p {
+    font-size: 1rem;
+    color: var(--text-muted, #5A5653);
+    margin-bottom: 15px;
+}
+
+.legalSection ul,
+.legalSection ol {
+    color: var(--text-muted, #5A5653);
+    margin: 15px 0 15px 20px;
+}
+
+.legalSection li {
+    margin-bottom: 8px;
+}
+
+/* Accordion Styling (For Privacy Policy) */
+.accordionItem {
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background: white;
+    overflow: hidden;
+}
+
+.accordionHeader {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 24px 20px;
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.accordionHeader:hover {
+    background: rgba(124, 58, 237, 0.03);
+    /* purple tint */
+}
+
+.accordionIcon {
+    font-size: 1.5rem;
+    color: var(--accent-purple);
+    transition: transform 0.4s ease;
+}
+
+.accordionIcon.open {
+    transform: rotate(45deg);
+}
+
+.accordionContent {
+    padding: 0 20px;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.accordionContentInner {
+    padding: 10px 0 24px;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+/* Table Styling */
+.tableContainer {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.legalTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    min-width: 600px;
+}
+
+.legalTable th {
+    background-color: var(--bg-soft, #E8E1D7);
+    color: var(--text-primary, #2C2A28);
+    font-weight: 600;
+    padding: 14px 16px;
+    text-align: left;
+    border: 1px solid var(--border-color, #D6CDC4);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.legalTable td {
+    padding: 14px 16px;
+    border: 1px solid var(--border-color, #D6CDC4);
+    color: var(--text-muted, #5A5653);
+    font-size: 0.95rem;
+}
+
+.legalTable tr:hover {
+    background-color: rgba(124, 58, 237, 0.03);
+}
+
+/* Bottom Navigation */
+.legalBottomNav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 50px 0 30px;
+    flex-wrap: wrap;
+}
+
+.legalBottomNav a {
+    color: var(--text-muted, #5A5653);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+}
+
+.legalBottomNav a:hover {
+    color: var(--accent-purple, #7C3AED);
+    border-bottom-color: var(--accent-purple, #7C3AED);
+}
+
+.backToTop {
+    text-align: center;
+    margin: 60px 0 20px;
+}
+
+.backToTop button {
+    background: transparent;
+    border: 1px solid var(--accent-purple, #7C3AED);
+    color: var(--text-primary, #2C2A28);
+    padding: 12px 30px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.backToTop button:hover {
+    background-color: var(--accent-purple, #7C3AED);
+    color: #fff;
+}
+
+/* Buttons / Interactive */
+.actionBtn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--accent-purple);
+    color: var(--text-primary);
+    padding: 12px 24px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.actionBtn:hover {
+    background: var(--accent-purple);
+    color: white;
+}
+
+.actionBtnPrimary {
+    background: var(--accent-purple);
+    color: white;
+    border-color: var(--accent-purple);
+}
+
+.actionBtnPrimary:hover {
+    background: var(--accent-yellow);
+    border-color: var(--accent-yellow);
+}
+
+/* Cookie Banner Design */
+.cookieBanner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border-top: 2px solid var(--accent-purple);
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    z-index: 1000;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.cookieBanner p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.cookieBannerActions {
+    display: flex;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .legalHero h1 {
+        font-size: 2.4rem;
+    }
+
+    .legalSection h2 {
+        font-size: 1.5rem;
+    }
+
+    .legalContainer {
+        padding: 40px 20px;
+    }
+
+    .legalTable th,
+    .legalTable td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+    .cookieBanner {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .legalHero h1 {
+        font-size: 2rem;
+    }
+
+    .legalSection h2 {
+        font-size: 1.3rem;
+    }
+
+    .legalBottomNav {
+        gap: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .accordionHeader {
+        font-size: 1.3rem;
+        padding: 16px 12px;
+    }
+
+    .accordionContentInner {
+        font-size: 0.95rem;
+    }
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

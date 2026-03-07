@@ -7,8 +7,9 @@
   --bg-soft: #E8E1D7;
   --text-primary: #2C2A28;
   --text-muted: #5A5653;
-  --accent-gold: #C6A87D;
-  --accent-gold-light: #D9C6A3;
+  --accent-purple: #7C3AED;
+  --accent-purple-light: #C4B5FD;
+  --accent-yellow: #EAB308;
   --border-color: #D6CDC4;
 
   /* ── Typography ── */
@@ -71,7 +72,7 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-gold-light);
+  background: var(--accent-purple-light);
 }
 
 /* ── Noise / Grain Texture Utility ── */

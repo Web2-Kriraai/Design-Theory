@@ -41,7 +41,7 @@
     right: 24px;
     background: transparent;
     border: none;
-    color: var(--accent-gold-light, #d4c4a8);
+    color: var(--accent-purple-light, #d4c4a8);
     font-size: 1.5rem;
     cursor: pointer;
     line-height: 1;
@@ -59,7 +59,7 @@
     font-size: 2.2rem;
     font-weight: 300;
     font-style: italic;
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     margin-bottom: 12px;
     text-transform: none;
     letter-spacing: 0.02em;
@@ -78,7 +78,7 @@
     font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.8rem;
     font-weight: 400;
-    color: var(--accent-gold-light, #d4c4a8);
+    color: var(--accent-purple-light, #d4c4a8);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 32px;
@@ -116,7 +116,7 @@
 }
 
 .input:focus {
-    border-color: var(--accent-gold, #B89E7B);
+    border-color: var(--accent-purple, #7C3AED);
 }
 
 .errorText {
@@ -133,7 +133,7 @@
     justify-content: center;
     background: transparent;
     color: #fff;
-    border: 1px solid var(--accent-gold, #B89E7B);
+    border: 1px solid var(--accent-purple, #7C3AED);
     padding: 14px 24px;
     font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.75rem;
@@ -146,7 +146,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-    background: var(--accent-gold, #B89E7B);
+    background: var(--accent-purple, #7C3AED);
 }
 
 .submitBtn:disabled {
@@ -180,7 +180,7 @@
 
 .successIcon {
     font-size: 2.5rem;
-    color: var(--accent-gold, #B89E7B);
+    color: var(--accent-purple, #7C3AED);
     margin-bottom: 16px;
 }
 

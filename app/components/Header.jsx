@@ -90,7 +90,7 @@ export default function Header() {
                 <div className={styles.logoContainer}>
                     <Link href="/" className={styles.logoLink}>
                         <Image
-                            src="/assets/logo/logo_purple.png"
+                            src="/assets/logo/L2.png"
                             alt="The Design Theory"
                             width={240}
                             height={120}
@@ -174,7 +174,7 @@ export default function Header() {
                 <div className={styles.mobileHeader}>
                     <Link href="/" className={styles.mobileLogoLink} onClick={toggleMobileMenu}>
                         <Image
-                            src="/assets/logo/logo (2).png"
+                            src="/assets/logo/L2.jpg"
                             alt="The Design Theory"
                             width={100}
                             height={52}

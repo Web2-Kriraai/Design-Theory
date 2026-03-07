@@ -1,0 +1,331 @@
+/* ==========================================
+   FOOTER — The Design Theory
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;600&display=swap');
+
+/* ---- Root / Tokens ---- */
+.footer {
+    background-color: #0f0f0f;
+    color: #c8c3bb;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle background texture grain */
+.footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+/* ---- Gold top accent ---- */
+.topAccent {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #B89E7B 30%, #e8d5a3 60%, transparent 100%);
+}
+
+/* ---- Container ---- */
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 72px 48px 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================
+   MAIN GRID — 4 columns
+   ========================================== */
+.grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px 40px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+/* ---- Column base ---- */
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    /* scroll fade-in via CSS @keyframes — triggered by IntersectionObserver class in JSX
+     We use animation-play-state to keep it paused until visible */
+    animation: fadeSlideUp 0.7s ease both;
+}
+
+.col:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.col:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.col:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- Column Title ---- */
+.colTitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #B89E7B;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    position: relative;
+}
+
+.colTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 28px;
+    height: 1px;
+    background: #B89E7B;
+}
+
+/* ==========================================
+   COLUMN 1 — GET IN TOUCH
+   ========================================== */
+.brandName {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    color: #f0ebe3;
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+}
+
+.address {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.addressRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.7;
+    color: #9e9690;
+}
+
+.addrIcon {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: #B89E7B;
+    opacity: 0.8;
+}
+
+.contactLink {
+    color: #b8b2aa;
+    text-decoration: none;
+    border-bottom: none;
+    transition: color 0.25s ease;
+}
+
+.contactLink:hover {
+    color: #B89E7B;
+    border-bottom: none;
+}
+
+/* Social icons row */
+.socialRow {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 50%;
+    color: #B89E7B;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.3) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.socialLink:hover {
+    background-color: #B89E7B;
+    border-color: #B89E7B;
+    color: #0f0f0f;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   LINK LISTS (Cols 2–4)
+   ========================================== */
+.linkList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.linkList li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.linkList li:last-child {
+    border-bottom: none;
+}
+
+.linkList a {
+    display: block;
+    padding: 9px 0;
+    color: #9e9690;
+    text-decoration: none;
+    border-bottom: none;
+    position: relative;
+    transition: color 0.25s ease, padding-left 0.25s ease;
+}
+
+.linkList a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    width: 0;
+    height: 1px;
+    background: #B89E7B;
+    transition: width 0.3s ease;
+}
+
+.linkList a:hover {
+    color: #e8d5a3;
+    padding-left: 10px;
+    border-bottom: none;
+}
+
+.linkList a:hover::before {
+    width: 6px;
+}
+
+/* ==========================================
+   BOTTOM BAR
+   ========================================== */
+.bottomBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.copyright {
+    font-size: 0.75rem;
+    color: #5a554f;
+    margin: 0;
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+.legalLinks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.legalLinks a {
+    font-size: 0.75rem;
+    color: #5a554f;
+    text-decoration: none;
+    border-bottom: none;
+    transition: color 0.25s ease;
+    letter-spacing: 0.05em;
+}
+
+.legalLinks a:hover {
+    color: #B89E7B;
+    border-bottom: none;
+}
+
+.divider {
+    color: #3a3632;
+    font-size: 0.7rem;
+}
+
+/* ==========================================
+   RESPONSIVE — TABLET (≤ 900px)
+   ========================================== */
+@media (max-width: 900px) {
+    .container {
+        padding: 56px 32px 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 32px;
+    }
+
+    /* Let col 1 span full width so address breathes */
+    .col:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE — MOBILE (≤ 600px)
+   ========================================== */
+@media (max-width: 600px) {
+    .container {
+        padding: 48px 20px 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .col:first-child {
+        grid-column: auto;
+    }
+
+    .bottomBar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .legalLinks {
+        justify-content: center;
+    }
+}

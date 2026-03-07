@@ -1,0 +1,82 @@
+.stripWrapper {
+    width: 100%;
+    overflow: hidden;
+    background-color: #1a1816;
+    padding: 30px 0;
+    position: relative;
+    border-top: 1px solid rgba(184, 158, 123, 0.15);
+    border-bottom: 1px solid rgba(184, 158, 123, 0.15);
+}
+
+.stripTrack {
+    display: flex;
+    width: fit-content;
+    animation: scroll 30s linear infinite;
+    will-change: transform;
+}
+
+.stripTrack:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.stripContent {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.stripLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #B89E7B;
+    text-decoration: none;
+    padding: 0 40px;
+    transition: all 0.3s ease;
+}
+
+.stripLink:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(184, 158, 123, 0.4);
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.stripLink:hover .arrow {
+    transform: translateX(4px);
+}
+
+.stripDivider {
+    color: rgba(184, 158, 123, 0.3);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+@media (max-width: 768px) {
+    .stripWrapper {
+        padding: 24px 0;
+    }
+
+    .stripLink {
+        font-size: 0.65rem;
+        padding: 0 24px;
+        letter-spacing: 0.2em;
+    }
+}

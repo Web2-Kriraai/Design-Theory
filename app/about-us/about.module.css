@@ -1,0 +1,359 @@
+/* ==========================================
+   ABOUT US PAGE — The Design Theory
+   ========================================== */
+
+.page {
+    background: var(--bg-primary, #F9F8F6);
+    min-height: 100vh;
+}
+
+/* ── PAGE HEADER ── */
+.pageHeader {
+    text-align: center;
+    padding: 160px 48px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeUp 0.8s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pageLabel {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-gold, #B89E7B);
+    margin-bottom: 12px;
+}
+
+.pageTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 3.8rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    margin-bottom: 32px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+}
+
+.introText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+/* ── SECTION: ZIG-ZAG LAYOUT ── */
+.section {
+    padding: 100px 48px;
+    background: #ffffff;
+}
+
+.sectionAlt {
+    padding: 100px 48px;
+    background: var(--bg-primary, #F9F8F6);
+}
+
+.inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* Reverse grid for alternate sections */
+.innerRev {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    direction: rtl;
+}
+
+.innerRev>* {
+    direction: ltr;
+    /* reset text direction */
+}
+
+/* TEXT CONTENT */
+.textContent {
+    animation: fadeUp 0.8s ease 0.15s both;
+}
+
+.heading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2.8rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    margin-bottom: 24px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.bodyText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 24px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+/* IMAGE WRAPPERS */
+.imageWrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    animation: fadeUp 0.8s ease both;
+}
+
+.imageWrapHover:hover .image {
+    transform: scale(1.03);
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+/* ── FOUNDER SECTION ── */
+.founderProfile {
+    padding: 120px 48px;
+    background: var(--bg-primary, #F9F8F6);
+}
+
+.founderInner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.founderHeader {
+    text-align: center;
+}
+
+.founderTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    margin-bottom: 12px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.founderSubtitle {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-gold, #B89E7B);
+    margin-bottom: 40px;
+}
+
+.founderContent {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.founderImageWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border: 1px solid var(--border-color, #E5E2DE);
+    padding: 8px;
+    background: #fff;
+}
+
+.founderImageInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Gold corner accents */
+.cornerTL,
+.cornerBR {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.cornerTL {
+    top: 16px;
+    left: 16px;
+    border-top: 2px solid var(--accent-gold, #B89E7B);
+    border-left: 2px solid var(--accent-gold, #B89E7B);
+}
+
+.cornerBR {
+    bottom: 16px;
+    right: 16px;
+    border-bottom: 2px solid var(--accent-gold, #B89E7B);
+    border-right: 2px solid var(--accent-gold, #B89E7B);
+}
+
+.founderText p {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 24px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+/* ---- CTA Link ---- */
+.goldCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary, #3A3530);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+    width: fit-content;
+    border-bottom: none;
+    margin-top: 20px;
+}
+
+.goldCta::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent-gold, #B89E7B);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.goldCta:hover {
+    color: var(--accent-gold, #B89E7B);
+}
+
+.goldCta:hover::after {
+    transform: scaleX(1);
+}
+
+.ctaArrow {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.goldCta:hover .ctaArrow {
+    transform: translateX(5px);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 1024px) {
+
+    .inner,
+    .innerRev {
+        gap: 48px;
+    }
+
+    .founderContent {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pageHeader {
+        padding: 140px 24px 60px;
+    }
+
+    .pageTitle {
+        font-size: 2.8rem;
+    }
+
+    .inner,
+    .innerRev,
+    .founderContent {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        /* reset */
+    }
+
+    .section,
+    .sectionAlt,
+    .founderProfile {
+        padding: 80px 24px;
+    }
+
+    .imageWrap {
+        aspect-ratio: 4 / 3;
+        order: -1;
+    }
+
+    .founderImageWrap {
+        max-width: 400px;
+        margin: 0 auto;
+        order: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .pageTitle {
+        font-size: 2.2rem;
+    }
+
+    .heading,
+    .founderTitle {
+        font-size: 2.2rem;
+    }
+
+    .introText,
+    .bodyText,
+    .founderText p {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,546 @@
+/* ==========================================
+   CAREERS PAGE — The Design Theory
+   ========================================== */
+
+.page {
+    background: var(--bg-primary, #F9F8F6);
+    min-height: 100vh;
+}
+
+/* ── HERO BANNER ── */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.heroImageWrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.heroImg {
+    object-fit: cover;
+    opacity: 0.9;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(25, 23, 20, 0.4) 0%,
+            rgba(25, 23, 20, 0.6) 100%);
+    z-index: 1;
+}
+
+.heroText {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 0 24px;
+    animation: fadeUp 1s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.heroTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 16px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.heroTagline {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    color: #e5e5e5;
+}
+
+/* ── GLOBALS & LAYOUT CONTAINERS ── */
+.sectionBlock {
+    padding: 100px 48px;
+    background: #ffffff;
+}
+
+.sectionBlockAlt {
+    padding: 100px 48px;
+    background: var(--bg-primary, #F9F8F6);
+}
+
+.inner {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.innerWide {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ── TEXT STYLES ── */
+.heading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2.5rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    margin-bottom: 32px;
+    text-transform: none;
+    letter-spacing: normal;
+    text-align: center;
+}
+
+.bodyText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 24px;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+/* ── WHY WORK WITH US ── */
+.bulletList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.bulletItem {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text-muted, #6B6560);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.6;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.bulletItem::before {
+    content: '✦';
+    color: var(--accent-gold, #B89E7B);
+    font-size: 0.85rem;
+    margin-top: 1px;
+}
+
+/* ── STUDIO TWO COLUMN ── */
+.twoColSection {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+.twoColInner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.colText {
+    padding: 0 80px 0 10%;
+}
+
+.headingLeft {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2.5rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    margin-bottom: 24px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.subHeadingLeft {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary, #3A3530);
+    margin: 40px 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.bodyTextLeft {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 24px;
+}
+
+.bulletListLeft {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.colImageWrap {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+.colImage {
+    object-fit: cover;
+}
+
+/* ── OPENINGS (Accordion format) ── */
+.accordionList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 48px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.accordionItem {
+    border-bottom: 1px solid var(--border-color, #E5E2DE);
+}
+
+.accordionToggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.3s ease;
+}
+
+.jobTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    text-transform: none;
+}
+
+.accordionToggle:hover .jobTitle {
+    color: var(--accent-gold, #B89E7B);
+}
+
+.plusIcon {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--accent-gold, #B89E7B);
+    transition: transform 0.3s ease;
+}
+
+.plusIcon.open {
+    transform: rotate(45deg);
+}
+
+.accordionContentWrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+}
+
+.accordionContentWrap.open {
+    grid-template-rows: 1fr;
+}
+
+.accordionContent {
+    overflow: hidden;
+    padding: 0 0 32px 0;
+}
+
+.jobDetailsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 32px 0;
+}
+
+.roleSubhead {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-gold, #B89E7B);
+    margin-bottom: 12px;
+}
+
+.roleText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 16px;
+}
+
+.roleList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.roleList li {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.6;
+}
+
+.roleList li::before {
+    content: '·';
+    color: var(--accent-gold, #B89E7B);
+    font-weight: bold;
+}
+
+/* ── GOLD CTA BUTTONS ── */
+.goldBtnDark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--text-primary, #3A3530);
+    color: #fff;
+    border: 1px solid var(--text-primary, #3A3530);
+    padding: 14px 32px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    margin-top: 16px;
+}
+
+.goldBtnDark:hover {
+    background: var(--accent-gold, #B89E7B);
+    border-color: var(--accent-gold, #B89E7B);
+    color: #fff;
+}
+
+/* ── HOW TO APPLY ── */
+.applyBox {
+    border: 1px solid var(--border-color, #E5E2DE);
+    padding: 48px;
+    text-align: center;
+    max-width: 700px;
+    margin: 48px auto 0;
+}
+
+.emailCta {
+    display: inline-block;
+    margin-top: 24px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--accent-gold, #B89E7B);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+}
+
+.emailCta:hover {
+    color: var(--text-primary, #3A3530);
+    border-bottom-color: var(--text-primary, #3A3530);
+}
+
+/* ── INTERNSHIPS ── */
+.internshipBlock {
+    margin-top: 100px;
+    padding: 60px 48px;
+    background: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.headingSoft {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    margin-bottom: 24px;
+}
+
+/* ── CONTACT CTA ── */
+.contactCtaBlock {
+    margin-top: 80px;
+    text-align: center;
+    padding-top: 60px;
+    border-top: 1px solid var(--border-color, #E5E2DE);
+}
+
+.contactCtaText {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.6;
+}
+
+.goldLink {
+    color: var(--accent-gold, #B89E7B);
+    text-decoration: none;
+    font-style: italic;
+    transition: opacity 0.3s ease;
+}
+
+.goldLink:hover {
+    opacity: 0.7;
+}
+
+/* ── GOLD CTA (Hero Button) ── */
+.goldBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 14px 32px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.goldBtn:hover {
+    background: var(--accent-gold, #B89E7B);
+    border-color: var(--accent-gold, #B89E7B);
+    color: #fff;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 900px) {
+    .rolesGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: 2.8rem;
+    }
+
+    .sectionBlock,
+    .sectionBlockAlt {
+        padding: 80px 24px;
+    }
+
+    .roleCard,
+    .applyBox {
+        padding: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heroTitle {
+        font-size: 2.2rem;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+
+    .heroTagline {
+        font-size: 0.8rem;
+    }
+
+    .emailCta {
+        font-size: 0.9rem;
+    }
+}
+
+/* ── CLOSING STATEMENT ── */
+.closingSection {
+    padding: 120px 48px;
+    background: var(--text-primary, #3A3530);
+    text-align: center;
+    color: #fff;
+}
+
+.closingInner {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.closingText {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--accent-gold-light, #d4c4a8);
+    margin-bottom: 0;
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+    .closingSection {
+        padding: 80px 24px;
+    }
+
+    .closingText {
+        font-size: 1.8rem;
+    }
+}

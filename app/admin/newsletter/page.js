@@ -1,38 +1,22 @@
 'use client';
 
-import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trash2, Download, CheckCircle2, Mail, Calendar } from "lucide-react";
+import useSWR, { mutate } from "swr";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function NewsletterPage() {
-    const [subscribers, setSubscribers] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    const fetchSubscribers = async () => {
-        setLoading(true);
-        try {
-            const res = await fetch("/api/newsletter");
-            const data = await res.json();
-            setSubscribers(data || []);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchSubscribers();
-    }, []);
+    const { data, isLoading: loading } = useSWR("/api/newsletter", fetcher);
+    const subscribers = Array.isArray(data) ? data : [];
 
     const handleDelete = async (id) => {
         if (!confirm("Unsubscribe this user?")) return;
-        try {
-            const res = await fetch(`/api/newsletter?id=${id}`, { method: "DELETE" });
-            if (res.ok) fetchSubscribers();
-        } catch (err) {
-            console.error(err);
-        }
+
+        mutate("/api/newsletter", async () => {
+            await fetch(`/api/newsletter?id=${id}`, { method: "DELETE" });
+            return fetcher("/api/newsletter");
+        }, { optimisticData: subscribers.filter(s => s._id !== id) });
     };
 
     const exportCSV = () => {

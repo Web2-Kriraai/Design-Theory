@@ -3,41 +3,41 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronLeft, ChevronRight, Trash2, Mail, Phone, Calendar } from "lucide-react";
+import useSWR, { mutate } from "swr";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+// Custom hook for debouncing search input
+function useDebounce(value, delay) {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+    useEffect(() => {
+        const handler = setTimeout(() => setDebouncedValue(value), delay);
+        return () => clearTimeout(handler);
+    }, [value, delay]);
+    return debouncedValue;
+}
 
 export default function EnquiriesPage() {
-    const [enquiries, setEnquiries] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
+    const debouncedSearch = useDebounce(search, 500);
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
 
-    const fetchEnquiries = async () => {
-        setLoading(true);
-        try {
-            const res = await fetch(`/api/enquiries?page=${page}&email=${search}`);
-            const data = await res.json();
-            setEnquiries(data.enquiries || []);
-            setTotalPages(data.totalPages || 1);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const { data, isLoading: loading } = useSWR(
+        `/api/enquiries?page=${page}&email=${debouncedSearch}`,
+        fetcher,
+        { keepPreviousData: true }
+    );
 
-    useEffect(() => {
-        const timer = setTimeout(fetchEnquiries, 500);
-        return () => clearTimeout(timer);
-    }, [page, search]);
+    const enquiries = data?.enquiries || [];
+    const totalPages = data?.totalPages || 1;
 
     const handleDelete = async (id) => {
         if (!confirm("Are you sure you want to remove this enquiry?")) return;
-        try {
-            const res = await fetch(`/api/enquiries?id=${id}`, { method: "DELETE" });
-            if (res.ok) fetchEnquiries();
-        } catch (err) {
-            console.error(err);
-        }
+
+        mutate(`/api/enquiries?page=${page}&email=${debouncedSearch}`, async () => {
+            await fetch(`/api/enquiries?id=${id}`, { method: "DELETE" });
+            return fetcher(`/api/enquiries?page=${page}&email=${debouncedSearch}`);
+        }, { optimisticData: { enquiries: enquiries.filter(e => e._id !== id), totalPages } });
     };
 
     return (

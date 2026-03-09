@@ -175,24 +175,48 @@ export default async function PortfolioDetailsPage({ params }) {
                         </div>
 
                         {/* Project Metadata Section */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 max-w-3xl mx-auto mb-16 py-8 border-y border-[#E8E3DB]">
-                            <div className="flex flex-col items-center gap-2">
-                                <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">Category</span>
-                                <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">{project.category || 'Architecture'}</span>
-                            </div>
-                            <div className="flex flex-col items-center gap-2">
-                                <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">Client</span>
-                                <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">{project.clientName || 'Private Client'}</span>
-                            </div>
-                            <div className="flex flex-col items-center gap-2 col-span-2 md:col-span-1">
-                                <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">Year</span>
-                                <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">{project.year || '2024'}</span>
+                        <div className="w-full flex justify-center mb-16 px-6">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24 max-w-4xl w-full py-8 border-y border-[#E8E3DB] text-center">
+
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">
+                                        Category
+                                    </span>
+                                    <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">
+                                        {project.category || 'Architecture'}
+                                    </span>
+                                </div>
+
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">
+                                        Client
+                                    </span>
+                                    <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">
+                                        {project.clientName || 'Private Client'}
+                                    </span>
+                                </div>
+
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#9A9490]">
+                                        Year
+                                    </span>
+                                    <span className="font-serif text-lg text-[#2C2A28] italic lowercase tracking-wider">
+                                        {project.year || '2024'}
+                                    </span>
+                                </div>
+
                             </div>
                         </div>
 
                         {/* Elegant Description */}
-                        {project.description && (
+                        {/* {project.description && (
                             <p className="text-[#5A5653] font-serif text-xl md:text-2xl lg:text-[1.65rem] leading-[1.8] max-w-4xl mx-auto font-light italic">
+                                &ldquo;{project.description}&rdquo;
+                            </p>
+                        )} */}
+
+                        {project.description && (
+                            <p className="text-[#5A5653] font-serif text-xl md:text-2xl lg:text-[1.65rem] leading-[1.8] max-w-xxl mx-auto d-block font-light italic justify-center">
                                 &ldquo;{project.description}&rdquo;
                             </p>
                         )}
@@ -206,11 +230,7 @@ export default async function PortfolioDetailsPage({ params }) {
 
                     {/* ── FINAL CTA ── */}
                     <section className="py-24 text-center block w-full border-t border-[#E8E3DB]">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="flex flex-col items-center gap-8"
-                        >
+                        <div className="flex flex-col items-center gap-8">
                             <h4 className="font-serif text-2xl italic text-[#5A5653]">Interested in a similar project?</h4>
                             <Link
                                 href="/portfolio"
@@ -219,7 +239,7 @@ export default async function PortfolioDetailsPage({ params }) {
                                 <span className="w-12 h-[1px] bg-[#D6CDC4] block transition-all group-hover:w-16 group-hover:bg-[#2A1E2F]" />
                                 EXPLORE MORE WORK
                             </Link>
-                        </motion.div>
+                        </div>
                     </section>
 
                 </div>{/* end centered wrapper */}

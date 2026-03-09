@@ -18,8 +18,8 @@ export default function ProjectCard({ project, index }) {
                 {/* ── IMAGE FRAME ── */}
                 <div
                     className={`relative overflow-hidden bg-[#F0EBE3] transition-all duration-700 ease-out border-[12px] border-[#FCFAF7] shadow-[0_15px_35px_rgba(0,0,0,0.05)] group-hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] group-hover:border-[#E8E1D7] ${index % 3 === 0 ? 'aspect-[4/5]' :
-                            index % 3 === 1 ? 'aspect-square' :
-                                'aspect-[1.4/1]'
+                        index % 3 === 1 ? 'aspect-square' :
+                            'aspect-[1.4/1]'
                         }`}
                 >
                     {project.coverImage ? (
@@ -27,6 +27,8 @@ export default function ProjectCard({ project, index }) {
                             src={project.coverImage}
                             alt={project.title}
                             fill
+                            loading="lazy"
+                            quality={85}
                             className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.05] grayscale-[20%] group-hover:grayscale-0"
                             sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />

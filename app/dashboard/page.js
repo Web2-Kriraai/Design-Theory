@@ -1,14 +1,23 @@
 'use client';
 
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import useSWR, { mutate } from "swr";
 import {
     ArrowUpRight, MessageSquare, Bell, LogOut,
     Activity, Users, Trash2, Eye, X, ChevronLeft, ChevronRight, Briefcase, Plus, Edit
 } from "lucide-react";
-import UploadForm from "../components/UploadForm";
+
+import dynamic from "next/dynamic";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+// Lazy load heavy components
+const UploadForm = dynamic(() => import("../components/UploadForm"), {
+    loading: () => <div style={{ padding: "40px", textAlign: "center", color: "#999", fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.2em" }}>Loading Editor...</div>
+});
 
 /* ── tiny reusable stat card ── */
 function StatCard({ icon, label, value, dark, gold }) {
@@ -178,120 +187,88 @@ export default function DashboardPage() {
     const router = useRouter();
 
     const [activeTab, setActiveTab] = useState("overview");
-    const [stats, setStats] = useState({ totalEnquiries: 0, totalSubscribers: 0, totalUsers: 0 });
-    const [enquiries, setEnquiries] = useState([]);
-    const [users, setUsers] = useState([]);
-    const [subscribers, setSubscribers] = useState([]);
-    const [portfolioProjects, setPortfolioProjects] = useState([]);
     const [showUploadForm, setShowUploadForm] = useState(false);
     const [editingProject, setEditingProject] = useState(null);
-    const [loadingStats, setLoadingStats] = useState(true);
-    const [loadingTab, setLoadingTab] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
     const [enquiryPage, setEnquiryPage] = useState(1);
-    const [enquiryTotal, setEnquiryTotal] = useState(0);
-    const [enquiryTotalPages, setEnquiryTotalPages] = useState(1);
-
     /* redirect if not authenticated */
     useEffect(() => {
-        if (status === "unauthenticated") router.push("/auth");
+        if (status === "unauthenticated") {
+            router.push("/auth");
+        }
     }, [status, router]);
 
-    /* fetch stats */
-    const fetchStats = useCallback(async () => {
-        try {
-            const r = await fetch("/api/dashboard/stats");
-            const d = await r.json();
-            if (d.stats) setStats(d.stats);
-        } catch { }
-        finally { setLoadingStats(false); }
-    }, []);
+    /* SWR Data Fetching */
+    const { data: statsData, isLoading: loadingStats } = useSWR(
+        status === "authenticated" ? "/api/dashboard/stats" : null,
+        fetcher
+    );
+    const stats = statsData?.stats || { totalEnquiries: 0, totalSubscribers: 0, totalUsers: 0 };
 
-    useEffect(() => {
-        if (status === "authenticated") fetchStats();
-    }, [status, fetchStats]);
+    /* Tab-specific fetchers */
+    const shouldFetchTab = (tabName) => status === "authenticated" && activeTab === tabName;
 
-    /* fetch enquiries */
-    const fetchEnquiries = useCallback(async (page = 1) => {
-        setLoadingTab(true);
-        try {
-            const r = await fetch(`/api/enquiries?page=${page}`);
-            const d = await r.json();
-            setEnquiries(d.enquiries || []);
-            setEnquiryTotal(d.total || 0);
-            setEnquiryTotalPages(d.totalPages || 1);
-        } catch { } finally { setLoadingTab(false); }
-    }, []);
+    const { data: enquiriesData, isLoading: loadingEnquiries } = useSWR(
+        shouldFetchTab("enquiries") ? `/api/enquiries?page=${enquiryPage}` : null,
+        fetcher, { keepPreviousData: true }
+    );
+    const enquiries = enquiriesData?.enquiries || [];
+    const enquiryTotal = enquiriesData?.total || 0;
+    const enquiryTotalPages = enquiriesData?.totalPages || 1;
 
-    /* fetch users */
-    const fetchUsers = useCallback(async () => {
-        setLoadingTab(true);
-        try {
-            const r = await fetch("/api/users");
-            const d = await r.json();
-            setUsers(d.users || []);
-        } catch { } finally { setLoadingTab(false); }
-    }, []);
+    const { data: usersData, isLoading: loadingUsers } = useSWR(
+        shouldFetchTab("users") ? "/api/users" : null,
+        fetcher
+    );
+    const users = usersData?.users || [];
 
-    /* fetch subscribers */
-    const fetchSubscribers = useCallback(async () => {
-        setLoadingTab(true);
-        try {
-            const r = await fetch("/api/newsletter");
-            const d = await r.json();
-            setSubscribers(Array.isArray(d) ? d : []);
-        } catch { } finally { setLoadingTab(false); }
-    }, []);
+    const { data: subscribersData, isLoading: loadingSubscribers } = useSWR(
+        shouldFetchTab("subscribers") ? "/api/newsletter" : null,
+        fetcher
+    );
+    const subscribers = Array.isArray(subscribersData) ? subscribersData : [];
 
-    /* fetch portfolio */
-    const fetchPortfolio = useCallback(async () => {
-        setLoadingTab(true);
-        try {
-            const r = await fetch("/api/portfolio");
-            const d = await r.json();
-            setPortfolioProjects(d.projects || []);
-        } catch { } finally { setLoadingTab(false); }
-    }, []);
+    const { data: portfolioData, isLoading: loadingPortfolio } = useSWR(
+        shouldFetchTab("portfolio") ? "/api/portfolio" : null,
+        fetcher
+    );
+    const portfolioProjects = portfolioData?.projects || [];
 
-    /* tab change */
-    useEffect(() => {
-        if (status !== "authenticated") return;
-        if (activeTab === "enquiries") fetchEnquiries(enquiryPage);
-        if (activeTab === "users") fetchUsers();
-        if (activeTab === "subscribers") fetchSubscribers();
-        if (activeTab === "portfolio") fetchPortfolio();
-    }, [activeTab, status]);
-
-    /* pagination */
-    useEffect(() => {
-        if (activeTab === "enquiries" && status === "authenticated") fetchEnquiries(enquiryPage);
-    }, [enquiryPage]);
+    const loadingTab = loadingEnquiries || loadingUsers || loadingSubscribers || loadingPortfolio;
 
     const deleteEnquiry = async (id) => {
         if (!confirm("Delete this enquiry?")) return;
-        await fetch(`/api/enquiries?id=${id}`, { method: "DELETE" });
-        fetchEnquiries(enquiryPage);
-        fetchStats();
+        const currentData = await mutate(`/api/enquiries?page=${enquiryPage}`, async () => {
+            await fetch(`/api/enquiries?id=${id}`, { method: "DELETE" });
+            return fetcher(`/api/enquiries?page=${enquiryPage}`);
+        }, { optimisticData: { enquiries: enquiries.filter(e => e._id !== id), total: enquiryTotal - 1, totalPages: enquiryTotalPages } });
+        mutate("/api/dashboard/stats");
     };
 
     const deleteUser = async (id) => {
         if (!confirm("Delete this user?")) return;
-        await fetch(`/api/users?id=${id}`, { method: "DELETE" });
-        fetchUsers();
+        mutate("/api/users", async () => {
+            await fetch(`/api/users?id=${id}`, { method: "DELETE" });
+            return fetcher("/api/users");
+        }, { optimisticData: { users: users.filter(u => u._id !== id) } });
     };
 
     const deleteSubscriber = async (id) => {
         if (!confirm("Remove this subscriber?")) return;
-        await fetch(`/api/newsletter?id=${id}`, { method: "DELETE" });
-        fetchSubscribers();
-        fetchStats();
+        mutate("/api/newsletter", async () => {
+            await fetch(`/api/newsletter?id=${id}`, { method: "DELETE" });
+            return fetcher("/api/newsletter");
+        }, { optimisticData: subscribers.filter(s => s._id !== id) });
+        mutate("/api/dashboard/stats");
     };
 
     const deletePortfolioProject = async (id) => {
         if (!confirm("Are you sure you want to delete this portfolio project forever?")) return;
-        await fetch(`/api/portfolio?id=${id}`, { method: "DELETE" });
-        fetchPortfolio();
+        mutate("/api/portfolio", async () => {
+            await fetch(`/api/portfolio?id=${id}`, { method: "DELETE" });
+            return fetcher("/api/portfolio");
+        }, { optimisticData: { projects: portfolioProjects.filter(p => p._id !== id) } });
     };
 
     const handleEditProject = (project) => {
@@ -592,7 +569,7 @@ export default function DashboardPage() {
                                 {showUploadForm ? (
                                     <UploadForm
                                         initialData={editingProject}
-                                        onSuccess={() => { setShowUploadForm(false); setEditingProject(null); fetchPortfolio(); }}
+                                        onSuccess={() => { setShowUploadForm(false); setEditingProject(null); mutate("/api/portfolio"); }}
                                         onCancel={() => { setShowUploadForm(false); setEditingProject(null); }}
                                     />
                                 ) : (

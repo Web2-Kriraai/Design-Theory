@@ -86,7 +86,7 @@ export default function CareersPage() {
 
                     <div className={styles.accordionList}>
                         {/* Job 1 */}
-                        <div className={styles.accordionItem}>
+                        {/* <div className={styles.accordionItem}>
                             <button
                                 className={styles.accordionToggle}
                                 onClick={() => toggleJob(0)}
@@ -133,10 +133,10 @@ export default function CareersPage() {
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* Job 2 */}
-                        <div className={styles.accordionItem}>
+                        {/* <div className={styles.accordionItem}>
                             <button
                                 className={styles.accordionToggle}
                                 onClick={() => toggleJob(1)}
@@ -178,6 +178,288 @@ export default function CareersPage() {
                                     </div>
 
                                     <a href="mailto:careers@thedesigntheory.in?subject=Application for Architectural Designer" className={styles.goldBtnDark}>
+                                        Apply Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div> */}
+
+                        {/* Job 1-6 */}
+                        <div className={styles.accordionItem}>
+                            <button
+                                className={styles.accordionToggle}
+                                onClick={() => toggleJob(0)}
+                                aria-expanded={openJob === 0}
+                            >
+                                <span className={styles.jobTitle}>Senior Project Manager</span>
+                                <span className={`${styles.plusIcon} ${openJob === 0 ? styles.open : ""}`}>
+                                    +
+                                </span>
+                            </button>
+                            <div className={`${styles.accordionContentWrap} ${openJob === 0 ? styles.open : ""}`}>
+                                <div className={styles.accordionContent}>
+                                    <p className={styles.roleSubhead}>Role Overview</p>
+                                    <p className={styles.roleText}>
+                                        We are looking for an experienced Senior Project Manager to lead and manage projects from initiation to completion while ensuring timely delivery and high quality standards.
+                                    </p>
+
+                                    <div className={styles.jobDetailsGrid}>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Responsibilities</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Plan and oversee project activities from start to completion</li>
+                                                <li>Coordinate with architects, engineers, and contractors</li>
+                                                <li>Monitor project timelines, budgets, and resources</li>
+                                                <li>Ensure compliance with safety and quality standards</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Requirements</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Bachelor’s degree in Engineering, Architecture, or related field</li>
+                                                <li>4+ years of project management experience</li>
+                                                <li>Strong leadership and communication skills</li>
+                                                <li>Experience with project planning tools</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Senior Project Manager" className={styles.goldBtnDark}>
+                                        Apply Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className={styles.accordionItem}>
+                            <button
+                                className={styles.accordionToggle}
+                                onClick={() => toggleJob(1)}
+                                aria-expanded={openJob === 1}
+                            >
+                                <span className={styles.jobTitle}>Site Engineer</span>
+                                <span className={`${styles.plusIcon} ${openJob === 1 ? styles.open : ""}`}>
+                                    +
+                                </span>
+                            </button>
+                            <div className={`${styles.accordionContentWrap} ${openJob === 1 ? styles.open : ""}`}>
+                                <div className={styles.accordionContent}>
+                                    <p className={styles.roleSubhead}>Role Overview</p>
+                                    <p className={styles.roleText}>
+                                        We are seeking a dedicated Site Engineer to supervise on-site construction activities and ensure projects are executed according to plans and safety standards.
+                                    </p>
+
+                                    <div className={styles.jobDetailsGrid}>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Responsibilities</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Supervise day-to-day construction activities</li>
+                                                <li>Ensure work follows approved drawings and specifications</li>
+                                                <li>Coordinate with contractors and suppliers</li>
+                                                <li>Monitor site safety and quality standards</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Requirements</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Bachelor’s degree in Civil Engineering</li>
+                                                <li>2-3 years of site supervision experience</li>
+                                                <li>Ability to read technical drawings</li>
+                                                <li>Strong communication and coordination skills</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Site Engineer" className={styles.goldBtnDark}>
+                                        Apply Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className={styles.accordionItem}>
+                            <button
+                                className={styles.accordionToggle}
+                                onClick={() => toggleJob(2)}
+                                aria-expanded={openJob === 2}
+                            >
+                                <span className={styles.jobTitle}>Senior Architect Engineer</span>
+                                <span className={`${styles.plusIcon} ${openJob === 2 ? styles.open : ""}`}>
+                                    +
+                                </span>
+                            </button>
+                            <div className={`${styles.accordionContentWrap} ${openJob === 2 ? styles.open : ""}`}>
+                                <div className={styles.accordionContent}>
+                                    <p className={styles.roleSubhead}>Role Overview</p>
+                                    <p className={styles.roleText}>
+                                        We are looking for a creative Senior Architect to develop architectural concepts and oversee design execution for residential and commercial projects.
+                                    </p>
+
+                                    <div className={styles.jobDetailsGrid}>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Responsibilities</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Develop architectural concepts and design plans</li>
+                                                <li>Lead client presentations and discussions</li>
+                                                <li>Coordinate with engineering and project teams</li>
+                                                <li>Ensure compliance with building regulations</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Requirements</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Bachelor’s or Master’s degree in Architecture</li>
+                                                <li>5+ years of architectural experience</li>
+                                                <li>Proficiency in AutoCAD, SketchUp, or Revit</li>
+                                                <li>Strong design and visualization skills</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Senior Architect" className={styles.goldBtnDark}>
+                                        Apply Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className={styles.accordionItem}>
+                            <button
+                                className={styles.accordionToggle}
+                                onClick={() => toggleJob(3)}
+                                aria-expanded={openJob === 3}
+                            >
+                                <span className={styles.jobTitle}>Executive Assistant</span>
+                                <span className={`${styles.plusIcon} ${openJob === 3 ? styles.open : ""}`}>
+                                    +
+                                </span>
+                            </button>
+                            <div className={`${styles.accordionContentWrap} ${openJob === 3 ? styles.open : ""}`}>
+                                <div className={styles.accordionContent}>
+                                    <p className={styles.roleSubhead}>Role Overview</p>
+                                    <p className={styles.roleText}>
+                                        We are seeking an organized Executive Assistant to provide administrative support and assist management in daily operations.
+                                    </p>
+
+                                    <div className={styles.jobDetailsGrid}>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Responsibilities</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Manage schedules, meetings, and appointments</li>
+                                                <li>Handle emails, documentation, and reports</li>
+                                                <li>Prepare presentations and meeting notes</li>
+                                                <li>Coordinate internal communications</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Requirements</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Bachelor’s degree in Business Administration</li>
+                                                <li>2–4 years of administrative experience</li>
+                                                <li>Strong organizational and communication skills</li>
+                                                <li>Proficiency in MS Office</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Executive Assistant" className={styles.goldBtnDark}>
+                                        Apply Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className={styles.accordionItem}>
+                            <button
+                                className={styles.accordionToggle}
+                                onClick={() => toggleJob(4)}
+                                aria-expanded={openJob === 4}
+                            >
+                                <span className={styles.jobTitle}>Digital Marketing Manager</span>
+                                <span className={`${styles.plusIcon} ${openJob === 4 ? styles.open : ""}`}>
+                                    +
+                                </span>
+                            </button>
+                            <div className={`${styles.accordionContentWrap} ${openJob === 4 ? styles.open : ""}`}>
+                                <div className={styles.accordionContent}>
+                                    <p className={styles.roleSubhead}>Role Overview</p>
+                                    <p className={styles.roleText}>
+                                        We are looking for a Digital Marketing Manager to plan and execute marketing strategies that increase brand visibility and generate business leads.
+                                    </p>
+
+                                    <div className={styles.jobDetailsGrid}>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Responsibilities</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Develop and manage digital marketing campaigns</li>
+                                                <li>Manage social media platforms and branding</li>
+                                                <li>Optimize website content for SEO</li>
+                                                <li>Analyze campaign performance</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Requirements</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Bachelor’s degree in Marketing or Business</li>
+                                                <li>3+ years of digital marketing experience</li>
+                                                <li>Knowledge of SEO, SEM, and analytics tools</li>
+                                                <li>Strong analytical skills</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Digital Marketing Manager" className={styles.goldBtnDark}>
+                                        Apply Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className={styles.accordionItem}>
+                            <button
+                                className={styles.accordionToggle}
+                                onClick={() => toggleJob(5)}
+                                aria-expanded={openJob === 5}
+                            >
+                                <span className={styles.jobTitle}>Operations Manager</span>
+                                <span className={`${styles.plusIcon} ${openJob === 5 ? styles.open : ""}`}>
+                                    +
+                                </span>
+                            </button>
+                            <div className={`${styles.accordionContentWrap} ${openJob === 5 ? styles.open : ""}`}>
+                                <div className={styles.accordionContent}>
+                                    <p className={styles.roleSubhead}>Role Overview</p>
+                                    <p className={styles.roleText}>
+                                        We are seeking an experienced Operations Manager to oversee daily operations and ensure smooth workflow across departments.
+                                    </p>
+
+                                    <div className={styles.jobDetailsGrid}>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Responsibilities</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Manage daily operational activities</li>
+                                                <li>Coordinate between departments</li>
+                                                <li>Improve operational efficiency</li>
+                                                <li>Monitor budgets and resources</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p className={styles.roleSubhead}>Requirements</p>
+                                            <ul className={styles.roleList}>
+                                                <li>Bachelor’s degree in Business Administration</li>
+                                                <li>5+ years of operations management experience</li>
+                                                <li>Strong leadership and problem-solving skills</li>
+                                                <li>Excellent organizational abilities</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Operations Manager" className={styles.goldBtnDark}>
                                         Apply Now
                                     </a>
                                 </div>

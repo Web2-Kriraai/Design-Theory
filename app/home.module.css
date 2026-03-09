@@ -130,6 +130,32 @@
     margin: 0;
 }
 
+/* Hero Indicators */
+.heroIndicators {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.heroDot {
+    width: 30px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    padding: 0;
+}
+
+.heroDotActive {
+    background: #ffffff;
+    width: 50px;
+}
+
 /* ==========================================
    SECTION 2 — INTRO TEXT
    ========================================== */

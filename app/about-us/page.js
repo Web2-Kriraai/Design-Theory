@@ -134,7 +134,7 @@ export default function AboutUsPage() {
                             <div className={styles.cornerBR}></div>
                             <div className={styles.founderImageInner}>
                                 <Image
-                                    src="/assets/about/founder.webp"
+                                    src="/assets/about/founder.png"
                                     alt="Rachitha Modupalli – Founder, The Design Theory"
                                     fill
                                     className={styles.image}

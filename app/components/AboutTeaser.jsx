@@ -10,7 +10,7 @@ export default function AboutTeaser() {
                 <div className={styles.imageWrap}>
                     <div className={styles.imageFrame}>
                         <Image
-                            src="/assets/about/founder.webp"
+                            src="/assets/about/founder.png"
                             alt="Rachitha Modupalli – Founder, The Design Theory"
                             width={520}
                             height={640}

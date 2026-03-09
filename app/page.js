@@ -10,6 +10,36 @@ import styles from "./home.module.css";
 const AboutTeaser = dynamic(() => import("./components/AboutTeaser"));
 
 export default function Home() {
+  const heroImages = [
+    "/assets/hero/hero1.jpg",
+    "/assets/hero/hero2.jpg",
+    "/assets/hero/hero3.jpg",
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+        setIsTransitioning(false);
+      }, 500);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
+  const handleImageChange = (index) => {
+    if (index === currentImageIndex) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentImageIndex(index);
+      setIsTransitioning(false);
+    }, 500);
+  };
+
   /* ---- Testimonial slider ---- */
   const testimonials = [
     {
@@ -51,22 +81,28 @@ export default function Home() {
           SECTION 1 — HERO
           ========================================== */}
       <section className={styles.hero}>
-        <motion.div
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className={styles.heroImageWrap}
-        >
-          <Image
-            src="/assets/hero/hero1.jpg"
-            alt="The Design Theory — Editorial Interior"
-            fill
-            className={styles.heroImg}
-            priority
-            sizes="100vw"
-          />
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImageIndex}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className={styles.heroImageWrap}
+          >
+            <Image
+              src={heroImages[currentImageIndex]}
+              alt={`The Design Theory — Hero ${currentImageIndex + 1}`}
+              fill
+              className={styles.heroImg}
+              priority
+              sizes="100vw"
+            />
+          </motion.div>
+        </AnimatePresence>
+
         <div className={styles.heroOverlay} />
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,6 +114,18 @@ export default function Home() {
             Designing thoughtful spaces for modern living.
           </p>
         </motion.div>
+
+        {/* Hero Indicators */}
+        <div className={styles.heroIndicators}>
+          {heroImages.map((_, i) => (
+            <button
+              key={i}
+              className={`${styles.heroDot} ${i === currentImageIndex ? styles.heroDotActive : ""}`}
+              onClick={() => handleImageChange(i)}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
       </section>
 
       {/* ==========================================
@@ -241,6 +289,7 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
+
 
       {/* ==========================================
           SECTION 6 — FEATURED PROJECT

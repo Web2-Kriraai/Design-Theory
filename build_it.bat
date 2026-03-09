@@ -1,6 +1,0 @@
-@echo off
-echo Starting installation...
-call npm install
-echo Starting build...
-call npx next build
-echo Done.

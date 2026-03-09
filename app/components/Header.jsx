@@ -96,6 +96,7 @@ export default function Header() {
                             height={120}
                             className={styles.logoImg}
                             priority
+                            loading="eager"
                         />
                     </Link>
                 </div>
@@ -175,11 +176,13 @@ export default function Header() {
                 <div className={styles.mobileHeader}>
                     <Link href="/" className={styles.mobileLogoLink} onClick={toggleMobileMenu}>
                         <Image
-                            src="/assets/logo/L2.jpg"
+                            src="/assets/logo/L2.png"
                             alt="The Design Theory"
                             width={100}
                             height={52}
                             className={styles.mobileLogoImg}
+                            priority
+                            loading="eager"
                         />
                     </Link>
                     <button className={styles.closeBtn} onClick={toggleMobileMenu} aria-label="Close menu">

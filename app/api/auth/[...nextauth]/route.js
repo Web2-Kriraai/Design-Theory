@@ -13,7 +13,9 @@ export const authOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials) {
+                console.log("Authorize attempt for:", credentials?.email);
                 if (!credentials?.email || !credentials?.password) {
+                    console.log("Missing email or password");
                     throw new Error("Email and password required");
                 }
 
@@ -23,15 +25,18 @@ export const authOptions = {
                 const user = await User.findOne({ email: credentials.email }).select("+password");
 
                 if (!user) {
+                    console.log("No user found with email:", credentials.email);
                     throw new Error("No user found with this email");
                 }
 
                 const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
 
                 if (!isPasswordCorrect) {
+                    console.log("Incorrect password for:", credentials.email);
                     throw new Error("Invalid password");
                 }
 
+                console.log("Authorize successful for:", credentials.email, "role:", user.role);
                 return {
                     id: user._id.toString(),
                     name: user.name,
@@ -63,9 +68,12 @@ export const authOptions = {
     session: {
         strategy: "jwt",
     },
+    // Required for Vercel deployment — trusts the host forwarded by Vercel's proxy
+    trustHost: true,
     secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
+

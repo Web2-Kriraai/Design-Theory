@@ -1,9 +1,16 @@
 import Newsletter from "@/models/Newsletter";
 import connectDB from "@/lib/mongodb";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET() {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session || session.user?.role !== "admin") {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         await connectDB();
         const subscribers = await Newsletter.find().sort({ subscribedAt: -1 });
         return NextResponse.json(subscribers);
@@ -12,6 +19,7 @@ export async function GET() {
     }
 }
 
+// POST is intentionally public — anyone can subscribe
 export async function POST(req) {
     try {
         const { email } = await req.json();
@@ -30,6 +38,11 @@ export async function POST(req) {
 
 export async function DELETE(req) {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session || session.user?.role !== "admin") {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const { searchParams } = new URL(req.url);
         const id = searchParams.get("id");
         if (!id) return NextResponse.json({ error: "Missing ID" }, { status: 400 });

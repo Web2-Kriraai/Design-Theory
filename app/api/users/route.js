@@ -2,12 +2,18 @@ import { User } from "@/models/User";
 import connectDB from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function GET() {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session || session.user?.role !== "admin") {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         await connectDB();
         const users = await User.find({}).sort({ createdAt: -1 });
-        // Don't send passwords to frontend
         const safeUsers = users.map(user => ({
             _id: user._id,
             name: user.name,
@@ -23,10 +29,14 @@ export async function GET() {
 
 export async function POST(req) {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session || session.user?.role !== "admin") {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const { name, email, password, role } = await req.json();
         await connectDB();
 
-        // Check if user exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return NextResponse.json({ error: "User already exists" }, { status: 400 });
@@ -48,6 +58,11 @@ export async function POST(req) {
 
 export async function DELETE(req) {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session || session.user?.role !== "admin") {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const { searchParams } = new URL(req.url);
         const id = searchParams.get("id");
         if (!id) return NextResponse.json({ error: "Missing ID" }, { status: 400 });

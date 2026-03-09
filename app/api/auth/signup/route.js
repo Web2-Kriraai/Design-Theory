@@ -22,16 +22,16 @@ export async function POST(req) {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // Create user
+        // Create user — role is "user" by default; set role to "admin" directly in MongoDB for admins
         const user = await User.create({
             name,
             email,
             password: hashedPassword,
-            role: "admin",
+            role: "user",
         });
 
         return NextResponse.json({
-            message: "Admin created successfully",
+            message: "Account created successfully",
             user: { id: user._id, name: user.name, email: user.email },
         }, { status: 201 });
 

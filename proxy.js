@@ -12,8 +12,8 @@ export default withAuth(
         }
 
         // 2. Protect sensitive API routes — return 401 if not admin
-        // Note: GET/DELETE/PATCH are protected; POST /api/enquiries and POST /api/subscribe should be public.
-        const isAdminAPI = pathname.startsWith("/api/newsletter") ||
+        const isAdminAPI =
+            pathname.startsWith("/api/newsletter") ||
             pathname.startsWith("/api/dashboard") ||
             pathname.startsWith("/api/users") ||
             (pathname.startsWith("/api/enquiries") && req.method !== "POST");
@@ -31,11 +31,27 @@ export default withAuth(
                 // /auth is always public
                 if (pathname === "/auth") return true;
 
-                // Public API routes
+                // Public API routes (no token needed)
                 if (pathname === "/api/subscribe" && method === "POST") return true;
                 if (pathname === "/api/enquiries" && method === "POST") return true;
 
-                // All other protected routes require a token
+                // Admin API routes: require admin role in token
+                const isAdminRoute =
+                    pathname.startsWith("/api/newsletter") ||
+                    pathname.startsWith("/api/dashboard") ||
+                    pathname.startsWith("/api/users") ||
+                    (pathname.startsWith("/api/enquiries") && method !== "POST");
+
+                if (isAdminRoute) {
+                    return token?.role === "admin";
+                }
+
+                // Dashboard: require any valid token (admin check done in proxy fn above)
+                if (pathname.startsWith("/dashboard")) {
+                    return !!token;
+                }
+
+                // All other matched routes: require a valid token
                 return !!token;
             },
         },
@@ -49,6 +65,6 @@ export const config = {
         "/api/newsletter/:path*",
         "/api/dashboard/:path*",
         "/api/users/:path*",
-        "/api/subscribe"
+        "/api/subscribe",
     ],
 };

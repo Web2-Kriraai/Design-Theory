@@ -1,10 +1,17 @@
 import connectDB from '@/lib/mongodb';
 import Enquiry from '@/models/Enquiry';
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 // GET /api/enquiries — Fetch all enquiries (admin use)
 export async function GET(req) {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session || session.user?.role !== "admin") {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         await connectDB();
         const { searchParams } = new URL(req.url);
         const email = searchParams.get("email");
@@ -109,6 +116,11 @@ export async function POST(req) {
 // DELETE /api/enquiries — Delete an enquiry (admin use)
 export async function DELETE(req) {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session || session.user?.role !== "admin") {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const { searchParams } = new URL(req.url);
         const id = searchParams.get("id");
         if (!id) return NextResponse.json({ error: "Missing ID" }, { status: 400 });

@@ -526,7 +526,7 @@ export default function CareersPage() {
             <section className={styles.closingSection}>
                 <div className={styles.closingInner}>
                     <p className={styles.closingText}>
-                        "At The Design Theory, we don’t just design spaces — we create experiences, stories, and environments that reflect individuality and purpose. We value dedication, creativity, and integrity, and we look forward to welcoming talented professionals who share our passion."
+                        "At The Design Theory, we don’t just design spaces - we create experiences, stories, and environments that reflect individuality and purpose. We value dedication, creativity, and integrity, and we look forward to welcoming talented professionals who share our passion."
                     </p>
                 </div>
             </section>

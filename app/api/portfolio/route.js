@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import connectMongo from '@/lib/mongodb';
-import Portfolio from '@/lib/models/Portfolio';
+import Portfolio from '@/models/Portfolio';
 
 export async function POST(req) {
     try {

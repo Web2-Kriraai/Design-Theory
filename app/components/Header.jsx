@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "./AnimatedImage";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import styles from "./Header.module.css";
@@ -145,10 +145,12 @@ export default function Header() {
                             <div className={styles.userDropdownLinks}>
                                 {session ? (
                                     <>
-                                        <Link href="/dashboard" className={styles.userDropdownLink} onClick={() => setIsUserMenuOpen(false)}>
-                                            <span>Studio Dashboard</span>
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                                        </Link>
+                                        {session?.user?.role === "admin" && (
+                                            <Link href="/dashboard" className={styles.userDropdownLink} onClick={() => setIsUserMenuOpen(false)}>
+                                                <span>Studio Dashboard</span>
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                                            </Link>
+                                        )}
                                         <button
                                             onClick={() => signOut({ callbackUrl: "/auth" })}
                                             className={styles.userDropdownLink}
@@ -225,9 +227,11 @@ export default function Header() {
                 <div className={styles.mobileFooter}>
                     {session ? (
                         <div className={styles.mobileFooterActions}>
-                            <Link href="/dashboard" className={styles.mobileAccessBtn} onClick={toggleMobileMenu}>
-                                Studio Dashboard
-                            </Link>
+                            {session?.user?.role === "admin" && (
+                                <Link href="/dashboard" className={styles.mobileAccessBtn} onClick={toggleMobileMenu}>
+                                    Studio Dashboard
+                                </Link>
+                            )}
                             <button
                                 className={`${styles.mobileAccessBtn} ${styles.mobileSignOut}`}
                                 onClick={() => { toggleMobileMenu(); signOut({ callbackUrl: "/auth" }); }}

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "./AnimatedImage";
 import Link from "next/link";
 import styles from "./AboutTeaser.module.css";
 

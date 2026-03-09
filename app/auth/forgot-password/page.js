@@ -45,8 +45,8 @@ export default function ForgotPasswordPage() {
                 style={{ width: "100%", maxWidth: "420px", background: "#FFF", padding: "40px", borderRadius: "8px", boxShadow: "0 10px 40px rgba(0,0,0,0.03)" }}
             >
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-                    <div style={{ width: "30px", height: "1px", background: "#7C3AED" }} />
-                    <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#7C3AED" }}>
+                    <div style={{ width: "30px", height: "1px", background: "#31275c" }} />
+                    <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#31275c" }}>
                         Recovery
                     </span>
                 </div>
@@ -92,7 +92,7 @@ export default function ForgotPasswordPage() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             style={{ width: "100%", padding: "14px 0", background: "transparent", border: "none", borderBottom: "1px solid #EAE6DF", outline: "none", fontFamily: "sans-serif", fontSize: "0.875rem", letterSpacing: "0.05em", color: "#2D2926", transition: "border-color 0.3s ease" }}
-                            onFocus={(e) => e.target.style.borderBottomColor = "#7C3AED"}
+                            onFocus={(e) => e.target.style.borderBottomColor = "#31275c"}
                             onBlur={(e) => e.target.style.borderBottomColor = "#EAE6DF"}
                         />
                     </div>
@@ -110,7 +110,7 @@ export default function ForgotPasswordPage() {
 
                 <div style={{ marginTop: "32px", textAlign: "center" }}>
                     <Link href="/auth" style={{ fontFamily: "sans-serif", fontSize: "0.65rem", color: "#999", letterSpacing: "0.15em", textDecoration: "none", fontWeight: 700, textTransform: "uppercase" }}>
-                        <span style={{ color: "#7C3AED", marginRight: "4px" }}>←</span> Back to Sign In
+                        <span style={{ color: "#31275c", marginRight: "4px" }}>←</span> Back to Sign In
                     </Link>
                 </div>
             </motion.div>

@@ -49,7 +49,7 @@ export default function PortfolioCard({ project, index, className = "" }) {
                     <div>
                         {/* Meta */}
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#7C3AED]">
+                            <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[#31275c]">
                                 {project.category}
                             </span>
                             {project.clientName && (
@@ -63,13 +63,13 @@ export default function PortfolioCard({ project, index, className = "" }) {
                         </div>
 
                         {/* Title */}
-                        <h3 className="font-serif text-2xl md:text-3xl text-[#2C2A28] leading-[1.2] m-0 group-hover:text-[#7C3AED] transition-colors duration-300">
+                        <h3 className="font-serif text-2xl md:text-3xl text-[#2C2A28] leading-[1.2] m-0 group-hover:text-[#31275c] transition-colors duration-300">
                             {project.title}
                         </h3>
                     </div>
 
                     {/* Action Link */}
-                    <div className="mt-8 flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#2C2A28] group-hover:text-[#7C3AED] transition-colors duration-300">
+                    <div className="mt-8 flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#2C2A28] group-hover:text-[#31275c] transition-colors duration-300">
                         Explore <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </div>
                 </div>

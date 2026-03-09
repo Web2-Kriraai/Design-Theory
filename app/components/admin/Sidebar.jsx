@@ -45,8 +45,8 @@ export default function Sidebar({ isOpen, onClose }) {
             <div className="mb-20">
                 <Link href="/" className="group inline-block">
                     <div className="flex items-center gap-2 mb-2">
-                        <div className="w-6 h-px bg-[#7C3AED] group-hover:w-12 transition-all duration-700" />
-                        <span className="text-[10px] uppercase tracking-[0.6em] font-sans font-bold text-[#7C3AED]">Studio</span>
+                        <div className="w-6 h-px bg-[#31275c] group-hover:w-12 transition-all duration-700" />
+                        <span className="text-[10px] uppercase tracking-[0.6em] font-sans font-bold text-[#31275c]">Studio</span>
                     </div>
                     <h2 className="text-3xl font-serif text-[#2D2926] italic tracking-tight leading-none">Theory</h2>
                 </Link>
@@ -79,7 +79,7 @@ export default function Sidebar({ isOpen, onClose }) {
                                         strokeWidth={isActive ? 2 : 1.2}
                                         className={cn(
                                             "transition-colors duration-500",
-                                            isActive ? "text-[#7C3AED]" : "text-[#CCC] group-hover:text-[#7C3AED]"
+                                            isActive ? "text-[#31275c]" : "text-[#CCC] group-hover:text-[#31275c]"
                                         )}
                                     />
                                     <span className="text-[11px] uppercase tracking-[0.25em] font-sans font-bold">{item.label}</span>
@@ -94,7 +94,7 @@ export default function Sidebar({ isOpen, onClose }) {
                                 {isActive && (
                                     <motion.div
                                         layoutId="active-pill"
-                                        className="absolute left-0 w-1 h-full bg-[#7C3AED] z-10"
+                                        className="absolute left-0 w-1 h-full bg-[#31275c] z-10"
                                     />
                                 )}
                             </Link>
@@ -107,8 +107,8 @@ export default function Sidebar({ isOpen, onClose }) {
             <div className="pt-10 border-t border-[#EAE6DF]">
                 <div className="mb-8">
                     <div className="p-6 bg-[#F9F7F2] border border-[#EAE6DF] relative group overflow-hidden">
-                        <Compass className="absolute -right-4 -bottom-4 text-[#7C3AED]/10 w-24 h-24 group-hover:rotate-45 transition-transform duration-1000" />
-                        <p className="text-[9px] uppercase tracking-widest text-[#7C3AED] font-sans font-bold mb-2">Live Environment</p>
+                        <Compass className="absolute -right-4 -bottom-4 text-[#31275c]/10 w-24 h-24 group-hover:rotate-45 transition-transform duration-1000" />
+                        <p className="text-[9px] uppercase tracking-widest text-[#31275c] font-sans font-bold mb-2">Live Environment</p>
                         <div className="flex items-center gap-3">
                             <div className="relative">
                                 <div className="w-2 h-2 bg-emerald-500 rounded-full" />

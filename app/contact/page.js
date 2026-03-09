@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from "react";
-import Image from "next/image";
+import Image from "@/app/components/AnimatedImage";
 import Link from "next/link";
 import AnimatedQuickStrip from "../components/AnimatedQuickStrip";
 import styles from "./contact.module.css";
+import { validateContactForm } from "@/lib/validators";
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -30,33 +31,10 @@ export default function ContactPage() {
         if (globalError) setGlobalError("");
     };
 
-    const validateForm = () => {
-        const newErrors = {};
-        if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
-        if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!formData.email || !emailRegex.test(formData.email)) {
-            newErrors.email = "Please enter a valid email address";
-        }
-
-        const phoneRegex = /^\d{10}$/;
-        if (!formData.phoneNumber || !phoneRegex.test(formData.phoneNumber.replace(/\s/g, ''))) {
-            newErrors.phoneNumber = "Please enter a valid 10-digit phone number";
-        }
-
-        if (!formData.projectType) newErrors.projectType = "Please select a project type";
-        if (!formData.message.trim() || formData.message.trim().length < 10) {
-            newErrors.message = "Message must be at least 10 characters";
-        }
-
-        return newErrors;
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const validationErrors = validateForm();
+        const validationErrors = validateContactForm(formData);
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;

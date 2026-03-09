@@ -46,14 +46,14 @@ export default function NewsletterPage() {
         <div className="max-w-5xl mx-auto">
             <header className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                 <div>
-                    <span className="script-font text-[#7C3AED] text-2xl block mb-2">The Inner Circle</span>
+                    <span className="script-font text-[#31275c] text-2xl block mb-2">The Inner Circle</span>
                     <h1 className="text-4xl font-serif text-[#2D2926]">Newsletter Subscribers</h1>
                 </div>
 
                 <button
                     onClick={exportCSV}
                     disabled={subscribers.length === 0}
-                    className="flex items-center gap-3 px-6 py-3 bg-[#2D2926] text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-[#7C3AED] transition-colors rounded disabled:opacity-50"
+                    className="flex items-center gap-3 px-6 py-3 bg-[#2D2926] text-white text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-[#31275c] transition-colors rounded disabled:opacity-50"
                 >
                     <Download size={14} />
                     Export CSV
@@ -84,7 +84,7 @@ export default function NewsletterPage() {
                                     >
                                         <td className="px-6 py-5">
                                             <div className="flex items-center gap-3 text-sm font-sans text-[#2D2926]">
-                                                <Mail size={14} className="text-[#7C3AED]" />
+                                                <Mail size={14} className="text-[#31275c]" />
                                                 {sub.email}
                                             </div>
                                         </td>
@@ -119,7 +119,7 @@ export default function NewsletterPage() {
 
                 {subscribers.length === 0 && !loading && (
                     <div className="py-20 text-center">
-                        <span className="script-font text-[#7C3AED] text-2xl block mb-2">Quiet List</span>
+                        <span className="script-font text-[#31275c] text-2xl block mb-2">Quiet List</span>
                         <p className="text-xs uppercase tracking-widest text-[#999]">No subscribers currently active</p>
                     </div>
                 )}

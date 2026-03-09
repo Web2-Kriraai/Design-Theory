@@ -39,7 +39,7 @@
     transform: translateX(-50%);
     width: 80px;
     height: 2px;
-    background-color: var(--accent-purple, #7C3AED);
+    background-color: var(--accent-purple, #31275c);
 }
 
 .lastUpdated {
@@ -69,7 +69,7 @@
     font-weight: 400;
     color: var(--text-primary, #2C2A28);
     margin-bottom: 20px;
-    border-left: 3px solid var(--accent-purple, #7C3AED);
+    border-left: 3px solid var(--accent-purple, #31275c);
     padding-left: 15px;
 }
 
@@ -123,7 +123,7 @@
 }
 
 .accordionHeader:hover {
-    background: rgba(124, 58, 237, 0.03);
+    background: rgba(49, 39, 92, 0.03);
     /* purple tint */
 }
 
@@ -184,7 +184,7 @@
 }
 
 .legalTable tr:hover {
-    background-color: rgba(124, 58, 237, 0.03);
+    background-color: rgba(49, 39, 92, 0.03);
 }
 
 /* Bottom Navigation */
@@ -209,8 +209,35 @@
 }
 
 .legalBottomNav a:hover {
-    color: var(--accent-purple, #7C3AED);
-    border-bottom-color: var(--accent-purple, #7C3AED);
+    color: var(--accent-purple, #31275c);
+    border-bottom-color: var(--accent-purple, #31275c);
+}
+
+.highlight {
+    color: #31275c;
+    border-bottom: 2px solid #31275c;
+    font-weight: 600;
+}
+
+.contactBox {
+    margin-top: 3rem;
+    padding: 2rem;
+    border: 1px solid #31275c;
+    text-align: center;
+}
+
+.contactBox h4 {
+    font-family: var(--font-serif, serif);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.btnPrimary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: #31275c;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
 }
 
 .backToTop {
@@ -220,7 +247,7 @@
 
 .backToTop button {
     background: transparent;
-    border: 1px solid var(--accent-purple, #7C3AED);
+    border: 1px solid var(--accent-purple, #31275c);
     color: var(--text-primary, #2C2A28);
     padding: 12px 30px;
     font-family: var(--font-sans);
@@ -233,7 +260,7 @@
 }
 
 .backToTop button:hover {
-    background-color: var(--accent-purple, #7C3AED);
+    background-color: var(--accent-purple, #31275c);
     color: #fff;
 }
 

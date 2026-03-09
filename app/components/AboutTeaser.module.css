@@ -65,15 +65,15 @@
 .cornerTL {
     top: -6px;
     left: -6px;
-    border-top: 2px solid var(--accent-purple, #7C3AED);
-    border-left: 2px solid var(--accent-purple, #7C3AED);
+    border-top: 2px solid var(--accent-purple, #31275c);
+    border-left: 2px solid var(--accent-purple, #31275c);
 }
 
 .cornerBR {
     bottom: -6px;
     right: -6px;
-    border-bottom: 2px solid var(--accent-purple, #7C3AED);
-    border-right: 2px solid var(--accent-purple, #7C3AED);
+    border-bottom: 2px solid var(--accent-purple, #31275c);
+    border-right: 2px solid var(--accent-purple, #31275c);
 }
 
 /* ---- Text Side ---- */
@@ -101,7 +101,7 @@
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent-purple, #7C3AED);
+    color: var(--accent-purple, #31275c);
     margin-bottom: 12px;
 }
 
@@ -159,14 +159,14 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: var(--accent-purple, #7C3AED);
+    background: var(--accent-purple, #31275c);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
 }
 
 .cta:hover {
-    color: var(--accent-purple, #7C3AED);
+    color: #31275c;
     border-bottom: none;
 }
 

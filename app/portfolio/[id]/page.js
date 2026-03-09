@@ -1,10 +1,10 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from '@/app/components/AnimatedImage';
 import Link from 'next/link';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import mongoose from 'mongoose';
 import connectMongo from '@/lib/mongodb';
-import Portfolio from '@/lib/models/Portfolio';
+import Portfolio from '@/models/Portfolio';
 
 export const revalidate = 60;
 

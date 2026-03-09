@@ -68,8 +68,8 @@ export default function DashboardPage() {
         return (
             <div className="flex items-center justify-center min-h-[80vh]">
                 <div className="flex flex-col items-center gap-6">
-                    <div className="w-12 h-px bg-[#7C3AED] animate-[width_2s_ease-in-out_infinite]" />
-                    <span className="text-[10px] uppercase tracking-[0.5em] text-[#7C3AED] font-bold">Initializing Archive</span>
+                    <div className="w-12 h-px bg-[#31275c] animate-[width_2s_ease-in-out_infinite]" />
+                    <span className="text-[10px] uppercase tracking-[0.5em] text-[#31275c] font-bold">Initializing Archive</span>
                 </div>
             </div>
         );
@@ -86,8 +86,8 @@ export default function DashboardPage() {
             >
                 <div className="max-w-2xl">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-px bg-[#7C3AED]" />
-                        <span className="text-[10px] uppercase tracking-[0.5em] text-[#7C3AED] font-bold">Studio Matrix | v1.0</span>
+                        <div className="w-8 h-px bg-[#31275c]" />
+                        <span className="text-[10px] uppercase tracking-[0.5em] text-[#31275c] font-bold">Studio Matrix | v1.0</span>
                     </div>
                     <h1 className="text-5xl lg:text-7xl font-serif text-[#2D2926] leading-[1.1] tracking-tight">
                         Editorial <br /><i>Archive</i>
@@ -105,7 +105,7 @@ export default function DashboardPage() {
             {/* CTA Card - Square */}
             <motion.div
                 variants={item}
-                className="md:col-span-2 lg:col-span-2 bg-[#7C3AED] p-10 flex flex-col justify-between text-white group cursor-pointer hover:bg-[#2D2926] transition-colors duration-700"
+                className="md:col-span-2 lg:col-span-2 bg-[#31275c] p-10 flex flex-col justify-between text-white group cursor-pointer hover:bg-[#2D2926] transition-colors duration-700"
             >
                 <div>
                     <h3 className="text-3xl font-serif leading-tight mb-4">System <br />Maintenance</h3>

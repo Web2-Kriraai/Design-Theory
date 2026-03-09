@@ -76,11 +76,15 @@ export default function Footer() {
                     <div className={styles.col}>
                         <h4 className={styles.colTitle}>Services</h4>
                         <ul className={styles.linkList}>
-                            <li><Link href="/services/#residential">Residential Interior Design</Link></li>
-                            <li><Link href="/services/#commercial">Commercial Interior Design</Link></li>
-                            <li><Link href="/services/#architecture">Architectural Design</Link></li>
-                            <li><Link href="/services/#visualization">3D Visualization & Rendering</Link></li>
-                            <li><Link href="/services/#turnkey">Turnkey Solutions</Link></li>
+                            {[
+                                { name: "Residential Interior Design", href: "/services/#residential" },
+                                { name: "Commercial Interior Design", href: "/services/#commercial" },
+                                { name: "Architectural Design", href: "/services/#architecture" },
+                                { name: "3D Visualization & Rendering", href: "/services/#visualization" },
+                                { name: "Turnkey Solutions", href: "/services/#turnkey" }
+                            ].map(link => (
+                                <li key={link.name}><Link href={link.href}>{link.name}</Link></li>
+                            ))}
                         </ul>
                     </div>
 
@@ -88,11 +92,15 @@ export default function Footer() {
                     <div className={styles.col}>
                         <h4 className={styles.colTitle}>Help</h4>
                         <ul className={styles.linkList}>
-                            <li><Link href="/contact">Contact</Link></li>
-                            <li><Link href="/careers">Careers</Link></li>
-                            <li><Link href="/faqs">FAQs</Link></li>
-                            <li><Link href="/privacy-policy">Privacy Policy</Link></li>
-                            <li><Link href="/cookie-policy">Cookie Policy</Link></li>
+                            {[
+                                { name: "Contact", href: "/contact" },
+                                { name: "Careers", href: "/careers" },
+                                { name: "FAQs", href: "/faqs" },
+                                { name: "Privacy Policy", href: "/privacy-policy" },
+                                { name: "Cookie Policy", href: "/cookie-policy" }
+                            ].map(link => (
+                                <li key={link.name}><Link href={link.href}>{link.name}</Link></li>
+                            ))}
                         </ul>
                     </div>
 
@@ -100,20 +108,16 @@ export default function Footer() {
                     <div className={styles.col}>
                         <h4 className={styles.colTitle}>Company</h4>
                         <ul className={styles.linkList}>
-                            <li><Link href="/portfolio">Portfolio</Link></li>
-                            <li><Link href="/services">Services</Link></li>
-                            <li><Link href="/about-us">About</Link></li>
-                            <li><Link href="/blog">Blog</Link></li>
-                            <li>
-                                <a href="https://www.instagram.com/the.designtheory/?hl=en" target="_blank" rel="noopener noreferrer">
-                                    Instagram
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://in.linkedin.com/company/the-design-theory-in" target="_blank" rel="noopener noreferrer">
-                                    LinkedIn
-                                </a>
-                            </li>
+                            {[
+                                { name: "Portfolio", href: "/portfolio" },
+                                { name: "Services", href: "/services" },
+                                { name: "About", href: "/about-us" },
+                                { name: "Blog", href: "/blog" },
+                            ].map(link => (
+                                <li key={link.name}><Link href={link.href}>{link.name}</Link></li>
+                            ))}
+                            <li><a href="https://www.instagram.com/the.designtheory/?hl=en" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                            <li><a href="https://in.linkedin.com/company/the-design-theory-in" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
                         </ul>
                     </div>
 

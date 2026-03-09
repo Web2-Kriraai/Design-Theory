@@ -1,6 +1,6 @@
 import React from 'react';
 import connectMongo from '@/lib/mongodb';
-import Portfolio from '@/lib/models/Portfolio';
+import Portfolio from '@/models/Portfolio';
 import PortfolioClient from '../components/PortfolioClient';
 
 export const metadata = {

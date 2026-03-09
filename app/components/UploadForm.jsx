@@ -207,7 +207,7 @@ export default function UploadForm({ onSuccess, onCancel, initialData = null }) 
                         <label style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#999', display: 'block', marginBottom: '8px' }}>Cover Image (1 File) *</label>
                         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
                             <label style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '140px', height: '140px', background: '#F9F7F2', border: '1px dashed #ccc', transition: 'all 0.2s' }}>
-                                <UploadCloud size={24} color="#7C3AED" style={{ marginBottom: '8px' }} />
+                                <UploadCloud size={24} color="#31275c" style={{ marginBottom: '8px' }} />
                                 <span style={{ fontSize: '0.7rem', color: '#999' }}>Upload Cover</span>
                                 <input type="file" accept="image/*" onChange={handleCoverChange} style={{ display: 'none' }} />
                             </label>
@@ -224,7 +224,7 @@ export default function UploadForm({ onSuccess, onCancel, initialData = null }) 
                         <label style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#999', display: 'block', marginBottom: '8px' }}>Gallery Images (4 to 8 Files) *</label>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
                             <label style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100px', height: '100px', background: '#F9F7F2', border: '1px dashed #ccc' }}>
-                                <ImageIcon size={20} color="#7C3AED" style={{ marginBottom: '8px' }} />
+                                <ImageIcon size={20} color="#31275c" style={{ marginBottom: '8px' }} />
                                 <span style={{ fontSize: '0.65rem', color: '#999' }}>Add Images</span>
                                 <input type="file" accept="image/*" multiple onChange={handleGalleryChange} style={{ display: 'none' }} />
                             </label>
@@ -246,7 +246,7 @@ export default function UploadForm({ onSuccess, onCancel, initialData = null }) 
                 {/* ── SUBMIT BUTTON ── */}
                 <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end', gap: '16px' }}>
                     <button type="button" onClick={onCancel} disabled={loading} style={{ padding: '12px 24px', background: 'transparent', border: '1px solid #EAE6DF', fontFamily: 'sans-serif', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', cursor: 'pointer' }}>Cancel</button>
-                    <button type="submit" disabled={loading} style={{ padding: '12px 32px', background: '#7C3AED', color: 'white', border: 'none', fontFamily: 'sans-serif', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1 }}>
+                    <button type="submit" disabled={loading} style={{ padding: '12px 32px', background: '#31275c', color: 'white', border: 'none', fontFamily: 'sans-serif', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1 }}>
                         {loading ? 'Saving...' : (initialData ? 'Update Project' : 'Publish Project')}
                     </button>
                 </div>

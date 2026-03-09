@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import Image from "next/image";
+import Image from "@/app/components/AnimatedImage";
 import Link from "next/link";
 import styles from "./careers.module.css";
 
@@ -22,7 +22,7 @@ export default function CareersPage() {
                         alt="Careers at The Design Theory"
                         fill
                         className={styles.heroImg}
-                        priority
+                        priority={true}
                         sizes="100vw"
                     />
                 </div>

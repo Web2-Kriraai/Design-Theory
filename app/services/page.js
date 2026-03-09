@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from "react";
-import Image from "next/image";
+import Image from "@/app/components/AnimatedImage";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "./services.module.css";
@@ -109,6 +109,7 @@ const ServiceCard = ({ section, index, progress, range, targetScale }) => {
                                 alt={section.title}
                                 fill
                                 className={styles.sectionImg}
+                                priority={index === 0}
                                 sizes="(max-width: 768px) 100vw, 50vw"
                             />
                         </motion.div>

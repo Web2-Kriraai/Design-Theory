@@ -1,6 +1,6 @@
 'use client';
 
-import Image from "next/image";
+import Image from "@/app/components/AnimatedImage";
 import Link from "next/link";
 import styles from "./about.module.css";
 

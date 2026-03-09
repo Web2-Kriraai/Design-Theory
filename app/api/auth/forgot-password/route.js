@@ -47,7 +47,7 @@ export async function POST(req) {
                 <p>You are receiving this email because you (or someone else) requested a password reset for your account.</p>
                 <p>Your One-Time Password (OTP) is:</p>
                 <div style="background-color: #F9F7F2; padding: 20px; text-align: center; border-radius: 8px; margin: 24px 0;">
-                    <h1 style="font-size: 40px; letter-spacing: 8px; color: #7C3AED; margin: 0;">${resetToken}</h1>
+                    <h1 style="font-size: 40px; letter-spacing: 8px; color: #31275c; margin: 0;">${resetToken}</h1>
                 </div>
                 <p>This code will expire in 10 minutes.</p>
                 <p style="color: #999; font-size: 12px; margin-top: 40px;">If you did not request this, please ignore this email and your password will remain unchanged.</p>

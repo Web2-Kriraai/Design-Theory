@@ -136,14 +136,14 @@
 }
 
 .faqQuestion:hover {
-    color: var(--accent-purple, #7C3AED);
+    color: var(--accent-purple, #31275c);
 }
 
 .faqIcon {
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 1;
-    color: var(--accent-purple, #7C3AED);
+    color: var(--accent-purple, #31275c);
     transition: transform 0.3s ease;
 }
 
@@ -216,7 +216,7 @@
 }
 
 .ctaLink:hover {
-    background: var(--accent-purple, #7C3AED);
+    background: var(--accent-purple, #31275c);
     color: #fff;
     transform: translateY(-2px);
 }

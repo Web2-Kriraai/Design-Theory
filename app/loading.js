@@ -20,15 +20,15 @@ export default function GlobalLoading() {
                         position: "absolute",
                         width: "40px",
                         height: "40px",
-                        border: "3px solid #7C3AED",
+                        border: "3px solid #31275c",
                         borderRadius: "50%",
                         animation: "spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
-                        borderColor: "#7C3AED transparent transparent transparent"
+                        borderColor: "#31275c transparent transparent transparent"
                     }}></div>
                 </div>
 
                 <div style={{ textAlign: "center" }}>
-                    <div style={{ width: "30px", height: "1px", background: "#7C3AED", margin: "0 auto 12px" }} />
+                    <div style={{ width: "30px", height: "1px", background: "#31275c", margin: "0 auto 12px" }} />
                     <span style={{
                         fontFamily: "sans-serif",
                         fontSize: "0.6rem",

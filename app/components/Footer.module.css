@@ -4,7 +4,7 @@
    ========================================== */
 
 .footer {
-    background: linear-gradient(180deg, #1A1030 0%, #150D28 100%);
+    background: linear-gradient(180deg, #31275c 0%, #31275c 100%);
     color: #c8c0d8;
     font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.82rem;

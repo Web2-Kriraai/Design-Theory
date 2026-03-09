@@ -30,7 +30,7 @@ export default function GlobalError({ error, reset }) {
                     <button
                         onClick={() => reset()}
                         style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", padding: "14px 24px", background: "#2D2926", border: "none", color: "white", fontSize: "0.7rem", fontFamily: "sans-serif", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", cursor: "pointer", borderRadius: "4px", transition: "background 0.3s" }}
-                        onMouseEnter={e => e.currentTarget.style.background = "#7C3AED"}
+                        onMouseEnter={e => e.currentTarget.style.background = "#31275c"}
                         onMouseLeave={e => e.currentTarget.style.background = "#2D2926"}
                     >
                         <RefreshCcw size={14} /> Try Again

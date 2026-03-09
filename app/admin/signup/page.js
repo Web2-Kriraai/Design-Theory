@@ -47,7 +47,7 @@ export default function SignupPage() {
                     className="w-full max-w-md"
                 >
                     <div className="mb-12">
-                        <span className="script-font text-[#7C3AED] text-2xl block mb-2">Join the Studio</span>
+                        <span className="script-font text-[#31275c] text-2xl block mb-2">Join the Studio</span>
                         <h1 className="text-4xl font-serif text-[#2D2926] tracking-tight">Create Access</h1>
                     </div>
 
@@ -63,13 +63,13 @@ export default function SignupPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-8">
                         <div className="group">
-                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#7C3AED]">
+                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#31275c]">
                                 Full Name
                             </label>
                             <input
                                 type="text"
                                 required
-                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#7C3AED] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
+                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#31275c] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
                                 placeholder="Alexander Design"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -77,13 +77,13 @@ export default function SignupPage() {
                         </div>
 
                         <div className="group">
-                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#7C3AED]">
+                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#31275c]">
                                 Email Identifier
                             </label>
                             <input
                                 type="email"
                                 required
-                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#7C3AED] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
+                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#31275c] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
                                 placeholder="studio@thedesigntheory.in"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -91,12 +91,12 @@ export default function SignupPage() {
                         </div>
 
                         <div className="group">
-                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#7C3AED]">
+                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#31275c]">
                                 Role Assignment
                             </label>
                             <input
                                 type="text"
-                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#7C3AED] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
+                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#31275c] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
                                 placeholder="editor, moderator, manager..."
                                 value={formData.role}
                                 onChange={(e) => setFormData({ ...formData, role: e.target.value })}
@@ -104,13 +104,13 @@ export default function SignupPage() {
                         </div>
 
                         <div className="group">
-                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#7C3AED]">
+                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#31275c]">
                                 Secret Key
                             </label>
                             <input
                                 type="password"
                                 required
-                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#7C3AED] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
+                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#31275c] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
                                 placeholder="••••••••"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -121,7 +121,7 @@ export default function SignupPage() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-5 bg-[#2D2926] text-white text-[10px] uppercase tracking-[0.4em] font-sans font-bold hover:bg-[#7C3AED] transition-all duration-500 disabled:opacity-50 relative group overflow-hidden"
+                                className="w-full py-5 bg-[#2D2926] text-white text-[10px] uppercase tracking-[0.4em] font-sans font-bold hover:bg-[#31275c] transition-all duration-500 disabled:opacity-50 relative group overflow-hidden"
                             >
                                 <span className="relative z-10">{loading ? "Registering..." : "Create Account"}</span>
                                 <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
@@ -133,7 +133,7 @@ export default function SignupPage() {
                         <div className="h-px w-12 bg-[#EAE6DF]" />
                         <p className="text-[10px] text-[#999] font-sans uppercase tracking-[0.25em]">
                             Already Have Access?{" "}
-                            <Link href="/admin/login" className="text-[#7C3AED] hover:text-[#2D2926] transition-colors font-bold underline underline-offset-4">
+                            <Link href="/admin/login" className="text-[#31275c] hover:text-[#2D2926] transition-colors font-bold underline underline-offset-4">
                                 Log In
                             </Link>
                         </p>

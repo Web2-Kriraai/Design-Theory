@@ -27,7 +27,15 @@ export default function LoginPage() {
             if (res.error) {
                 setError(res.error);
             } else {
-                router.push("/dashboard");
+                // Fetch session to determine role
+                const sessionRes = await fetch("/api/auth/session");
+                const sessionData = await sessionRes.json();
+
+                if (sessionData?.user?.role === "admin") {
+                    router.push("/dashboard");
+                } else {
+                    router.push("/");
+                }
             }
         } catch (err) {
             setError("Failed to connect to authentication server");
@@ -84,7 +92,7 @@ export default function LoginPage() {
                     className="w-full max-w-md"
                 >
                     <div className="mb-12">
-                        <span className="script-font text-[#7C3AED] text-2xl block mb-2">Welcome Back</span>
+                        <span className="script-font text-[#31275c] text-2xl block mb-2">Welcome Back</span>
                         <h1 className="text-4xl font-serif text-[#2D2926] tracking-tight">Studio Access</h1>
                     </div>
 
@@ -100,13 +108,13 @@ export default function LoginPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-8">
                         <div className="group">
-                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#7C3AED]">
+                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#31275c]">
                                 Email Identifier
                             </label>
                             <input
                                 type="email"
                                 required
-                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#7C3AED] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
+                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#31275c] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
                                 placeholder="studio@thedesigntheory.in"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -115,17 +123,17 @@ export default function LoginPage() {
 
                         <div className="group">
                             <div className="flex justify-between items-center mb-3">
-                                <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold transition-colors group-focus-within:text-[#7C3AED]">
+                                <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold transition-colors group-focus-within:text-[#31275c]">
                                     Secret Key
                                 </label>
-                                <Link href="/auth/forgot-password" className="text-[9px] uppercase tracking-[0.2em] font-sans font-bold text-[#7C3AED] hover:text-[#2D2926] transition-colors">
+                                <Link href="/auth/forgot-password" className="text-[9px] uppercase tracking-[0.2em] font-sans font-bold text-[#31275c] hover:text-[#2D2926] transition-colors">
                                     Forgot?
                                 </Link>
                             </div>
                             <input
                                 type="password"
                                 required
-                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#7C3AED] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
+                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#31275c] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
                                 placeholder="••••••••"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -136,7 +144,7 @@ export default function LoginPage() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-5 bg-[#2D2926] text-white text-[10px] uppercase tracking-[0.4em] font-sans font-bold hover:bg-[#7C3AED] transition-all duration-500 disabled:opacity-50 relative group overflow-hidden"
+                                className="w-full py-5 bg-[#2D2926] text-white text-[10px] uppercase tracking-[0.4em] font-sans font-bold hover:bg-[#31275c] transition-all duration-500 disabled:opacity-50 relative group overflow-hidden"
                             >
                                 <span className="relative z-10">{loading ? "Authenticating..." : "Enter Workspace"}</span>
                                 <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
@@ -148,7 +156,7 @@ export default function LoginPage() {
                         <div className="h-px w-12 bg-[#EAE6DF]" />
                         <p className="text-[10px] text-[#999] font-sans uppercase tracking-[0.25em]">
                             New Collective Member?{" "}
-                            <Link href="/admin/signup" className="text-[#7C3AED] hover:text-[#2D2926] transition-colors font-bold underline underline-offset-4">
+                            <Link href="/admin/signup" className="text-[#31275c] hover:text-[#2D2926] transition-colors font-bold underline underline-offset-4">
                                 Register Here
                             </Link>
                         </p>
@@ -156,7 +164,7 @@ export default function LoginPage() {
                 </motion.div>
 
                 {/* Decorative Elements */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#7C3AED]/5 rounded-full -mr-16 -mt-16 blur-3xl" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#31275c]/5 rounded-full -mr-16 -mt-16 blur-3xl" />
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#2D2926]/5 rounded-full -ml-24 -mb-24 blur-3xl" />
             </div>
         </div>

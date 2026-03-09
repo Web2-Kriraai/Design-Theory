@@ -1,11 +1,13 @@
 'use client';
 
-import Image from "next/image";
+import Image from "./components/AnimatedImage";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import AboutTeaser from "./components/AboutTeaser";
+import dynamic from "next/dynamic";
 import styles from "./home.module.css";
+
+const AboutTeaser = dynamic(() => import("./components/AboutTeaser"));
 
 export default function Home() {
   /* ---- Testimonial slider ---- */

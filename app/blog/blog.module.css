@@ -17,8 +17,18 @@
     font-weight: 600;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--accent-purple, #7C3AED);
+    color: var(--accent-purple, #31275c);
     margin-bottom: 20px;
+}
+
+.categoryLabel {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-purple, #31275c);
+    margin-bottom: 0.75rem;
 }
 
 .title {

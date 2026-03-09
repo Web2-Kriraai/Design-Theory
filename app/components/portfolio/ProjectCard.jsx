@@ -2,9 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function ProjectCard({ project, index }) {
+    const [isLoaded, setIsLoaded] = useState(false);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -29,7 +32,8 @@ export default function ProjectCard({ project, index }) {
                             fill
                             loading="lazy"
                             quality={85}
-                            className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.05] grayscale-[20%] group-hover:grayscale-0"
+                            onLoad={() => setIsLoaded(true)}
+                            className={`object-cover transition-all duration-1000 ease-out group-hover:scale-[1.05] grayscale-[20%] group-hover:grayscale-0 ${isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-[10px]'}`}
                             sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                     ) : (

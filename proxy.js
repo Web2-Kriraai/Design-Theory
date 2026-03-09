@@ -8,7 +8,7 @@ export default withAuth(
 
         // 1. Protect /dashboard — redirect to /auth if not authenticated admin
         if (pathname.startsWith("/dashboard") && token?.role !== "admin") {
-            return NextResponse.redirect(new URL("/auth", req.url));
+            return NextResponse.redirect(new URL("/", req.url));
         }
 
         // 2. Protect sensitive API routes — return 401 if not admin

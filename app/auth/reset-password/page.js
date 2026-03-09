@@ -59,8 +59,8 @@ function ResetPasswordForm() {
                 style={{ width: "100%", maxWidth: "420px", background: "#FFF", padding: "40px", borderRadius: "8px", boxShadow: "0 10px 40px rgba(0,0,0,0.03)" }}
             >
                 <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-                    <div style={{ width: "30px", height: "1px", background: "#7C3AED" }} />
-                    <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#7C3AED" }}>
+                    <div style={{ width: "30px", height: "1px", background: "#31275c" }} />
+                    <span style={{ fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.4em", color: "#31275c" }}>
                         Secure
                     </span>
                 </div>
@@ -105,7 +105,7 @@ function ResetPasswordForm() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             style={{ width: "100%", padding: "14px 0", background: "transparent", border: "none", borderBottom: "1px solid #E5E5E5", fontSize: "0.95rem", color: "#2D2926", outline: "none", transition: "border-color 0.3s ease" }}
-                            onFocus={(e) => e.target.style.borderBottomColor = "#7C3AED"}
+                            onFocus={(e) => e.target.style.borderBottomColor = "#31275c"}
                             onBlur={(e) => e.target.style.borderBottomColor = "#E5E5E5"}
                         />
                     </div>
@@ -120,7 +120,7 @@ function ResetPasswordForm() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             style={{ width: "100%", padding: "14px 0", background: "transparent", border: "none", borderBottom: "1px solid #E5E5E5", fontSize: "0.95rem", color: "#2D2926", outline: "none", transition: "border-color 0.3s ease" }}
-                            onFocus={(e) => e.target.style.borderBottomColor = "#7C3AED"}
+                            onFocus={(e) => e.target.style.borderBottomColor = "#31275c"}
                             onBlur={(e) => e.target.style.borderBottomColor = "#E5E5E5"}
                         />
                     </div>
@@ -129,7 +129,7 @@ function ResetPasswordForm() {
                         type="submit"
                         disabled={status === "loading" || status === "success"}
                         style={{ width: "100%", padding: "16px", background: "#2D2926", color: "#FFF", border: "none", borderRadius: "2px", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.2em", cursor: (status === "loading" || status === "success") ? "not-allowed" : "pointer", opacity: (status === "loading" || status === "success") ? 0.7 : 1, transition: "background 0.3s ease", marginTop: "12px" }}
-                        onMouseEnter={(e) => { if (status !== "loading" && status !== "success") e.target.style.background = "#7C3AED"; }}
+                        onMouseEnter={(e) => { if (status !== "loading" && status !== "success") e.target.style.background = "#31275c"; }}
                         onMouseLeave={(e) => { if (status !== "loading" && status !== "success") e.target.style.background = "#2D2926"; }}
                     >
                         {status === "loading" ? "UPDATING..." : "RESET PASSWORD"}

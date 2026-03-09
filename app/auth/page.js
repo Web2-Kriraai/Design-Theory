@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function AuthPage() {
     const [mode, setMode] = useState("login"); // "login" | "signup"
     const [loginData, setLoginData] = useState({ email: "", password: "" });
-    const [signupData, setSignupData] = useState({ name: "", email: "", password: "" });
+    const [signupData, setSignupData] = useState({ name: "", email: "", password: "", role: "" });
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
@@ -55,7 +56,7 @@ export default function AuthPage() {
 
             if (res.ok) {
                 setSuccess("Account created successfully. Please log in.");
-                setSignupData({ name: "", email: "", password: "" });
+                setSignupData({ name: "", email: "", password: "", role: "" });
                 setTimeout(() => {
                     setMode("login");
                     setSuccess("");
@@ -241,7 +242,12 @@ export default function AuthPage() {
                                         />
                                     </div>
                                     <div>
-                                        <label className="field-label">Password</label>
+                                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+                                            <label className="field-label" style={{ marginBottom: 0 }}>Password</label>
+                                            <Link href="/auth/forgot-password" style={{ fontFamily: "sans-serif", fontSize: "0.55rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.2em", color: "#7C3AED", textDecoration: "none" }}>
+                                                Forgot?
+                                            </Link>
+                                        </div>
                                         <input
                                             className="auth-input"
                                             type="password"
@@ -291,6 +297,16 @@ export default function AuthPage() {
                                             placeholder="studio@thedesigntheory.in"
                                             value={signupData.email}
                                             onChange={e => setSignupData({ ...signupData, email: e.target.value })}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="field-label">System Role</label>
+                                        <input
+                                            className="auth-input"
+                                            type="text"
+                                            placeholder="user, admin, editor, etc."
+                                            value={signupData.role}
+                                            onChange={e => setSignupData({ ...signupData, role: e.target.value })}
                                         />
                                     </div>
                                     <div>

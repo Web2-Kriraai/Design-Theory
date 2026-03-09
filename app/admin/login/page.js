@@ -114,9 +114,14 @@ export default function LoginPage() {
                         </div>
 
                         <div className="group">
-                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#7C3AED]">
-                                Secret Key
-                            </label>
+                            <div className="flex justify-between items-center mb-3">
+                                <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold transition-colors group-focus-within:text-[#7C3AED]">
+                                    Secret Key
+                                </label>
+                                <Link href="/auth/forgot-password" className="text-[9px] uppercase tracking-[0.2em] font-sans font-bold text-[#7C3AED] hover:text-[#2D2926] transition-colors">
+                                    Forgot?
+                                </Link>
+                            </div>
                             <input
                                 type="password"
                                 required

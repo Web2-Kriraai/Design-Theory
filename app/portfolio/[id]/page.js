@@ -147,7 +147,7 @@ export default async function PortfolioDetailsPage({ params }) {
                     {/* ── PREMIUM HEADER ── */}
                     <header className="pb-24 text-center block w-full relative">
                         {/* Elegant Back Link */}
-                        <div className="flex justify-center mb-16">
+                        <div className="flex justify-center mb-16 relative z-50">
                             <Link
                                 href="/portfolio"
                                 className="inline-flex items-center gap-4 text-[#9A9490] hover:text-[#2A1E2F] text-[0.65rem] font-bold uppercase tracking-[0.4em] no-underline transition-all duration-300 group"
@@ -216,7 +216,7 @@ export default async function PortfolioDetailsPage({ params }) {
                         )} */}
 
                         {project.description && (
-                            <p className="text-[#5A5653] font-serif text-xl md:text-2xl lg:text-[1.65rem] leading-[1.8] max-w-xxl mx-auto d-block font-light italic justify-center">
+                            <p className="text-[#5A5653] font-serif text-xl md:text-2xl lg:text-[1.65rem] leading-[1.8] max-w-xxl mx-auto block font-light italic text-center px-4">
                                 &ldquo;{project.description}&rdquo;
                             </p>
                         )}

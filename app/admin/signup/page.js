@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function SignupPage() {
-    const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", password: "", role: "" });
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
@@ -87,6 +87,19 @@ export default function SignupPage() {
                                 placeholder="studio@thedesigntheory.in"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            />
+                        </div>
+
+                        <div className="group">
+                            <label className="block text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold mb-3 transition-colors group-focus-within:text-[#7C3AED]">
+                                Role Assignment
+                            </label>
+                            <input
+                                type="text"
+                                className="w-full px-0 py-4 bg-transparent border-b border-[#EAE6DF] focus:border-[#7C3AED] outline-none transition-all font-sans text-sm tracking-wide placeholder:text-gray-300"
+                                placeholder="editor, moderator, manager..."
+                                value={formData.role}
+                                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                             />
                         </div>
 

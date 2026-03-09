@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
     try {
-        const { name, email, password } = await req.json();
+        const { name, email, password, role } = await req.json();
 
         if (!name || !email || !password) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -22,12 +22,12 @@ export async function POST(req) {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // Create user — role is "user" by default; set role to "admin" directly in MongoDB for admins
+        // Create user with dynamic role (fallback to 'user')
         const user = await User.create({
             name,
             email,
             password: hashedPassword,
-            role: "user",
+            role: role || "user",
         });
 
         return NextResponse.json({

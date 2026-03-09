@@ -17,7 +17,7 @@ export default function PortfolioClient({ initialProjects }) {
 
     return (
         <div className="min-h-screen bg-[#FCFAF7] w-full">
-            <main className="pt-[140px] md:pt-[180px] lg:pt-[220px] pb-20 w-full flex flex-col items-center" style={{ transform: "translateY(150px)", marginBottom: "150px" }}>
+            <main className="pt-[140px] md:pt-[180px] lg:pt-[220px] pb-20 w-full flex flex-col items-center" style={{ transform: "translateY(150px)", marginBottom: "200px" }}>
                 <div className="w-full max-w-[1280px] mx-auto px-6 sm:px-8 lg:px-16 flex flex-col items-center">
 
                     {/* ── HERO TEXT ── Matching site Cormorant Garamond headings */}

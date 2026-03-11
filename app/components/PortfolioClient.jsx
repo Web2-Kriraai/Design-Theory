@@ -5,129 +5,208 @@ import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import ProjectCard from '../components/portfolio/ProjectCard';
 import CategoryFilter from '../components/portfolio/CategoryFilter';
 
+/*
+ * ─────────────────────────────────────────────────────────────────
+ *  DESIGN TOKEN SHEET  — edit values here only, nowhere else
+ * ─────────────────────────────────────────────────────────────────
+ */
+const TOKENS = `
+  :root {
+    --nav-h         : 100px;
+    --page-px       : clamp(1rem, 3vw, 3rem);
+    --section-gap   : clamp(1.5rem, 3vw, 3rem);
+    --grid-col-gap  : clamp(1.5rem, 3vw, 3rem);
+    --grid-row-gap  : clamp(2rem, 5vw, 5rem);
+  }
+
+  @media (min-width: 1024px) {
+    :root { --nav-h: 110px; }
+  }
+`;
+
 export default function PortfolioClient({ initialProjects }) {
     const [activeCategory, setActiveCategory] = useState('ALL');
 
-    const filteredProjects = activeCategory === 'ALL'
-        ? initialProjects
-        : initialProjects.filter(p =>
-            p.category?.toUpperCase() === activeCategory ||
-            p.category?.toUpperCase().includes(activeCategory)
-        );
+    const filteredProjects =
+        activeCategory === 'ALL'
+            ? initialProjects
+            : initialProjects.filter(p =>
+                p.category?.toUpperCase() === activeCategory ||
+                p.category?.toUpperCase().includes(activeCategory)
+            );
 
     return (
-        <div className="min-h-screen bg-[#FCFAF7] w-full overflow-x-hidden">
-            <main className="pt-[120px] md:pt-[140px] lg:pt-[160px] w-full flex flex-col items-center" style={{ transform: 'translateY(150px)' }}>
-                <div className="w-full max-w-[1200px] mx-auto px-6 sm:px-12 lg:px-16 flex flex-col items-center">
+        <div className="relative z-0">
+            {/* ── Global design tokens ──────────────────────────────── */}
+            <style>{TOKENS}</style>
 
-                    {/* Hero Section with proper spacing */}
-                    <div className="flex flex-col items-center text-center mb-24 md:mb-32 w-full">
-                        <div className="flex flex-col items-center space-y-6">
-                            <div className="w-full mb-16 md:mb-20  pt-10 pr-10 pb-10 pl-10 mt-5 mr-4 mb-6 ml-3">
+            {/*
+              PAGE SHELL
+              padding-top = var(--nav-h)  →  clears fixed header
+              min-h-screen                →  ensures footer positioning and scroll
+            */}
+            <div
+                className="w-full min-h-screen bg-[#FCFAF7]"
+                style={{ paddingTop: 'var(--nav-h)' }}
+            >
+                <main className="w-full flex flex-col items-center">
+                    <div
+                        className="w-full max-w-[1600px] mx-auto flex flex-col items-center"
+                        style={{
+                            paddingLeft: 'var(--page-px)',
+                            paddingRight: 'var(--page-px)',
+                            paddingBottom: 'var(--section-gap)',
+                        }}
+                    >
 
-                                <motion.p
-                                    initial={{ opacity: 0, y: 8 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8 }}
-                                    style={{ fontFamily: 'var(--font-sans)', fontSize: '0.7rem', letterSpacing: '0.5em' }}
-                                    className="uppercase text-[#9A9490] font-bold"
-                                >
-                                    The Design Theory
-                                </motion.p>
-                            </div>
+                        {/* ── HERO (Ultra-Compact) ──────────────────────── */}
+                        <section
+                            className="flex flex-col items-center justify-center text-center w-full"
+                            style={{
+                                paddingTop: 'calc(var(--section-gap) / 4)',
+                                paddingBottom: 'calc(var(--section-gap) / 4)',
+                            }}
+                        >
+                            {/* Eyebrow label */}
+                            <motion.p
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.6 }}
+                                style={{
+                                    fontFamily: 'var(--font-sans)',
+                                    fontSize: '0.58rem',
+                                    letterSpacing: '0.35em',
+                                    marginBottom: '0.4rem',
+                                }}
+                                className="uppercase text-[#9A9490] font-bold"
+                            >
+                                The Design Theory
+                            </motion.p>
 
+                            {/* Page title */}
                             <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 8 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 1, delay: 0.1, ease: 'easeOut' }}
-                                style={{ fontFamily: 'var(--font-script)', lineHeight: 1 }}
-                                className="text-6xl md:text-7xl lg:text-8xl text-[#2C2A28] font-normal"
+                                transition={{ duration: 0.8, delay: 0.05, ease: 'easeOut' }}
+                                style={{
+                                    fontFamily: 'var(--font-script)',
+                                    lineHeight: 0.85,
+                                    marginBottom: '0.4rem',
+                                }}
+                                className="text-5xl md:text-6xl lg:text-7xl text-[#2C2A28] font-normal"
                             >
                                 Portfolio
                             </motion.h1>
-                        </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            className="flex items-center gap-4 md:gap-6 text-[#D6CDC4] my-8"
-                        >
-                            <span className="text-lg md:text-xl">»</span>
-                            <span className="w-12 md:w-16 h-[1px] bg-current block" />
-                            <span className="text-[#D4AF37] text-sm md:text-base">✦</span>
-                            <span className="w-12 md:w-16 h-[1px] bg-current block" />
-                            <span className="text-lg md:text-xl">«</span>
-                        </motion.div>
-
-                        <motion.p
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                            style={{ fontFamily: 'var(--font-serif)', lineHeight: 1.5 }}
-                            className="text-[#5A5653] text-xl md:text-2xl max-w-5xl italic font-light px-10"
-                        >
-                            A definitive collection of architectural and interior design endeavors,
-                            crafted for those who value the language of space.
-                        </motion.p>
-                    </div>
-
-                    {/* Filter Bar with reduced bottom margin */}
-                    <div className="w-full mb-16 md:mb-20  pt-10 pr-10 pb-10 pl-10 mt-5 mr-4 mb-6 ml-3">
-                        <CategoryFilter active={activeCategory} onChange={setActiveCategory} />
-                    </div>
-
-                    {/* Projects Grid with proper bottom spacing */}
-                    <LayoutGroup>
-                        {filteredProjects.length > 0 ? (
-                            <motion.div
-                                layout
-                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-16 lg:gap-y-24 w-full pb-24 md:pb-32"
-                            >
-                                <AnimatePresence mode="popLayout">
-                                    {filteredProjects.map((project, index) => (
-                                        <motion.div
-                                            key={project._id}
-                                            layout
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, scale: 0.95 }}
-                                            transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.05 }}
-                                        >
-                                            <ProjectCard project={project} index={index} />
-                                        </motion.div>
-                                    ))}
-                                </AnimatePresence>
-                            </motion.div>
-                        ) : (
+                            {/* Ornamental divider */}
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                className="flex flex-col items-center justify-center py-32 md:py-48 w-full pb-32"
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="flex items-center text-[#D6CDC4]"
+                                style={{ gap: '0.75rem', margin: '0.4rem 0' }}
                             >
-                                <p
-                                    style={{ fontFamily: 'var(--font-serif)' }}
-                                    className="text-xl md:text-2xl text-[#5A5653] italic mb-10 text-center px-4 font-light"
-                                >
-                                    No projects found in this category.
-                                </p>
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    onClick={() => setActiveCategory('ALL')}
-                                    style={{
-                                        fontFamily: 'var(--font-sans)',
-                                        letterSpacing: '0.3em'
-                                    }}
-                                    className="px-10 py-4 border border-[#D6CDC4] text-[0.7rem] md:text-[0.75rem] font-bold uppercase text-[#9A9490] hover:text-[#2C2A28] hover:border-[#2C2A28] transition-all duration-300"
-                                >
-                                    View All Projects
-                                </motion.button>
+                                <span className="text-base">»</span>
+                                <span className="block h-px w-8 bg-current" />
+                                <span className="text-[#D4AF37] text-[10px]">✦</span>
+                                <span className="block h-px w-8 bg-current" />
+                                <span className="text-base">«</span>
                             </motion.div>
-                        )}
-                    </LayoutGroup>
-                </div>
-            </main>
+
+                            {/* Subtitle */}
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.6, delay: 0.3 }}
+                                style={{
+                                    fontFamily: 'var(--font-serif)',
+                                    lineHeight: 1.4,
+                                    maxWidth: '65ch',
+                                }}
+                                className="text-[#5A5653] text-[0.95rem] md:text-base lg:text-lg italic font-light"
+                            >
+                                A definitive collection of architectural and interior design endeavors,
+                                crafted for those who value the language of space.
+                            </motion.p>
+                        </section>
+
+                        {/* ── FILTER BAR ───────────────────────────────── */}
+                        <div
+                            className="w-full"
+                            style={{ marginBottom: 'var(--section-gap)' }}
+                        >
+                            <CategoryFilter active={activeCategory} onChange={setActiveCategory} />
+                        </div>
+
+                        {/* ── PROJECTS GRID ────────────────────────────── */}
+                        <LayoutGroup>
+                            {filteredProjects.length > 0 ? (
+                                <motion.div
+                                    layout
+                                    className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                                    style={{
+                                        columnGap: 'var(--grid-col-gap)',
+                                        rowGap: 'var(--grid-row-gap)',
+                                    }}
+                                >
+                                    <AnimatePresence mode="popLayout">
+                                        {filteredProjects.map((project, index) => (
+                                            <motion.div
+                                                key={project._id}
+                                                layout
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, scale: 0.95 }}
+                                                transition={{
+                                                    duration: 0.4,
+                                                    ease: 'easeOut',
+                                                    delay: index * 0.05,
+                                                }}
+                                            >
+                                                <ProjectCard project={project} index={index} />
+                                            </motion.div>
+                                        ))}
+                                    </AnimatePresence>
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    className="flex flex-col items-center justify-center w-full"
+                                    style={{
+                                        paddingTop: 'var(--section-gap)',
+                                        paddingBottom: 'var(--section-gap)',
+                                    }}
+                                >
+                                    <p
+                                        style={{
+                                            fontFamily: 'var(--font-serif)',
+                                            marginBottom: '2.5rem',
+                                        }}
+                                        className="text-xl md:text-2xl text-[#5A5653] italic font-light text-center"
+                                    >
+                                        No projects found in this category.
+                                    </p>
+
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={() => setActiveCategory('ALL')}
+                                        style={{
+                                            fontFamily: 'var(--font-sans)',
+                                            letterSpacing: '0.3em',
+                                        }}
+                                        className="px-10 py-4 border border-[#D6CDC4] text-[0.7rem] md:text-[0.75rem] font-bold uppercase text-[#9A9490] hover:text-[#2C2A28] hover:border-[#2C2A28] transition-all duration-300"
+                                    >
+                                        View All Projects
+                                    </motion.button>
+                                </motion.div>
+                            )}
+                        </LayoutGroup>
+
+                    </div>
+                </main>
+            </div>
         </div>
     );
 }

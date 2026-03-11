@@ -138,7 +138,7 @@ export default async function PortfolioDetailsPage({ params }) {
     ];
 
     return (
-        <main className="bg-[#FCFAF7] min-h-screen flex flex-col items-center pt-[220px] md:pt-[260px] lg:pt-[300px]" style={{ transform: "translateY(150px)", marginBottom: "150px" }}>
+        <main className="bg-[#FCFAF7] min-h-screen flex flex-col items-center pt-[370px] md:pt-[410px] lg:pt-[450px]" style={{ transform: "translateY(150px)", marginBottom: "150px" }}>
             <div className="w-full pb-16 md:pb-32 flex flex-col items-center">
 
                 {/* ── SINGLE CENTERED WRAPPER — max-w-1280 ── */}

@@ -12,8 +12,8 @@ const AboutTeaser = dynamic(() => import("./components/AboutTeaser"));
 export default function Home() {
   const heroImages = [
     "/assets/hero/hero1.jpg",
-    "/assets/hero/hero2.jpg",
-    "/assets/hero/hero3.jpg",
+    // "/assets/hero/hero2.jpg",
+    // "/assets/hero/hero3.jpg",
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

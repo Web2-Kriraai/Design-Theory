@@ -7,10 +7,11 @@
     background: linear-gradient(180deg, #31275c 0%, #31275c 100%);
     color: #c8c0d8;
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
     position: relative;
     overflow: hidden;
+    font-weight: 300;
 }
 
 /* subtle noise texture */
@@ -44,10 +45,10 @@
    ========================================== */
 .grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 48px 40px;
-    padding-bottom: 64px;
-    border-bottom: 1px solid rgba(232, 197, 71, 0.12);
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 80px 60px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid rgba(232, 197, 71, 0.15);
 }
 
 /* ---- Column base ---- */
@@ -66,10 +67,6 @@
     animation-delay: 0.2s;
 }
 
-.col:nth-child(4) {
-    animation-delay: 0.3s;
-}
-
 @keyframes fadeSlideUp {
     from {
         opacity: 0;
@@ -85,13 +82,13 @@
 /* ---- Column Title ---- */
 .colTitle {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #E8C547;
-    margin-bottom: 24px;
-    padding-bottom: 12px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
     border-bottom: 1px solid rgba(232, 197, 71, 0.18);
     position: relative;
 }
@@ -111,12 +108,12 @@
    ========================================== */
 .brandName {
     font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 1.25rem;
+    font-size: 1.8rem;
     font-weight: 300;
     font-style: italic;
-    color: #f0eaf8;
-    margin-bottom: 22px;
-    letter-spacing: 0.04em;
+    color: #ffffff;
+    margin-bottom: 28px;
+    letter-spacing: 0.06em;
 }
 
 .address {
@@ -130,9 +127,10 @@
 .addressRow {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    line-height: 1.7;
-    color: #9e94b0;
+    gap: 12px;
+    line-height: 1.8;
+    color: #c8c0d8;
+    font-weight: 300;
 }
 
 .addrIcon {
@@ -143,10 +141,10 @@
 }
 
 .contactLink {
-    color: #b8aed0;
+    color: #c8c0d8;
     text-decoration: none;
     border-bottom: none;
-    transition: color 0.25s ease;
+    transition: color 0.3s ease;
 }
 
 .contactLink:hover {
@@ -183,7 +181,7 @@
 }
 
 /* ==========================================
-   LINK LISTS (Cols 2–4)
+   LINK LISTS (Cols 2–3)
    ========================================== */
 .linkList {
     list-style: none;
@@ -204,12 +202,13 @@
 
 .linkList a {
     display: block;
-    padding: 9px 0;
-    color: #9e94b0;
+    padding: 10px 0;
+    color: #c8c0d8;
     text-decoration: none;
     border-bottom: none;
     position: relative;
-    transition: color 0.25s ease, padding-left 0.25s ease;
+    font-weight: 300;
+    transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
 .linkList a::before {
@@ -240,17 +239,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 22px 0;
+    padding: 32px 0;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
 }
 
 .copyright {
-    font-size: 0.75rem;
-    color: #5a4f6e;
+    font-size: 0.8rem;
+    color: #9e94b0;
     margin: 0;
-    letter-spacing: 0.05em;
-    line-height: 1;
+    letter-spacing: 0.06em;
+    font-weight: 300;
+    line-height: 1.5;
 }
 
 .legalLinks {
@@ -261,12 +261,13 @@
 }
 
 .legalLinks a {
-    font-size: 0.75rem;
-    color: #5a4f6e;
+    font-size: 0.8rem;
+    color: #9e94b0;
+    font-weight: 300;
     text-decoration: none;
     border-bottom: none;
-    transition: color 0.25s ease;
-    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+    letter-spacing: 0.06em;
 }
 
 .legalLinks a:hover {
@@ -293,7 +294,7 @@
     }
 
     .col:first-child {
-        grid-column: 1 / -1;
+        grid-column: span 2;
     }
 }
 

@@ -158,35 +158,41 @@
 }
 
 .founderHeader {
-    text-align: center;
+    text-align: left;
+    margin-top: 24px;
 }
 
 .founderTitle {
     font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 3rem;
+    font-size: 2.2rem;
     font-weight: 300;
     font-style: italic;
     color: var(--text-primary, #3A3530);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     text-transform: none;
     letter-spacing: normal;
 }
 
 .founderSubtitle {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--accent-purple, #31275c);
-    margin-bottom: 40px;
+    margin-bottom: 0;
 }
 
 .founderContent {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-    gap: 60px;
+    gap: 80px;
     align-items: flex-start;
+}
+
+.imageCol {
+    display: flex;
+    flex-direction: column;
 }
 
 .founderImageWrap {
@@ -302,7 +308,7 @@
     }
 
     .founderContent {
-        gap: 40px;
+        gap: 60px;
     }
 }
 
@@ -336,8 +342,20 @@
 
     .founderImageWrap {
         max-width: 400px;
-        margin: 0 auto;
+        width: 100%;
+        margin: 0;
+    }
+
+    .imageCol {
         order: -1;
+        align-items: center;
+        text-align: center;
+    }
+
+    .founderHeader {
+        text-align: center;
+        margin-top: 24px;
+        margin-bottom: 32px;
     }
 }
 
@@ -346,9 +364,12 @@
         font-size: 2.2rem;
     }
 
-    .heading,
-    .founderTitle {
+    .heading {
         font-size: 2.2rem;
+    }
+
+    .founderTitle {
+        font-size: 1.8rem;
     }
 
     .introText,

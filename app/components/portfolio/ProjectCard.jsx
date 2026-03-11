@@ -20,10 +20,7 @@ export default function ProjectCard({ project, index }) {
 
                 {/* ── IMAGE FRAME ── */}
                 <div
-                    className={`relative overflow-hidden bg-[#F0EBE3] transition-all duration-700 ease-out border-[12px] border-[#FCFAF7] shadow-[0_15px_35px_rgba(0,0,0,0.05)] group-hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] group-hover:border-[#E8E1D7] ${index % 3 === 0 ? 'aspect-[4/5]' :
-                        index % 3 === 1 ? 'aspect-square' :
-                            'aspect-[1.4/1]'
-                        }`}
+                    className="relative overflow-hidden bg-[#F0EBE3] transition-all duration-700 ease-out border-[8px] md:border-[12px] border-[#FCFAF7] shadow-[0_15px_35px_rgba(0,0,0,0.05)] group-hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] group-hover:border-[#E8E1D7] aspect-[4/5] w-full"
                 >
                     {project.coverImage ? (
                         <Image

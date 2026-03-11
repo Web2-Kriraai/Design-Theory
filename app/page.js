@@ -2,398 +2,394 @@
 
 import Image from "./components/AnimatedImage";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import styles from "./home.module.css";
 
-const AboutTeaser = dynamic(() => import("./components/AboutTeaser"));
+const HomeContact = dynamic(() => import("./components/HomeContact"));
+
+/* ── Workflow Steps ── */
+const WORKFLOW = [
+    { step: "01", title: "Consultation", desc: "Understanding your vision, requirements, and lifestyle." },
+    { step: "02", title: "Planning", desc: "Space planning, budgeting, and concept development." },
+    { step: "03", title: "Design", desc: "Detailed drawings, 3D renders, and material selection." },
+    { step: "04", title: "Execution", desc: "On-site coordination, vendor management, and quality checks." },
+    { step: "05", title: "Delivery", desc: "Final handover of a polished, complete space." },
+];
+
+/* ── Portfolio Categories ── */
+const PORTFOLIO_CATEGORIES = [
+    {
+        label: "Interior Design",
+        href: "/portfolio",
+        images: [
+            "/assets/styles/high-living.jpg",
+            "/assets/styles/tailor-made.jpg",
+        ],
+    },
+    {
+        label: "Architecture",
+        href: "/portfolio",
+        images: [
+            "/assets/process/work-in-progress.jpg",
+            "/assets/styles/easy-care.jpg",
+        ],
+    },
+];
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 36 },
+    visible: (i = 0) => ({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.85, delay: i * 0.1, ease: [0.215, 0.61, 0.355, 1] },
+    }),
+};
 
 export default function Home() {
-  const heroImages = [
-    "/assets/hero/hero1.jpg",
-    // "/assets/hero/hero2.jpg",
-    // "/assets/hero/hero3.jpg",
-  ];
+    return (
+        <div>
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+            {/* ============================================
+                HERO — Full-width banner
+            ============================================ */}
+            <section className={styles.hero}>
+                <div className={styles.heroImageWrap}>
+                    <Image
+                        src="/assets/hero/hero1.jpg"
+                        alt="The Design Theory — Hero"
+                        fill
+                        className={styles.heroImg}
+                        priority
+                        sizes="100vw"
+                    />
+                </div>
+                <div className={styles.heroOverlay} />
+                <motion.div
+                    initial={{ opacity: 0, y: 60 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
+                    className={styles.heroText}
+                >
+                    <p className={styles.heroEyebrow}>The Design Theory</p>
+                    <h1 className={styles.heroTitle}>
+                        Designing Thoughtful<br /><em>Spaces for Modern Living</em>
+                    </h1>
+                    <div className={styles.heroCtas}>
+                        <Link href="/portfolio" className={styles.heroBtnPrimary}>View Portfolio</Link>
+                        <Link href="/contact" className={styles.heroBtnSecondary}>Get in Touch</Link>
+                    </div>
+                </motion.div>
+            </section>
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-        setIsTransitioning(false);
-      }, 500);
-    }, 5000);
+            {/* ============================================
+                ABOUT COMPANY — Full-width, editorial text
+            ============================================ */}
+            <section className={styles.aboutCompany}>
+                <div className={styles.aboutCompanyInner}>
+                    <motion.p
+                        className={styles.sectionEyebrow}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                    >
+                        Who We Are
+                    </motion.p>
+                    <motion.h2
+                        className={styles.aboutCompanyTitle}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={0.1}
+                    >
+                        A Contemporary Studio<br />Rooted in Thoughtful Design
+                    </motion.h2>
+                    <div className={styles.aboutCompanyBody}>
+                        <motion.p
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.2}
+                        >
+                            The Design Theory is a young, dynamic interior and architectural design studio based in
+                            Hyderabad, India. We specialise in creating refined residential and commercial spaces
+                            that balance aesthetics, functionality, and individuality.
+                        </motion.p>
+                        <motion.p
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.3}
+                        >
+                            Led by a deep understanding of design principles and client aspirations, our work is
+                            rooted in thoughtful planning, attention to detail, and timeless design sensibility.
+                            We deliver spaces that feel personal, purposeful, and enduring.
+                        </motion.p>
+                        <motion.div
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.4}
+                        >
+                            <Link href="/about-us" className={styles.textCta}>
+                                Our Story <span>→</span>
+                            </Link>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
 
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
+            {/* ============================================
+                ABOUT FOUNDER — Image + Bio, full-width
+            ============================================ */}
+            <section className={styles.aboutFounder}>
+                <div className={styles.founderInner}>
+                    <motion.div
+                        className={styles.founderImageCol}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                    >
+                        <div className={styles.founderImageWrap}>
+                            <Image
+                                src="/assets/about/founder.png"
+                                alt="Rachitha Modupalli — Founder, The Design Theory"
+                                fill
+                                className={styles.founderImage}
+                                sizes="(max-width: 768px) 100vw, 45vw"
+                            />
+                        </div>
+                        <div className={styles.founderCaption}>
+                            <span className={styles.founderName}>Rachitha Modupalli</span>
+                            <span className={styles.founderRole}>Founder &amp; Principal Architect</span>
+                        </div>
+                    </motion.div>
 
-  const handleImageChange = (index) => {
-    if (index === currentImageIndex) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentImageIndex(index);
-      setIsTransitioning(false);
-    }, 500);
-  };
+                    <div className={styles.founderTextCol}>
+                        <motion.p
+                            className={styles.sectionEyebrow}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
+                            About the Founder
+                        </motion.p>
+                        <motion.h2
+                            className={styles.founderHeading}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.1}
+                        >
+                            Design Begins<br /><em>with a Vision</em>
+                        </motion.h2>
+                        <motion.p
+                            className={styles.founderBio}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.2}
+                        >
+                            Rachitha Modupalli, Founder and Principal Architect of The Design Theory, holds a
+                            Bachelor's degree in Architecture from SVCA, Hyderabad. Her professional journey
+                            began with leading design and build firms where she gained extensive experience in
+                            architectural planning, project execution, and client collaboration.
+                        </motion.p>
+                        <motion.p
+                            className={styles.founderBio}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.3}
+                        >
+                            Inspired by her passion for creating meaningful spaces, she established The Design
+                            Theory to pursue a design vision that prioritises individuality, innovation, and
+                            emotional connection — resulting in interiors that feel serene, sophisticated, and enduring.
+                        </motion.p>
+                        <motion.div
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.4}
+                        >
+                            <Link href="/about-us" className={styles.textCta}>
+                                Read Full Story <span>→</span>
+                            </Link>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
 
-  /* ---- Testimonial slider ---- */
-  const testimonials = [
-    {
-      quote: "The Design Theory transformed our space beyond expectations. Their attention to detail, transparency, and design sensibility made the entire experience seamless.",
-      author: "Priya & Arvind Sharma",
-      role: "Residential Client, Hyderabad",
-    },
-    {
-      quote: "Working with The Design Theory was a truly collaborative experience. They understood our brand identity and translated it into a space that feels both inviting and professional.",
-      author: "Rahul Mehta",
-      role: "Commercial Client, Hyderabad",
-    },
-    {
-      quote: "From concept to completion, the team brought a level of creativity and precision that exceeded every expectation. Our home feels like it was designed just for us.",
-      author: "Ananya Reddy",
-      role: "Residential Client, Hyderabad",
-    },
-  ];
+            {/* ============================================
+                PORTFOLIO — Two category sections
+            ============================================ */}
+            <section className={styles.portfolioSection}>
+                <div className={styles.portfolioHeader}>
+                    <motion.p
+                        className={styles.sectionEyebrow}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                    >
+                        Our Work
+                    </motion.p>
+                    <motion.h2
+                        className={styles.portfolioTitle}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={0.1}
+                    >
+                        Portfolio
+                    </motion.h2>
+                </div>
 
-  const [testiIndex, setTestiIndex] = useState(0);
+                {PORTFOLIO_CATEGORIES.map((cat, ci) => (
+                    <div key={cat.label} className={`${styles.portfolioCategory} ${ci % 2 !== 0 ? styles.portfolioCategoryAlt : ''}`}>
+                        <div className={styles.portfolioCategoryInner}>
+                            <div className={styles.portfolioImages}>
+                                {cat.images.map((src, ii) => (
+                                    <motion.div
+                                        key={src}
+                                        className={styles.portfolioImageWrap}
+                                        variants={fadeUp}
+                                        initial="hidden"
+                                        whileInView="visible"
+                                        viewport={{ once: true }}
+                                        custom={ii * 0.15}
+                                    >
+                                        <Image
+                                            src={src}
+                                            alt={`${cat.label} project ${ii + 1}`}
+                                            fill
+                                            className={styles.portfolioImage}
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                        />
+                                    </motion.div>
+                                ))}
+                            </div>
+                            <div className={styles.portfolioCategoryText}>
+                                <motion.h3
+                                    className={styles.portfolioCategoryLabel}
+                                    variants={fadeUp}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true }}
+                                >
+                                    {cat.label}
+                                </motion.h3>
+                                <motion.div
+                                    variants={fadeUp}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true }}
+                                    custom={0.1}
+                                >
+                                    <Link href={cat.href} className={styles.viewMoreBtn}>
+                                        View More →
+                                    </Link>
+                                </motion.div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </section>
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTestiIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [testimonials.length]);
+            {/* ============================================
+                DESIGN PHILOSOPHY + WORKFLOW
+            ============================================ */}
+            <section className={styles.philosophySection}>
+                <div className={styles.philosophyInner}>
+                    <div className={styles.philosophyText}>
+                        <motion.p
+                            className={styles.sectionEyebrow}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
+                            Our Approach
+                        </motion.p>
+                        <motion.h2
+                            className={styles.philosophyHeading}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.1}
+                        >
+                            Design<br /><em>Philosophy</em>
+                        </motion.h2>
+                        <motion.p
+                            className={styles.philosophyBody}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.2}
+                        >
+                            At The Design Theory, every space tells a story. Our design approach is
+                            collaborative, client-focused, and driven by innovation. From concept to
+                            execution, we ensure that every project reflects the client's vision
+                            while maintaining functionality, comfort, and elegance.
+                        </motion.p>
+                        <motion.div
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.3}
+                        >
+                            <Link href="/services" className={styles.textCta}>
+                                Our Services <span>→</span>
+                            </Link>
+                        </motion.div>
+                    </div>
 
-  const SECTION_ANIM = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.8 }
-  };
+                    {/* Workflow Steps */}
+                    <div className={styles.workflowSteps}>
+                        {WORKFLOW.map((step, i) => (
+                            <motion.div
+                                key={step.step}
+                                className={styles.workflowStep}
+                                variants={fadeUp}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                custom={i * 0.1}
+                            >
+                                <div className={styles.workflowConnector}>
+                                    <span className={styles.workflowNum}>{step.step}</span>
+                                    {i < WORKFLOW.length - 1 && (
+                                        <span className={styles.workflowLine} />
+                                    )}
+                                </div>
+                                <h3 className={styles.workflowTitle}>{step.title}</h3>
+                                <p className={styles.workflowDesc}>{step.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-  return (
-    <div>
-      {/* ==========================================
-          SECTION 1 — HERO
-          ========================================== */}
-      <section className={styles.hero}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className={styles.heroImageWrap}
-          >
-            <Image
-              src={heroImages[currentImageIndex]}
-              alt={`The Design Theory — Hero ${currentImageIndex + 1}`}
-              fill
-              className={styles.heroImg}
-              priority
-              sizes="100vw"
-            />
-          </motion.div>
-        </AnimatePresence>
+            {/* ============================================
+                ENQUIRY FORM
+            ============================================ */}
+            <HomeContact />
 
-        <div className={styles.heroOverlay} />
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className={styles.heroText}
-        >
-          <h1 className={styles.heroTitle}>The Design Theory</h1>
-          <p className={styles.heroTagline}>
-            Designing thoughtful spaces for modern living.
-          </p>
-        </motion.div>
-
-        {/* Hero Indicators */}
-        <div className={styles.heroIndicators}>
-          {heroImages.map((_, i) => (
-            <button
-              key={i}
-              className={`${styles.heroDot} ${i === currentImageIndex ? styles.heroDotActive : ""}`}
-              onClick={() => handleImageChange(i)}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
         </div>
-      </section>
-
-      {/* ==========================================
-          SECTION 2 — INTRODUCTORY TEXT
-          ========================================== */}
-      <motion.section
-        {...SECTION_ANIM}
-        className={styles.intro}
-      >
-        <div className={styles.introInner}>
-          <p className={styles.introText}>
-            The Design Theory is a young, dynamic interior and architectural
-            design studio based in Hyderabad, India. We specialise in creating
-            refined residential and commercial spaces that balance aesthetics,
-            functionality, and individuality. Led by a deep understanding of
-            design principles and client aspirations, our work is rooted in
-            thoughtful planning, attention to detail, and timeless design.
-          </p>
-        </div>
-      </motion.section>
-
-      {/* ==========================================
-          SECTION 3 — FEATURED PROJECTS
-          ========================================== */}
-      <motion.section
-        {...SECTION_ANIM}
-        className={styles.featuredProjects}
-      >
-        <div className={styles.fpInner}>
-          <div className={styles.fpImages}>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className={styles.fpImageWrap}
-            >
-              <Image
-                src="/assets/styles/high-living.jpg"
-                alt="Featured Project — High Living"
-                width={600}
-                height={600}
-                className={styles.fpImg}
-              />
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className={styles.fpImageWrap}
-            >
-              <Image
-                src="/assets/styles/tailor-made.jpg"
-                alt="Featured Project — Tailor Made"
-                width={600}
-                height={600}
-                className={styles.fpImg}
-              />
-            </motion.div>
-          </div>
-          <div className={styles.fpContent}>
-            <p className={styles.sectionLabel}>Our Work</p>
-            <h2 className={styles.serifHeading}>Selected Projects</h2>
-            <p className={styles.bodyText}>
-              A curated selection of our architectural and interior design projects,
-              showcaseing our approach to space, materiality, and detail.
-            </p>
-            <Link href="/portfolio" className={styles.goldCta}>
-              VIEW PORTFOLIO <span className={styles.ctaArrow}>→</span>
-            </Link>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* ==========================================
-          SECTION 4 — DESIGN PHILOSOPHY
-          ========================================== */}
-      <motion.section
-        {...SECTION_ANIM}
-        className={styles.philosophy}
-      >
-        <div className={styles.philoInner}>
-          <div className={styles.philoImages}>
-            <motion.div
-              whileHover={{ rotate: -1 }}
-              className={styles.philoImgWrap}
-            >
-              <Image
-                src="/assets/services/decor.jpg"
-                alt="Design Philosophy — Decor Detail"
-                width={480}
-                height={360}
-                className={styles.philoImg}
-              />
-            </motion.div>
-            <motion.div
-              whileHover={{ rotate: 1 }}
-              className={styles.philoImgWrap}
-            >
-              <Image
-                src="/assets/services/furniture-carte.jpg"
-                alt="Design Philosophy — Furniture"
-                width={480}
-                height={360}
-                className={styles.philoImg}
-              />
-            </motion.div>
-          </div>
-          <div className={styles.philoText}>
-            <p className={styles.sectionLabel}>Our Approach</p>
-            <h2 className={styles.serifHeading}>Design Philosophy</h2>
-            <p className={styles.bodyText}>
-              At The Design Theory, we believe every space should tell a story.
-              Our design approach is collaborative, client-focused, and driven by
-              innovation. From concept to execution, we ensure that every project
-              reflects the client's vision while maintaining functionality,
-              comfort, and elegance.
-            </p>
-            <Link href="/services" className={styles.goldCta}>
-              LEARN MORE <span className={styles.ctaArrow}>→</span>
-            </Link>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* ==========================================
-          SECTION 5 — TESTIMONIALS
-          ========================================== */}
-      <motion.section
-        {...SECTION_ANIM}
-        className={styles.testimonials}
-      >
-        <div className={styles.testiInner}>
-          <h2 className={styles.testiHeading}>Client Testimonials</h2>
-          <div className={styles.testiSlider}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={testiIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.5 }}
-                className={styles.testiSlide}
-              >
-                <p className={styles.testiQuote}>
-                  {testimonials[testiIndex].quote}
-                </p>
-                <p className={styles.testiAuthor}>
-                  {testimonials[testiIndex].author}
-                </p>
-                <p className={styles.testiRole}>
-                  {testimonials[testiIndex].role}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-          <div className={styles.testiDots}>
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                className={`${styles.testiDot} ${i === testiIndex ? styles.testiDotActive : ""}`}
-                onClick={() => setTestiIndex(i)}
-                aria-label={`Testimonial ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-
-      {/* ==========================================
-          SECTION 6 — FEATURED PROJECT
-          ========================================== */}
-      <motion.section
-        {...SECTION_ANIM}
-        className={styles.featuredProject}
-      >
-        <div className={styles.fpSingleInner}>
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            className={styles.fpSingleImgWrap}
-          >
-            <Image
-              src="/assets/styles/easy-care.jpg"
-              alt="Featured Project — Easy Care"
-              width={600}
-              height={800}
-              className={styles.fpSingleImg}
-            />
-          </motion.div>
-          <div className={styles.fpSingleText}>
-            <p className={styles.sectionLabel}>Spotlight</p>
-            <h2 className={styles.serifHeading}>Featured Project</h2>
-            <p className={styles.bodyText}>
-              A thoughtfully designed residential interior that blends modern
-              aesthetics with everyday functionality. Each element was curated to
-              reflect the client's lifestyle, preferences, and budget.
-            </p>
-            <Link href="/portfolio" className={styles.goldCta}>
-              VIEW PROJECT <span className={styles.ctaArrow}>→</span>
-            </Link>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* ==========================================
-          SECTION 7 — ABOUT TEASER
-          ========================================== */}
-      <AboutTeaser />
-
-      {/* ==========================================
-          SECTION 8 — UTILITY GRID
-          ========================================== */}
-      <motion.section
-        {...SECTION_ANIM}
-        className={styles.utilityGrid}
-      >
-        <div className={styles.ugInner}>
-          {/* Block 1 */}
-          <div className={styles.ugBlock}>
-            <h3 className={styles.ugHeading}>Contact Us</h3>
-            <p className={styles.ugBody}>
-              Get in touch to discuss your project, design requirements, or
-              general enquiries.
-            </p>
-            <Link href="/contact" className={styles.goldCta}>
-              VIEW DETAILS <span className={styles.ctaArrow}>→</span>
-            </Link>
-          </div>
-
-          {/* Block 2 */}
-          <div className={styles.ugBlock}>
-            <h3 className={styles.ugHeading}>Our Process</h3>
-            <p className={styles.ugBody}>
-              Learn about our workflow, design stages, and how we bring
-              concepts to life.
-            </p>
-            <Link href="/services" className={styles.goldCta}>
-              VIEW DETAILS <span className={styles.ctaArrow}>→</span>
-            </Link>
-          </div>
-
-          {/* Block 3 */}
-          <div className={styles.ugBlock}>
-            <h3 className={styles.ugHeading}>Design Services</h3>
-            <p className={styles.ugBody}>
-              Explore our residential, commercial, architectural, and turnkey
-              solutions.
-            </p>
-            <Link href="/services" className={styles.goldCta}>
-              VIEW DETAILS <span className={styles.ctaArrow}>→</span>
-            </Link>
-          </div>
-
-          {/* Block 4 */}
-          <div className={styles.ugBlock}>
-            <h3 className={styles.ugHeading}>Newsletter</h3>
-            <p className={styles.ugBody}>
-              Sign up to receive studio updates, design inspiration, and project highlights.
-            </p>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                window.dispatchEvent(new Event('open-newsletter-popup'));
-              }}
-              style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
-              className={styles.goldCta}
-            >
-              SIGN UP <span className={styles.ctaArrow}>→</span>
-            </button>
-          </div>
-        </div>
-      </motion.section>
-    </div>
-  );
+    );
 }

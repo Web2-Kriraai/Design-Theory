@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Image from "@/app/components/AnimatedImage";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import styles from "./services.module.css";
 
 const SERVICE_SECTIONS = [
@@ -61,71 +61,67 @@ const SERVICE_SECTIONS = [
     }
 ];
 
-const ServiceCard = ({ section, index, progress, range, targetScale }) => {
-    const container = useRef(null);
-    const scale = useTransform(progress, range, [1, targetScale]);
+const ServiceBlock = ({ section, index }) => {
+    const isEven = index % 2 === 0;
 
     return (
-        <div ref={container} className={styles.cardContainer}>
-            <motion.div
-                style={{
-                    scale,
-                    top: `calc(-10% + ${index * 25}px)`
-                }}
-                className={styles.card}
-            >
-                <div className={styles.cardHeader}>
-                    <span className={styles.cardIndex}>0{index + 1}</span>
-                    <p className={styles.sectionLabel}>{section.label}</p>
+        <section className={`${styles.editorialSection} ${isEven ? styles.even : styles.odd}`} id={section.id}>
+            <div className={styles.edContainer}>
+                {/* Image Side */}
+                <div className={styles.edImageCol}>
+                    <motion.div
+                        className={styles.edImageWrap}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-10%" }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <Image
+                            src={section.image}
+                            alt={section.title}
+                            fill
+                            className={styles.edImage}
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                    </motion.div>
                 </div>
 
-                <div className={styles.cardBody}>
-                    <div className={styles.cardText}>
-                        <h2 className={styles.sectionTitle}>{section.title}</h2>
-                        <p className={styles.sectionDescription}>{section.description}</p>
+                {/* Text Side */}
+                <div className={styles.edTextCol}>
+                    <motion.div
+                        className={styles.edTextInner}
+                        initial={{ opacity: 0, x: isEven ? 30 : -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-10%" }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                    >
+                        <div className={styles.edHeader}>
+                            <span className={styles.edIndex}>0{index + 1}</span>
+                            <span className={styles.edLabel}>{section.label}</span>
+                        </div>
+                        
+                        <h2 className={styles.edTitle}>{section.title}</h2>
+                        <p className={styles.edDescription}>{section.description}</p>
 
-                        <ul className={styles.detailsList}>
+                        <ul className={styles.edDetailsList}>
                             {section.details.map((detail, i) => (
-                                <li key={i} className={styles.detailItem}>
-                                    <span className={styles.bullet}>✦</span> {detail}
+                                <li key={i} className={styles.edDetailItem}>
+                                    <span className={styles.edBullet}>✦</span> {detail}
                                 </li>
                             ))}
                         </ul>
 
-                        <Link href="/contact" className={styles.sectionLink}>
-                            Consult our experts <span>→</span>
+                        <Link href="/contact" className={styles.edLink}>
+                            Consult our experts <span className={styles.edArrow}>→</span>
                         </Link>
-                    </div>
-
-                    <div className={styles.cardImageInner}>
-                        <motion.div
-                            className={styles.imageReveal}
-                            initial={{ scale: 1.2 }}
-                            whileInView={{ scale: 1 }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                        >
-                            <Image
-                                src={section.image}
-                                alt={section.title}
-                                fill
-                                className={styles.sectionImg}
-                                priority={index === 0}
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                            />
-                        </motion.div>
-                    </div>
+                    </motion.div>
                 </div>
-            </motion.div>
-        </div>
+            </div>
+        </section>
     );
 };
 
 export default function ServicesPage() {
-    const container = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: container,
-        offset: ['start start', 'end end']
-    });
 
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState("idle");
@@ -155,9 +151,6 @@ export default function ServicesPage() {
         <main className={styles.page}>
             {/* Header Section */}
             <header className={styles.header}>
-                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="script-font">
-                    Our Expertise
-                </motion.span>
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -175,21 +168,15 @@ export default function ServicesPage() {
                 </div>
             </header>
 
-            {/* Stacked Cards */}
-            <div ref={container} className={styles.sectionsWrapper}>
-                {SERVICE_SECTIONS.map((section, index) => {
-                    const targetScale = 1 - ((SERVICE_SECTIONS.length - index) * 0.05);
-                    return (
-                        <ServiceCard
-                            key={section.id}
-                            index={index}
-                            section={section}
-                            progress={scrollYProgress}
-                            range={[index * 0.25, 1]}
-                            targetScale={targetScale}
-                        />
-                    );
-                })}
+            {/* Editorial Sections */}
+            <div className={styles.sectionsWrapper}>
+                {SERVICE_SECTIONS.map((section, index) => (
+                    <ServiceBlock
+                        key={section.id}
+                        index={index}
+                        section={section}
+                    />
+                ))}
             </div>
 
             {/* Newsletter Subscription (New Footer CTA) */}

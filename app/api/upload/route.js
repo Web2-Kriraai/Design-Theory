@@ -11,7 +11,7 @@ export async function POST(req) {
         }
 
         // Validate file size before uploading to Cloudinary (5MB limit per file on free tier)
-        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+        const MAX_FILE_SIZE = 10 * 1024 * 1024; // 5MB in bytes
         for (const file of files) {
             if (file.size > MAX_FILE_SIZE) {
                 return NextResponse.json({

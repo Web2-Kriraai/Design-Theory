@@ -1,0 +1,320 @@
+/* ==========================================
+   HOMECONTACT COMPONENT — The Design Theory
+   ========================================== */
+
+.homeContact {
+    background: #ffffff;
+    width: 100%;
+}
+
+/* ── TWO-COLUMN LAYOUT ── */
+.twoCol {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 80vh; /* Make sure it takes up significant space */
+}
+
+/* LEFT COL (Form) */
+.leftCol {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 64px;
+    background: var(--bg-primary, #F9F8F6);
+}
+
+.formWrapper {
+    max-width: 600px;
+    width: 100%;
+    background: transparent;
+}
+
+/* RIGHT COL (Image) */
+.rightCol {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.imageWrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    display: block;
+}
+
+.sideImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease;
+}
+
+.rightCol:hover .sideImage {
+    transform: scale(1.03);
+}
+
+.imageOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(58, 53, 48, 0.15) 0%,
+            rgba(58, 53, 48, 0.05) 100%);
+    pointer-events: none;
+}
+
+/* ── FORM ELEMENTS ── */
+.formHeading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    text-transform: none;
+    letter-spacing: normal;
+    margin-bottom: 32px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #31275c;
+}
+
+.req {
+    color: var(--accent-purple, #31275c);
+}
+
+.input {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--text-primary, #3A3530);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-color, #E5E2DE);
+    padding: 10px 0;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    border-radius: 0;
+    appearance: none;
+}
+
+.input::placeholder {
+    color: #b8b4af;
+    font-weight: 300;
+}
+
+.input:focus {
+    border-bottom-color: var(--accent-purple, #31275c);
+}
+
+.inputError {
+    border-bottom-color: #d9534f !important;
+}
+
+.select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C6A87D' stroke-width='1.5'%3E%3Cpath d='m19 9-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    padding-right: 20px;
+}
+
+.textarea {
+    resize: none;
+    line-height: 1.8;
+    padding-top: 10px;
+}
+
+.submitBtn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--text-primary, #3A3530);
+    color: #fff;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--text-primary, #3A3530);
+    padding: 16px 40px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-top: 12px;
+}
+
+.submitBtn:hover {
+    background: var(--accent-purple, #31275c);
+    border-color: var(--accent-purple, #31275c);
+    color: #fff;
+}
+
+.btnArrow {
+    transition: transform 0.3s ease;
+}
+
+.submitBtn:hover .btnArrow {
+    transform: translateX(4px);
+}
+
+.privacyNote {
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: #9e9894;
+    line-height: 1.7;
+    margin: 10px 0 0 0;
+}
+
+.privacyLink {
+    color: var(--accent-purple, #31275c);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.privacyLink:hover {
+    opacity: 0.75;
+}
+
+/* ── SUCCESS MESSAGE ── */
+.successMsg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 0;
+    gap: 16px;
+    animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.successIcon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-purple, #31275c);
+    color: var(--accent-purple, #31275c);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.successHeading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 1.8rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    margin: 0;
+}
+
+.successText {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text-muted, #6B6560);
+    margin: 0;
+}
+
+.resetBtn {
+    background: none;
+    border: 1px solid #31275c;
+    color: #31275c;
+    padding: 0.75rem 2rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.resetBtn:hover {
+    background: #31275c;
+    color: white;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 1024px) {
+    .twoCol {
+        flex-direction: column;
+    }
+
+    .leftCol {
+        padding: 80px 48px;
+        order: 2; /* Form below image on tablet/mobile */
+    }
+
+    .rightCol {
+        height: 50vh;
+        min-height: 400px;
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .leftCol {
+        padding: 64px 24px;
+    }
+
+    .formRow {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .rightCol {
+        height: 40vh;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .submitBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}

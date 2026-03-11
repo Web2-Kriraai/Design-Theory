@@ -6,8 +6,8 @@ export default withAuth(
         const { pathname } = req.nextUrl;
         const { token } = req.nextauth;
 
-        // 1. Protect /dashboard — redirect to /auth if not authenticated admin
-        if (pathname.startsWith("/dashboard") && token?.role !== "admin") {
+        // 1. Protect /dashboard and /admin/dashboard — redirect to /auth if not authenticated admin
+        if ((pathname.startsWith("/dashboard") || pathname.startsWith("/admin/dashboard")) && token?.role !== "admin") {
             return NextResponse.redirect(new URL("/", req.url));
         }
 
@@ -46,8 +46,8 @@ export default withAuth(
                     return token?.role === "admin";
                 }
 
-                // Dashboard: require any valid token (admin check done in proxy fn above)
-                if (pathname.startsWith("/dashboard")) {
+                // Dashboard & Admin Dashboard: require any valid token (admin check done in proxy fn above)
+                if (pathname.startsWith("/dashboard") || pathname.startsWith("/admin/dashboard")) {
                     return !!token;
                 }
 
@@ -61,6 +61,7 @@ export default withAuth(
 export const config = {
     matcher: [
         "/dashboard/:path*",
+        "/admin/dashboard/:path*",
         "/api/enquiries/:path*",
         "/api/newsletter/:path*",
         "/api/dashboard/:path*",

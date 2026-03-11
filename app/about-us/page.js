@@ -9,7 +9,6 @@ export default function AboutUsPage() {
         <main className={styles.page}>
             {/* ── PAGE HEADER ── */}
             <div className={styles.pageHeader}>
-                <p className={styles.pageLabel}>Who We Are</p>
                 <h1 className={styles.pageTitle}>The Design Theory</h1>
                 <p className={styles.introText}>
                     The Design Theory is a contemporary architecture and interior design
@@ -123,23 +122,24 @@ export default function AboutUsPage() {
             {/* ── FOUNDER'S MESSAGE ── */}
             <section className={styles.founderProfile}>
                 <div className={styles.founderInner}>
-                    <div className={styles.founderHeader}>
-                        <h2 className={styles.founderTitle}>Founder’s Message</h2>
-                        <p className={styles.founderSubtitle}>Rachitha Modupalli</p>
-                    </div>
-
                     <div className={styles.founderContent}>
-                        <div className={styles.founderImageWrap}>
-                            <div className={styles.cornerTL}></div>
-                            <div className={styles.cornerBR}></div>
-                            <div className={styles.founderImageInner}>
-                                <Image
-                                    src="/assets/about/founder.png"
-                                    alt="Rachitha Modupalli – Founder, The Design Theory"
-                                    fill
-                                    className={styles.image}
-                                    sizes="(max-width: 768px) 100vw, 400px"
-                                />
+                        <div className={styles.imageCol}>
+                            <div className={styles.founderImageWrap}>
+                                <div className={styles.cornerTL}></div>
+                                <div className={styles.cornerBR}></div>
+                                <div className={styles.founderImageInner}>
+                                    <Image
+                                        src="/assets/about/founder.png"
+                                        alt="Rachitha Modupalli – Founder, The Design Theory"
+                                        fill
+                                        className={styles.image}
+                                        sizes="(max-width: 768px) 100vw, 400px"
+                                    />
+                                </div>
+                            </div>
+                            <div className={styles.founderHeader}>
+                                <h2 className={styles.founderTitle}>Rachitha Modupalli</h2>
+                                <p className={styles.founderSubtitle}>Founder & Principal Architect</p>
                             </div>
                         </div>
 
@@ -176,9 +176,6 @@ export default function AboutUsPage() {
                                 creative journey. She embraces challenges as opportunities to innovate
                                 and believes that the act of creation is what continually inspires her work.
                             </p>
-                            <Link href="/contact" className={styles.goldCta}>
-                                WORK WITH US <span className={styles.ctaArrow}>→</span>
-                            </Link>
                         </div>
                     </div>
                 </div>

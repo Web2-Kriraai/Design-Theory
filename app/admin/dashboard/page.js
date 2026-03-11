@@ -10,7 +10,8 @@ import {
     Clock,
     Activity,
     Layers,
-    Shield
+    Shield,
+    Briefcase
 } from "lucide-react";
 import Link from "next/link";
 
@@ -19,17 +20,25 @@ export default function DashboardPage() {
         totalEnquiries: 0,
         totalSubscribers: 0,
     });
+    const [totalApplications, setTotalApplications] = useState(0);
     const [latestEnquiry, setLatestEnquiry] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const res = await fetch("/api/dashboard/stats");
-                const data = await res.json();
+                const [statsRes, careersRes] = await Promise.all([
+                    fetch("/api/dashboard/stats"),
+                    fetch("/api/careers"),
+                ]);
+                const data = await statsRes.json();
+                const careersData = await careersRes.json();
                 if (data.stats) {
                     setStats(data.stats);
                     setLatestEnquiry(data.latestEnquiry);
+                }
+                if (careersData.applications) {
+                    setTotalApplications(careersData.applications.length);
                 }
             } catch (error) {
                 console.error("Failed to fetch dashboard stats:", error);
@@ -99,6 +108,30 @@ export default function DashboardPage() {
                         <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
                         <span className="text-[10px] uppercase tracking-widest font-sans font-bold text-[#2D2926]">Access: Secure</span>
                     </div>
+                </div>
+            </motion.div>
+
+            {/* Career Applications Card */}
+            <motion.div
+                variants={item}
+                className="md:col-span-2 lg:col-span-1 border border-[#E8E3DB] bg-white p-8 flex flex-col justify-between group hover:border-[#31275c] transition-colors duration-500"
+            >
+                <div>
+                    <div className="flex items-center justify-between mb-6">
+                        <Briefcase size={18} className="text-[#31275c]" />
+                        <span className="text-[9px] uppercase tracking-[0.4em] text-[#999] font-bold font-sans">Career Applications</span>
+                    </div>
+                    <p className="text-6xl font-serif text-[#2D2926] leading-none mb-3">{totalApplications}</p>
+                    <p className="text-[10px] uppercase tracking-[0.3em] text-[#999] font-sans font-bold">Total Applications</p>
+                </div>
+                <div className="flex items-center justify-between pt-6 border-t border-[#F0ECE8]">
+                    <Link
+                        href="/admin/careers"
+                        className="text-[9px] uppercase tracking-[0.4em] font-bold font-sans text-[#31275c] hover:text-[#2D2926] transition-colors"
+                    >
+                        View Applications
+                    </Link>
+                    <ArrowUpRight size={14} className="text-[#CCC8C3] group-hover:text-[#31275c] transition-colors" />
                 </div>
             </motion.div>
 

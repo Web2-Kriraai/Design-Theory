@@ -12,6 +12,12 @@ const nextConfig = {
             },
         ],
     },
+    // Allow larger file uploads in API routes (prevents 413 "Request Entity Too Large")
+    experimental: {
+        serverActions: {
+            bodySizeLimit: '10mb',
+        },
+    },
     async redirects() {
         return [
             {

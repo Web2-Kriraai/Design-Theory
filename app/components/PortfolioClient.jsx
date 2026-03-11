@@ -12,15 +12,23 @@ import CategoryFilter from '../components/portfolio/CategoryFilter';
  */
 const TOKENS = `
   :root {
-    --nav-h         : 100px;
-    --page-px       : clamp(1rem, 3vw, 3rem);
-    --section-gap   : clamp(1.5rem, 3vw, 3rem);
-    --grid-col-gap  : clamp(1.5rem, 3vw, 3rem);
-    --grid-row-gap  : clamp(2rem, 5vw, 5rem);
+    --nav-h         : 80px;
+    --page-px       : clamp(1rem, 4vw, 3rem);
+    --section-gap   : clamp(1.5rem, 5vw, 4rem);
+    --grid-col-gap  : clamp(1rem, 3vw, 2.5rem);
+    --grid-row-gap  : clamp(2.5rem, 6vw, 5rem);
+  }
+
+  @media (min-width: 768px) {
+    :root { 
+        --nav-h: 100px; 
+    }
   }
 
   @media (min-width: 1024px) {
-    :root { --nav-h: 110px; }
+    :root { 
+        --nav-h: 110px; 
+    }
   }
 `;
 

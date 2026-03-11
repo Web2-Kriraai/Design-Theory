@@ -7,569 +7,635 @@
     min-height: 100vh;
 }
 
-/* ── HERO BANNER ── */
+/* ── HERO ── */
 .hero {
     position: relative;
     width: 100%;
-    height: 60vh;
-    min-height: 500px;
+    height: 100vh;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    text-align: center;
 }
 
 .heroImageWrap {
     position: absolute;
     inset: 0;
-    z-index: 0;
 }
 
 .heroImg {
     object-fit: cover;
-    opacity: 0.9;
+    object-position: center;
+    transition: transform 0.8s ease;
 }
 
 .heroOverlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg,
-            rgba(25, 23, 20, 0.4) 0%,
-            rgba(25, 23, 20, 0.6) 100%);
+    background: linear-gradient(
+        to bottom,
+        rgba(30, 25, 20, 0.2) 0%,
+        rgba(30, 25, 20, 0.6) 60%,
+        rgba(30, 25, 20, 0.85) 100%
+    );
     z-index: 1;
 }
 
-.heroText {
+.heroContent {
     position: relative;
     z-index: 2;
-    color: #fff;
+    text-align: center;
     padding: 0 24px;
-    animation: fadeUp 1s ease both;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(24px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.heroEyebrow {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 20px;
 }
 
 .heroTitle {
     font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 3.5rem;
+    font-size: clamp(3.5rem, 8vw, 7rem);
     font-weight: 300;
+    color: #fff;
+    line-height: 1.0;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+}
+
+.heroTitle em {
     font-style: italic;
-    margin-bottom: 16px;
-    text-transform: none;
-    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .heroTagline {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.06em;
+    margin-bottom: 40px;
+}
+
+.heroCta {
+    display: inline-block;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 16px 40px;
+    text-decoration: none;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.heroCta:hover {
+    background: #fff;
+    color: #2D2926;
+    border-color: #fff;
+}
+
+/* ── SHARED SECTION STYLES ── */
+.sectionEyebrow {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent-purple, #31275c);
+    margin-bottom: 16px;
+}
+
+.sectionTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.sectionTitle em {
+    font-style: italic;
+}
+
+.sectionBodyText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 1rem;
     font-weight: 300;
-    letter-spacing: 0.1em;
-    margin-bottom: 32px;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 0;
+}
+
+/* ── WHY SECTION ── */
+.whySection {
+    padding: 120px 48px;
+    background: #fff;
+}
+
+.whyInner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.whyTextBlock {
+    position: sticky;
+    top: 130px;
+}
+
+.whyGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.whyCard {
+    background: var(--bg-primary, #F9F8F6);
+    border: 1px solid var(--border-color, #E8E3DB);
+    padding: 36px 28px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.whyCard:hover {
+    border-color: var(--accent-purple, #31275c);
+    transform: translateY(-4px);
+}
+
+.whyIcon {
+    display: block;
+    font-size: 1rem;
+    color: var(--accent-purple, #31275c);
+    margin-bottom: 20px;
+}
+
+.whyCardTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-primary, #3A3530);
+    margin-bottom: 12px;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.whyCardText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--text-muted, #6B6560);
+}
+
+/* ── TEAM PHOTO ── */
+.teamPhotoSection {
+    width: 100%;
+}
+
+.teamPhotoWrap {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.teamPhoto {
+    object-fit: cover;
+    object-position: center;
+}
+
+.teamPhotoOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(45, 41, 38, 0.8) 0%,
+        rgba(45, 41, 38, 0.3) 70%,
+        transparent 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    padding: 80px 80px;
+}
+
+.teamPhotoText {
+    max-width: 620px;
+}
+
+.teamPhotoQuote {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-style: italic;
+    color: #fff;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.teamPhotoAttr {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #e5e5e5;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 600;
 }
 
-/* ── GLOBALS & LAYOUT CONTAINERS ── */
-.sectionBlock {
-    padding: 100px 48px;
-    background: #ffffff;
-}
-
-.sectionBlockAlt {
-    padding: 100px 48px;
+/* ── OPENINGS ── */
+.openingsSection {
+    padding: 120px 48px;
     background: var(--bg-primary, #F9F8F6);
 }
 
-.inner {
-    max-width: 860px;
+.openingsInner {
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.innerWide {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-/* ── TEXT STYLES ── */
-.heading {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2.5rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary, #31275c);
-    margin-bottom: 32px;
-    text-transform: none;
-    letter-spacing: normal;
-    text-align: center;
-}
-
-.bodyText {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--text-muted, #6B6560);
-    margin-bottom: 24px;
-    text-transform: none;
-    letter-spacing: 0.02em;
-    text-align: center;
-}
-
-/* ── WHY WORK WITH US ── */
-.bulletList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.openingsGrid {
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 600px;
-    margin: 0 auto;
+    border-top: 1px solid var(--border-color, #E8E3DB);
 }
 
-.bulletItem {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: var(--text-muted, #6B6560);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    line-height: 1.6;
-    text-transform: none;
-    letter-spacing: 0.02em;
-}
-
-.bulletItem::before {
-    content: '✦';
-    color: #31275c;
-    font-size: 0.85rem;
-    margin-top: 1px;
-}
-
-/* ── STUDIO TWO COLUMN ── */
-.twoColSection {
-    padding: 100px 0;
-    background: #ffffff;
-}
-
-.twoColInner {
+.openingItem {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 80px 1fr auto;
     align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border-color, #E8E3DB);
+    transition: background 0.2s;
 }
 
-.colText {
-    padding: 0 80px 0 10%;
+.openingItem:hover {
+    background: rgba(49, 39, 92, 0.02);
 }
 
-.headingLeft {
+.openingIndex {
     font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2.5rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary, #3A3530);
-    margin-bottom: 24px;
-    text-transform: none;
-    letter-spacing: normal;
-}
-
-.subHeadingLeft {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text-primary, #3A3530);
-    margin: 40px 0 20px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.bodyTextLeft {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--text-muted, #6B6560);
-    margin-bottom: 24px;
-}
-
-.bulletListLeft {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.colImageWrap {
-    position: relative;
-    width: 100%;
-    height: 600px;
-    overflow: hidden;
-}
-
-.colImage {
-    object-fit: cover;
-}
-
-/* ── OPENINGS (Accordion format) ── */
-.accordionList {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 48px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.accordionItem {
-    border-bottom: 1px solid var(--border-color, #E5E2DE);
-}
-
-.accordionToggle {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: none;
-    border: none;
-    padding: 24px 0;
-    cursor: pointer;
-    text-align: left;
-    transition: color 0.3s ease;
-}
-
-.jobTitle {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary, #3A3530);
-    text-transform: none;
-}
-
-.accordionToggle:hover .jobTitle {
+    font-size: 1.6rem;
     color: var(--accent-purple, #31275c);
+    opacity: 0.3;
 }
 
-.accordionIcon {
-    font-size: 2rem;
-    color: #31275c;
+.openingRole {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 1.6rem;
     font-weight: 300;
-    transition: transform 0.3s ease;
+    color: var(--text-primary, #3A3530);
+    letter-spacing: normal;
+    text-transform: none;
 }
 
-.accordionIcon.open {
-    transform: rotate(45deg);
-}
-
-.accordionContentWrap {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s ease;
-}
-
-.accordionContentWrap.open {
-    grid-template-rows: 1fr;
-}
-
-.accordionContent {
-    overflow: hidden;
-    padding: 0 0 32px 0;
-}
-
-.jobDetailsGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin: 32px 0;
-}
-
-.roleSubhead {
+.openingApply {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--accent-purple, #31275c);
-    margin-bottom: 12px;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(-8px);
 }
 
-.posDept {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #31275c;
-    margin-bottom: 0.5rem;
-    display: block;
-    font-weight: 700;
+.openingItem:hover .openingApply {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.roleText {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.95rem;
-    font-weight: 300;
-    line-height: 1.8;
-    color: var(--text-muted, #6B6560);
-    margin-bottom: 16px;
+/* ── APPLICATION FORM ── */
+.formSection {
+    padding: 120px 48px;
+    background: #fff;
 }
 
-.roleList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.formInner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
 }
 
-.roleList li {
+.formTextCol {
+    position: sticky;
+    top: 130px;
+}
+
+.formNote {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.88rem;
     font-weight: 300;
     color: var(--text-muted, #6B6560);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    line-height: 1.6;
+    margin-top: 32px;
+    line-height: 1.8;
 }
 
-.roleList li::before {
-    content: '·';
+.formLink {
     color: var(--accent-purple, #31275c);
-    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
-.highlight {
-    color: #31275c;
-    font-weight: 600;
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-/* ── GOLD CTA BUTTONS ── */
-.goldBtnDark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: var(--text-primary, #3A3530);
-    color: #fff;
-    border: 1px solid var(--text-primary, #3A3530);
-    padding: 14px 32px;
+.fieldRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    margin-top: 16px;
+    color: var(--text-primary, #3A3530);
 }
 
-.goldBtnDark:hover {
-    background: var(--accent-purple, #31275c);
-    border-color: var(--accent-purple, #31275c);
-    color: #fff;
-}
-
-/* ── HOW TO APPLY ── */
-.applyBox {
-    border: 1px solid var(--border-color, #E5E2DE);
-    padding: 48px;
-    text-align: center;
-    max-width: 700px;
-    margin: 48px auto 0;
-}
-
-.emailCta {
-    display: inline-block;
-    margin-top: 24px;
+.input,
+.textarea {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--accent-purple, #31275c);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    text-transform: none;
-    letter-spacing: 0.02em;
-    transition: all 0.3s ease;
-}
-
-.applyBtn {
-    display: inline-block;
-    padding: 1rem 3rem;
-    background: #31275c;
-    border: 1px solid #31275c;
-    color: white;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.emailCta:hover {
-    color: var(--text-primary, #3A3530);
-    border-bottom-color: var(--text-primary, #3A3530);
-}
-
-/* ── INTERNSHIPS ── */
-.internshipBlock {
-    margin-top: 100px;
-    padding: 60px 48px;
-    background: #ffffff;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.headingSoft {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2rem;
+    font-size: 0.95rem;
     font-weight: 300;
-    font-style: italic;
     color: var(--text-primary, #3A3530);
+    background: var(--bg-primary, #F9F8F6);
+    border: 1px solid var(--border-color, #E8E3DB);
+    padding: 14px 18px;
+    outline: none;
+    border-radius: 0;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+.input:focus,
+.textarea:focus {
+    border-color: var(--accent-purple, #31275c);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* File Upload */
+.fileUploadBox {
+    border: 1px dashed var(--border-color, #E8E3DB);
+    background: var(--bg-primary, #F9F8F6);
+    padding: 32px 24px;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.fileUploadBox:hover {
+    border-color: var(--accent-purple, #31275c);
+    background: #f0f0f8;
+}
+
+.fileInput {
+    display: none;
+}
+
+.fileUploadInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.fileUploadIcon {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+}
+
+.fileUploadText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--text-primary, #3A3530);
+    word-break: break-all;
+}
+
+.fileUploadHint {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    color: var(--text-muted, #9A9490);
+    letter-spacing: 0.04em;
+}
+
+.errorMsg {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.85rem;
+    color: #c0392b;
+    padding: 12px 16px;
+    border: 1px solid #e0bebe;
+    background: #fdf5f5;
+}
+
+.submitBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--accent-purple, #31275c);
+    color: #fff;
+    border: none;
+    padding: 18px 40px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: #2D2926;
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.submitArrow {
+    transition: transform 0.3s ease;
+}
+
+.submitBtn:hover .submitArrow {
+    transform: translateX(4px);
+}
+
+/* Success State */
+.successBox {
+    text-align: center;
+    padding: 60px 40px;
+    background: var(--bg-primary, #F9F8F6);
+    border: 1px solid var(--border-color, #E8E3DB);
+}
+
+.successIcon {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--accent-purple, #31275c);
     margin-bottom: 24px;
 }
 
-/* ── CONTACT CTA ── */
-.contactCtaBlock {
-    margin-top: 80px;
-    text-align: center;
-    padding-top: 60px;
-    border-top: 1px solid var(--border-color, #E5E2DE);
-}
-
-.contactCtaText {
+.successTitle {
     font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 300;
     color: var(--text-primary, #3A3530);
-    line-height: 1.6;
+    margin-bottom: 16px;
+    letter-spacing: normal;
+    text-transform: none;
 }
 
-.goldLink {
-    color: #31275c;
-    text-decoration: none;
-    font-style: italic;
-    transition: opacity 0.3s ease;
-}
-
-.goldLink:hover {
-    opacity: 0.7;
-}
-
-/* ── GOLD CTA (Hero Button) ── */
-.goldBtn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    padding: 14px 32px;
+.successText {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.72rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text-muted, #6B6560);
+    line-height: 1.9;
+    max-width: 440px;
+    margin: 0 auto 32px;
+}
+
+.resetBtn {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    color: var(--accent-purple, #31275c);
+    background: none;
+    border: 1px solid var(--accent-purple, #31275c);
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-.goldBtn:hover {
-    background: #31275c;
-    border-color: #31275c;
+.resetBtn:hover {
+    background: var(--accent-purple, #31275c);
     color: #fff;
 }
 
 /* ==========================================
    RESPONSIVE
    ========================================== */
-@media (max-width: 900px) {
-    .rolesGrid {
+@media (max-width: 1024px) {
+    .whyInner {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .whyTextBlock {
+        position: static;
+    }
+
+    .formInner {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .formTextCol {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .whySection,
+    .openingsSection,
+    .formSection {
+        padding: 80px 24px;
+    }
+
+    .whyGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .teamPhotoWrap {
+        height: 50vh;
+    }
+
+    .teamPhotoOverlay {
+        padding: 40px 24px;
+        background: linear-gradient(
+            to top,
+            rgba(45, 41, 38, 0.85) 0%,
+            rgba(45, 41, 38, 0.2) 100%
+        );
+        align-items: flex-end;
+    }
+
+    .openingItem {
+        grid-template-columns: 50px 1fr;
+        gap: 16px;
+    }
+
+    .openingApply {
+        display: none;
+    }
+
+    .fieldRow {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 768px) {
-    .heroTitle {
-        font-size: 2.8rem;
-    }
-
-    .sectionBlock,
-    .sectionBlockAlt {
-        padding: 80px 24px;
-    }
-
-    .roleCard,
-    .applyBox {
-        padding: 32px;
-    }
-}
-
 @media (max-width: 480px) {
+    .hero {
+        min-height: 100svh;
+    }
+
     .heroTitle {
+        font-size: 3rem;
+    }
+
+    .openingRole {
+        font-size: 1.2rem;
+    }
+
+    .sectionTitle {
         font-size: 2.2rem;
     }
 
-    .heading {
-        font-size: 2rem;
-    }
-
-    .heroTagline {
-        font-size: 0.8rem;
-    }
-
-    .emailCta {
-        font-size: 0.9rem;
-    }
-}
-
-/* ── CLOSING STATEMENT ── */
-.closingSection {
-    padding: 120px 48px;
-    background: var(--bg-soft, #3A3530);
-    text-align: center;
-    color: #fff;
-}
-
-.closingInner {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.closingText {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2.2rem;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.5;
-    color: var(--accent-purple-light, #d4c4a8);
-    margin-bottom: 0;
-    text-transform: none;
-    letter-spacing: 0.02em;
-}
-
-@media (max-width: 768px) {
-    .closingSection {
-        padding: 80px 24px;
-    }
-
-    .closingText {
-        font-size: 1.8rem;
+    .whyCardTitle {
+        font-size: 1.3rem;
     }
 }

@@ -1,12 +1,18 @@
 .page {
-    background: var(--bg-primary);
+    background: var(--bg-primary, #F9F8F6);
     min-height: 100vh;
-    padding-top: 140px;
 }
 
 .header {
     text-align: center;
-    padding: 0 48px 100px;
+    padding: 160px 48px 100px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    padding: 160px 48px 100px;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -25,113 +31,183 @@
     line-height: 1.8;
 }
 
-/* Stacked Cards */
+/* ==========================================
+   EDITORIAL SECTION LAYOUT
+   ========================================== */
 .sectionsWrapper {
-    padding: 0 48px 150px;
-}
-
-.cardContainer {
-    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: sticky;
-    top: 0;
+    flex-direction: column;
+    padding-bottom: 80px;
 }
 
-.card {
-    width: 100%;
-    max-width: 1500px;
-    height: 80vh;
-    background: white;
-    border-radius: 4px;
-    padding: 80px;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    border: 1px solid var(--border-color);
+.editorialSection {
+    padding: 80px 0;
 }
 
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 60px;
-}
-
-.cardIndex {
-    font-family: var(--font-serif);
-    font-size: 3rem;
-    color: var(--accent-purple);
-    opacity: 0.4;
-}
-
-.sectionLabel {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: var(--accent-purple);
-}
-
-.cardBody {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 100px;
-    height: calc(100% - 100px);
-}
-
-.sectionTitle {
-    font-size: 3.5rem;
-    line-height: 1.1;
-    margin-bottom: 30px;
-}
-
-.sectionDescription {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 50px;
-}
-
-.detailsList {
-    list-style: none;
-    margin-bottom: 60px;
+.edContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 48px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 80px;
+    align-items: center;
 }
 
-.detailItem {
+/* Alternate Layout Flow */
+.even .edImageCol {
+    order: 1;
+}
+.even .edTextCol {
+    order: 2;
+}
+
+.odd .edImageCol {
+    order: 2;
+}
+.odd .edTextCol {
+    order: 1;
+}
+
+/* Image Column */
+.edImageCol {
+    width: 100%;
+}
+
+.edImageWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+}
+
+.edImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease;
+}
+
+.edImageWrap:hover .edImage {
+    transform: scale(1.03);
+}
+
+/* Text Column */
+.edTextCol {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.edTextInner {
+    max-width: 500px;
+}
+
+/* Even blocks align right naturally from margin, Odd left - let's center align them within their col */
+.even .edTextInner {
+    margin-right: auto;
+}
+
+.odd .edTextInner {
+    margin-left: auto;
+}
+
+.edHeader {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.edIndex {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2.2rem;
+    color: var(--accent-purple, #31275c);
+    opacity: 0.3;
+}
+
+.edLabel {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: 600;
+    color: var(--accent-purple, #31275c);
+}
+
+.edTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.edDescription {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 1rem;
+    color: var(--text-muted, #6B6560);
+    line-height: 1.8;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+.edDetailsList {
+    list-style: none;
+    margin: 0 0 48px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.edDetailItem {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.85rem;
+    color: var(--text-primary, #3A3530);
     display: flex;
     align-items: center;
     gap: 12px;
+    letter-spacing: 0.04em;
 }
 
-.bullet {
-    color: var(--accent-purple);
+.edBullet {
+    color: var(--accent-purple, #31275c);
+    font-size: 0.8rem;
 }
 
-.sectionLink {
-    font-family: var(--font-sans);
+.edLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    color: var(--text-primary, #3A3530);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-primary, #3A3530);
+    padding-bottom: 6px;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
-.cardImageInner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.edLink:hover {
+    color: var(--accent-purple, #31275c);
+    border-color: var(--accent-purple, #31275c);
 }
 
-.sectionImg {
-    object-fit: cover;
+.edArrow {
+    transition: transform 0.3s ease;
+}
+
+.edLink:hover .edArrow {
+    transform: translateX(4px);
 }
 
 /* Newsletter (Footer CTA) */
@@ -178,35 +254,61 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .sectionTitle {
-        font-size: 2.5rem;
+    .edContainer {
+        gap: 60px;
     }
 
-    .cardBody {
-        gap: 40px;
+    .edTitle {
+        font-size: 2.5rem;
     }
 }
 
 @media (max-width: 768px) {
     .header {
-        padding: 0 24px 60px;
+        padding: 140px 24px 60px;
     }
 
-    .card {
-        height: auto;
-        min-height: 85vh;
-        padding: 40px 24px;
+    .editorialSection {
+        padding: 60px 0;
     }
 
-    .cardBody {
+    .edContainer {
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-        gap: 30px;
+        padding: 0 24px;
+        gap: 40px;
     }
 
-    .cardImageInner {
-        height: 300px;
-        order: -1;
+    /* Stack Image First on Mobile for all blocks */
+    .even .edImageCol, .odd .edImageCol {
+        order: 1;
+    }
+
+    .even .edTextCol, .odd .edTextCol {
+        order: 2;
+    }
+
+    .edTextInner {
+        max-width: 100%;
+    }
+    
+    .even .edTextInner, 
+    .odd .edTextInner {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+    }
+    
+    .edHeader {
+        justify-content: center;
+    }
+
+    .edDetailsList {
+        align-items: center;
+        text-align: left; /* Keep bullets readable but block centered */
+    }
+
+    .edImageWrap {
+        aspect-ratio: 1/1; /* Square on mobile */
     }
 
     .nsTitle {
@@ -216,36 +318,27 @@
     .newsletter {
         padding: 80px 24px;
     }
-
-    .sectionTitle {
-        font-size: 2rem;
-    }
 }
 
 @media (max-width: 480px) {
-    .card {
-        min-height: auto;
-        padding: 32px 16px;
+    .edTitle {
+        font-size: 2rem;
     }
 
-    .sectionTitle {
-        font-size: 1.6rem;
+    .title {
+        font-size: 3.2rem;
     }
 
-    .cardNum {
-        font-size: 4rem;
+    .introText {
+        font-size: 0.95rem;
     }
 
-    .cardTitle {
-        font-size: 1.3rem;
+    .edIndex {
+        font-size: 1.8rem;
     }
 
-    .cardText {
-        font-size: 0.85rem;
-    }
-
-    .cardImageInner {
-        height: 220px;
+    .edImageWrap {
+        aspect-ratio: 4/5; /* Taller on very small screens */
     }
 
     .nsTitle {

@@ -80,7 +80,6 @@ export default function ContactPage() {
         <main className={styles.page}>
             {/* ── PAGE HEADER ── */}
             <div className={styles.pageHeader}>
-                <p className={styles.pageLabel}>Get In Touch</p>
                 <h1 className={styles.pageTitle}>Contact Us</h1>
                 <p className={styles.pageIntro}>
                     We would love to hear from you. Whether you are planning your dream

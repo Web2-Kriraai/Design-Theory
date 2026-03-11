@@ -1,20 +1,135 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "@/app/components/AnimatedImage";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import styles from "./careers.module.css";
 
-export default function CareersPage() {
-    const [openJob, setOpenJob] = useState(null);
+const WHY_REASONS = [
+    {
+        icon: "✦",
+        title: "Creative Freedom",
+        text: "Work on diverse architectural and interior projects where your creativity is celebrated and encouraged.",
+    },
+    {
+        icon: "✦",
+        title: "Real Exposure",
+        text: "Gain hands-on involvement across residential, commercial, and workspace design — from concept to execution.",
+    },
+    {
+        icon: "✦",
+        title: "Growth Mindset",
+        text: "Join a collaborative, ambition-driven studio culture that nurtures talent and celebrates individual growth.",
+    },
+    {
+        icon: "✦",
+        title: "Purposeful Work",
+        text: "Design spaces that truly matter — meaningful, functional environments that shape how people live and work.",
+    },
+];
 
-    const toggleJob = (index) => {
-        setOpenJob(openJob === index ? null : index);
+const OPENINGS = [
+    "Senior Project Manager",
+    "Site Engineer",
+    "Senior Architect",
+    "Interior Designer",
+    "Digital Marketing Manager",
+    "Executive Assistant",
+];
+
+export default function CareersPage() {
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        contact: "",
+        designation: "",
+        message: "",
+    });
+    const [file, setFile] = useState(null);
+    const [fileName, setFileName] = useState("");
+    const [status, setStatus] = useState("idle"); // idle | loading | success | error
+    const [errorMsg, setErrorMsg] = useState("");
+    const fileInputRef = useRef(null);
+
+    const handleChange = (e) => {
+        setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleFileChange = (e) => {
+        const selected = e.target.files[0];
+        if (selected) {
+            setFile(selected);
+            setFileName(selected.name);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus("loading");
+        setErrorMsg("");
+
+        try {
+            let attachmentUrl = "";
+
+            // Upload file to Cloudinary if provided
+            if (file) {
+                const uploadData = new FormData();
+                uploadData.append("images", file);
+                const uploadRes = await fetch("/api/upload", {
+                    method: "POST",
+                    body: uploadData,
+                });
+                const uploadText = await uploadRes.text();
+                let uploadJson;
+                try {
+                    uploadJson = JSON.parse(uploadText);
+                } catch (e) {
+                    throw new Error(uploadRes.status === 413 ? "File is too large. Please upload a smaller file." : "Server returned an invalid response during upload.");
+                }
+                if (!uploadRes.ok) throw new Error(uploadJson?.error || "File upload failed.");
+                attachmentUrl = uploadJson.urls?.[0] || "";
+            }
+
+            // Submit application
+            const res = await fetch("/api/careers", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...form, attachmentUrl }),
+            });
+
+            const text = await res.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                throw new Error(res.status === 413 ? "Submission is too large." : "Server returned an invalid response.");
+            }
+            if (!res.ok) throw new Error(data?.error || "Submission failed.");
+
+            setStatus("success");
+            setForm({ name: "", email: "", contact: "", designation: "", message: "" });
+            setFile(null);
+            setFileName("");
+        } catch (err) {
+            setStatus("error");
+            setErrorMsg(err.message || "Something went wrong. Please try again.");
+        }
+    };
+
+    const fadeUp = {
+        hidden: { opacity: 0, y: 32 },
+        visible: (i = 0) => ({
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.8, delay: i * 0.1, ease: [0.215, 0.61, 0.355, 1] },
+        }),
     };
 
     return (
         <main className={styles.page}>
-            {/* ── HERO BANNER ── */}
+
+            {/* ── HERO ── */}
             <section className={styles.hero}>
                 <div className={styles.heroImageWrap}>
                     <Image
@@ -22,514 +137,358 @@ export default function CareersPage() {
                         alt="Careers at The Design Theory"
                         fill
                         className={styles.heroImg}
-                        priority={true}
+                        priority
                         sizes="100vw"
                     />
                 </div>
                 <div className={styles.heroOverlay} />
-                <div className={styles.heroText}>
-                    <h1 className={styles.heroTitle}>Careers at The Design Theory</h1>
-                    <p className={styles.heroTagline}>
+                <div className={styles.heroContent}>
+                    <motion.p
+                        className={styles.heroEyebrow}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7 }}
+                    >
+                        The Design Theory
+                    </motion.p>
+                    <motion.h1
+                        className={styles.heroTitle}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.9, delay: 0.1 }}
+                    >
+                        Join Our<br /><em>Creative Team</em>
+                    </motion.h1>
+                    <motion.p
+                        className={styles.heroTagline}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.25 }}
+                    >
                         Build spaces. Build ideas. Build your future.
-                    </p>
-                    <Link href="#openings" className={styles.goldBtn}>
-                        View Openings
-                    </Link>
+                    </motion.p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.4 }}
+                    >
+                        <a href="#apply" className={styles.heroCta}>Apply Now →</a>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* ── STUDIO CULTURE / WHY WORK WITH US ── */}
-            <section className={styles.twoColSection}>
-                <div className={styles.twoColInner}>
-                    <div className={styles.colText}>
-                        <h2 className={styles.headingLeft}>Join Our Creative Journey</h2>
-                        <p className={styles.bodyTextLeft}>
-                            At The Design Theory, we believe great design is born from
-                            passionate minds, collaborative energy, and fearless creativity. We
-                            are constantly looking for talented individuals who share our vision
-                            of transforming spaces into meaningful, functional, and inspiring
-                            environments.
-                        </p>
-
-                        <h3 className={styles.subHeadingLeft}>Why Work With Us</h3>
-                        <ul className={styles.bulletListLeft}>
-                            <li className={styles.bulletItem}>
-                                Opportunity to work on diverse architectural and interior projects
-                            </li>
-                            <li className={styles.bulletItem}>
-                                Exposure to residential, commercial, and workspace design
-                            </li>
-                            <li className={styles.bulletItem}>
-                                Collaborative and growth-oriented studio culture
-                            </li>
-                            <li className={styles.bulletItem}>
-                                Hands-on project involvement from concept to execution
-                            </li>
-                        </ul>
+            {/* ── WHY WORK WITH US ── */}
+            <section className={styles.whySection}>
+                <div className={styles.whyInner}>
+                    <div className={styles.whyTextBlock}>
+                        <motion.p
+                            className={styles.sectionEyebrow}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0}
+                        >
+                            Why Join Us
+                        </motion.p>
+                        <motion.h2
+                            className={styles.sectionTitle}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.1}
+                        >
+                            Why Work With<br /><em>Design Theory</em>
+                        </motion.h2>
+                        <motion.p
+                            className={styles.sectionBodyText}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.2}
+                        >
+                            At The Design Theory, we believe great design is born from passionate minds,
+                            collaborative energy, and fearless creativity. We are constantly looking for
+                            talented individuals who share our vision of transforming spaces into meaningful,
+                            functional, and inspiring environments.
+                        </motion.p>
                     </div>
-                    <div className={styles.colImageWrap}>
-                        <Image
-                            src="/assets/styles/high-living.jpg"
-                            alt="Studio Environment"
-                            fill
-                            className={styles.colImage}
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                        />
+
+                    <div className={styles.whyGrid}>
+                        {WHY_REASONS.map((r, i) => (
+                            <motion.div
+                                key={r.title}
+                                className={styles.whyCard}
+                                variants={fadeUp}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                custom={i * 0.1}
+                            >
+                                <span className={styles.whyIcon}>{r.icon}</span>
+                                <h3 className={styles.whyCardTitle}>{r.title}</h3>
+                                <p className={styles.whyCardText}>{r.text}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── TEAM PHOTO ── */}
+            <section className={styles.teamPhotoSection}>
+                <div className={styles.teamPhotoWrap}>
+                    <Image
+                        src="/assets/styles/high-living.jpg"
+                        alt="The Design Theory Team"
+                        fill
+                        className={styles.teamPhoto}
+                        sizes="100vw"
+                    />
+                    <div className={styles.teamPhotoOverlay}>
+                        <div className={styles.teamPhotoText}>
+                            <p className={styles.teamPhotoQuote}>
+                                "We don't just design spaces — we create experiences, stories, and environments
+                                that reflect individuality and purpose."
+                            </p>
+                            <span className={styles.teamPhotoAttr}>— Rachitha Modupalli, Founder</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* ── CURRENT OPENINGS ── */}
-            <section id="openings" className={styles.sectionBlockAlt}>
-                <div className={styles.innerWide}>
-                    <h2 className={styles.heading}>Current Openings</h2>
-
-                    <div className={styles.accordionList}>
-                        {/* Job 1 */}
-                        {/* <div className={styles.accordionItem}>
-                            <button
-                                className={styles.accordionToggle}
-                                onClick={() => toggleJob(0)}
-                                aria-expanded={openJob === 0}
+            <section className={styles.openingsSection}>
+                <div className={styles.openingsInner}>
+                    <motion.p
+                        className={styles.sectionEyebrow}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                    >
+                        We&#39;re Hiring
+                    </motion.p>
+                    <motion.h2
+                        className={styles.sectionTitle}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={0.1}
+                    >
+                        Current <em>Openings</em>
+                    </motion.h2>
+                    <div className={styles.openingsGrid}>
+                        {OPENINGS.map((role, i) => (
+                            <motion.div
+                                key={role}
+                                className={styles.openingItem}
+                                variants={fadeUp}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                custom={i * 0.08}
                             >
-                                <span className={styles.jobTitle}>Interior Designer</span>
-                                <span className={`${styles.plusIcon} ${openJob === 0 ? styles.open : ""}`}>
-                                    +
-                                </span>
-                            </button>
-                            <div className={`${styles.accordionContentWrap} ${openJob === 0 ? styles.open : ""}`}>
-                                <div className={styles.accordionContent}>
-                                    <p className={styles.roleSubhead}>Role Overview</p>
-                                    <p className={styles.roleText}>
-                                        We are looking for a creative and detail-oriented Interior
-                                        Designer to join our team. You will be responsible for developing
-                                        design concepts, preparing presentations, and executing design
-                                        plans for high-end residential and commercial projects.
-                                    </p>
-
-                                    <div className={styles.jobDetailsGrid}>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Responsibilities</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Develop conceptual designs and space plans</li>
-                                                <li>Create detailed 2D/3D layouts and mood boards</li>
-                                                <li>Select and specify materials, finishes, and furniture</li>
-                                                <li>Coordinate with vendors, contractors, and clients</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Requirements</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Bachelor’s degree in Interior Design or Architecture</li>
-                                                <li>2-3 years of proven experience in luxury interiors</li>
-                                                <li>Proficiency in AutoCAD, SketchUp, and rendering software</li>
-                                                <li>Strong understanding of materials and detailing</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="mailto:careers@thedesigntheory.in?subject=Application for Interior Designer" className={styles.goldBtnDark}>
-                                        Apply Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div> */}
-
-                        {/* Job 2 */}
-                        {/* <div className={styles.accordionItem}>
-                            <button
-                                className={styles.accordionToggle}
-                                onClick={() => toggleJob(1)}
-                                aria-expanded={openJob === 1}
-                            >
-                                <span className={styles.jobTitle}>Architectural Designer</span>
-                                <span className={`${styles.plusIcon} ${openJob === 1 ? styles.open : ""}`}>
-                                    +
-                                </span>
-                            </button>
-                            <div className={`${styles.accordionContentWrap} ${openJob === 1 ? styles.open : ""}`}>
-                                <div className={styles.accordionContent}>
-                                    <p className={styles.roleSubhead}>Role Overview</p>
-                                    <p className={styles.roleText}>
-                                        Seeking a talented Architectural Designer to assist in all phases
-                                        of architectural planning and execution. The ideal candidate will
-                                        have a strong eye for form, proportion, and structural harmony.
-                                    </p>
-
-                                    <div className={styles.jobDetailsGrid}>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Responsibilities</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Assist in conceptualizing building designs</li>
-                                                <li>Produce detailed architectural working drawings</li>
-                                                <li>Ensure compliance with local building codes</li>
-                                                <li>Visit sites and monitor construction progress</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Requirements</p>
-                                            <ul className={styles.roleList}>
-                                                <li>B.Arch degree</li>
-                                                <li>1-3 years of architectural design experience</li>
-                                                <li>Expert proficiency in AutoCAD and Revit/SketchUp</li>
-                                                <li>Excellent problem-solving and communication skills</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="mailto:careers@thedesigntheory.in?subject=Application for Architectural Designer" className={styles.goldBtnDark}>
-                                        Apply Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div> */}
-
-                        {/* Job 1-6 */}
-                        <div className={styles.accordionItem}>
-                            <button
-                                className={styles.accordionToggle}
-                                onClick={() => toggleJob(0)}
-                                aria-expanded={openJob === 0}
-                            >
-                                <span className={styles.jobTitle}>Senior Project Manager</span>
-                                <span className={`${styles.plusIcon} ${openJob === 0 ? styles.open : ""}`}>
-                                    +
-                                </span>
-                            </button>
-                            <div className={`${styles.accordionContentWrap} ${openJob === 0 ? styles.open : ""}`}>
-                                <div className={styles.accordionContent}>
-                                    <p className={styles.roleSubhead}>Role Overview</p>
-                                    <p className={styles.roleText}>
-                                        We are looking for an experienced Senior Project Manager to lead and manage projects from initiation to completion while ensuring timely delivery and high quality standards.
-                                    </p>
-
-                                    <div className={styles.jobDetailsGrid}>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Responsibilities</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Plan and oversee project activities from start to completion</li>
-                                                <li>Coordinate with architects, engineers, and contractors</li>
-                                                <li>Monitor project timelines, budgets, and resources</li>
-                                                <li>Ensure compliance with safety and quality standards</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Requirements</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Bachelor’s degree in Engineering, Architecture, or related field</li>
-                                                <li>4+ years of project management experience</li>
-                                                <li>Strong leadership and communication skills</li>
-                                                <li>Experience with project planning tools</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Senior Project Manager" className={styles.goldBtnDark}>
-                                        Apply Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.accordionItem}>
-                            <button
-                                className={styles.accordionToggle}
-                                onClick={() => toggleJob(1)}
-                                aria-expanded={openJob === 1}
-                            >
-                                <span className={styles.jobTitle}>Site Engineer</span>
-                                <span className={`${styles.plusIcon} ${openJob === 1 ? styles.open : ""}`}>
-                                    +
-                                </span>
-                            </button>
-                            <div className={`${styles.accordionContentWrap} ${openJob === 1 ? styles.open : ""}`}>
-                                <div className={styles.accordionContent}>
-                                    <p className={styles.roleSubhead}>Role Overview</p>
-                                    <p className={styles.roleText}>
-                                        We are seeking a dedicated Site Engineer to supervise on-site construction activities and ensure projects are executed according to plans and safety standards.
-                                    </p>
-
-                                    <div className={styles.jobDetailsGrid}>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Responsibilities</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Supervise day-to-day construction activities</li>
-                                                <li>Ensure work follows approved drawings and specifications</li>
-                                                <li>Coordinate with contractors and suppliers</li>
-                                                <li>Monitor site safety and quality standards</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Requirements</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Bachelor’s degree in Civil Engineering</li>
-                                                <li>2-3 years of site supervision experience</li>
-                                                <li>Ability to read technical drawings</li>
-                                                <li>Strong communication and coordination skills</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Site Engineer" className={styles.goldBtnDark}>
-                                        Apply Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.accordionItem}>
-                            <button
-                                className={styles.accordionToggle}
-                                onClick={() => toggleJob(2)}
-                                aria-expanded={openJob === 2}
-                            >
-                                <span className={styles.jobTitle}>Senior Architect Engineer</span>
-                                <span className={`${styles.plusIcon} ${openJob === 2 ? styles.open : ""}`}>
-                                    +
-                                </span>
-                            </button>
-                            <div className={`${styles.accordionContentWrap} ${openJob === 2 ? styles.open : ""}`}>
-                                <div className={styles.accordionContent}>
-                                    <p className={styles.roleSubhead}>Role Overview</p>
-                                    <p className={styles.roleText}>
-                                        We are looking for a creative Senior Architect to develop architectural concepts and oversee design execution for residential and commercial projects.
-                                    </p>
-
-                                    <div className={styles.jobDetailsGrid}>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Responsibilities</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Develop architectural concepts and design plans</li>
-                                                <li>Lead client presentations and discussions</li>
-                                                <li>Coordinate with engineering and project teams</li>
-                                                <li>Ensure compliance with building regulations</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Requirements</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Bachelor’s or Master’s degree in Architecture</li>
-                                                <li>5+ years of architectural experience</li>
-                                                <li>Proficiency in AutoCAD, SketchUp, or Revit</li>
-                                                <li>Strong design and visualization skills</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Senior Architect" className={styles.goldBtnDark}>
-                                        Apply Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.accordionItem}>
-                            <button
-                                className={styles.accordionToggle}
-                                onClick={() => toggleJob(3)}
-                                aria-expanded={openJob === 3}
-                            >
-                                <span className={styles.jobTitle}>Executive Assistant</span>
-                                <span className={`${styles.plusIcon} ${openJob === 3 ? styles.open : ""}`}>
-                                    +
-                                </span>
-                            </button>
-                            <div className={`${styles.accordionContentWrap} ${openJob === 3 ? styles.open : ""}`}>
-                                <div className={styles.accordionContent}>
-                                    <p className={styles.roleSubhead}>Role Overview</p>
-                                    <p className={styles.roleText}>
-                                        We are seeking an organized Executive Assistant to provide administrative support and assist management in daily operations.
-                                    </p>
-
-                                    <div className={styles.jobDetailsGrid}>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Responsibilities</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Manage schedules, meetings, and appointments</li>
-                                                <li>Handle emails, documentation, and reports</li>
-                                                <li>Prepare presentations and meeting notes</li>
-                                                <li>Coordinate internal communications</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Requirements</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Bachelor’s degree in Business Administration</li>
-                                                <li>2–4 years of administrative experience</li>
-                                                <li>Strong organizational and communication skills</li>
-                                                <li>Proficiency in MS Office</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Executive Assistant" className={styles.goldBtnDark}>
-                                        Apply Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.accordionItem}>
-                            <button
-                                className={styles.accordionToggle}
-                                onClick={() => toggleJob(4)}
-                                aria-expanded={openJob === 4}
-                            >
-                                <span className={styles.jobTitle}>Digital Marketing Manager</span>
-                                <span className={`${styles.plusIcon} ${openJob === 4 ? styles.open : ""}`}>
-                                    +
-                                </span>
-                            </button>
-                            <div className={`${styles.accordionContentWrap} ${openJob === 4 ? styles.open : ""}`}>
-                                <div className={styles.accordionContent}>
-                                    <p className={styles.roleSubhead}>Role Overview</p>
-                                    <p className={styles.roleText}>
-                                        We are looking for a Digital Marketing Manager to plan and execute marketing strategies that increase brand visibility and generate business leads.
-                                    </p>
-
-                                    <div className={styles.jobDetailsGrid}>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Responsibilities</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Develop and manage digital marketing campaigns</li>
-                                                <li>Manage social media platforms and branding</li>
-                                                <li>Optimize website content for SEO</li>
-                                                <li>Analyze campaign performance</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Requirements</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Bachelor’s degree in Marketing or Business</li>
-                                                <li>3+ years of digital marketing experience</li>
-                                                <li>Knowledge of SEO, SEM, and analytics tools</li>
-                                                <li>Strong analytical skills</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Digital Marketing Manager" className={styles.goldBtnDark}>
-                                        Apply Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.accordionItem}>
-                            <button
-                                className={styles.accordionToggle}
-                                onClick={() => toggleJob(5)}
-                                aria-expanded={openJob === 5}
-                            >
-                                <span className={styles.jobTitle}>Operations Manager</span>
-                                <span className={`${styles.plusIcon} ${openJob === 5 ? styles.open : ""}`}>
-                                    +
-                                </span>
-                            </button>
-                            <div className={`${styles.accordionContentWrap} ${openJob === 5 ? styles.open : ""}`}>
-                                <div className={styles.accordionContent}>
-                                    <p className={styles.roleSubhead}>Role Overview</p>
-                                    <p className={styles.roleText}>
-                                        We are seeking an experienced Operations Manager to oversee daily operations and ensure smooth workflow across departments.
-                                    </p>
-
-                                    <div className={styles.jobDetailsGrid}>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Responsibilities</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Manage daily operational activities</li>
-                                                <li>Coordinate between departments</li>
-                                                <li>Improve operational efficiency</li>
-                                                <li>Monitor budgets and resources</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <p className={styles.roleSubhead}>Requirements</p>
-                                            <ul className={styles.roleList}>
-                                                <li>Bachelor’s degree in Business Administration</li>
-                                                <li>5+ years of operations management experience</li>
-                                                <li>Strong leadership and problem-solving skills</li>
-                                                <li>Excellent organizational abilities</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <a href="mailto:info@thedesigntheory.in?subject=Application for Operations Manager" className={styles.goldBtnDark}>
-                                        Apply Now
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                                <span className={styles.openingIndex}>0{i + 1}</span>
+                                <span className={styles.openingRole}>{role}</span>
+                                <a href="#apply" className={styles.openingApply}>Apply →</a>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* ── HOW TO APPLY & INTERNSHIPS ── */}
-            <section className={styles.sectionBlockAlt}>
-                <div className={styles.inner}>
-                    <h2 className={styles.heading}>How To Apply</h2>
-                    <p className={styles.bodyText}>
-                        If you are excited to build with us, please share the following
-                        documents to process your application:
-                    </p>
-
-                    <ul className={styles.bulletList} style={{ alignItems: "center" }}>
-                        <li className={styles.bulletItem}>Updated Resume</li>
-                        <li className={styles.bulletItem}>Portfolio (PDF or Drive Link)</li>
-                        <li className={styles.bulletItem}>
-                            Cover Letter (optional but recommended)
-                        </li>
-                    </ul>
-
-                    <div className={styles.applyBox}>
-                        <p className={styles.bodyText} style={{ marginBottom: 0 }}>
-                            <em>
-                                * Please mention the position you are applying for in the
-                                subject line.
-                            </em>
-                        </p>
-                        <a
-                            href="mailto:careers@thedesigntheory.in"
-                            className={styles.emailCta}
+            {/* ── APPLICATION FORM ── */}
+            <section id="apply" className={styles.formSection}>
+                <div className={styles.formInner}>
+                    <div className={styles.formTextCol}>
+                        <motion.p
+                            className={styles.sectionEyebrow}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
                         >
-                            📩 Email your application to: careers@thedesigntheory.in
-                        </a>
+                            Get In Touch
+                        </motion.p>
+                        <motion.h2
+                            className={styles.sectionTitle}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.1}
+                        >
+                            Start Your<br /><em>Application</em>
+                        </motion.h2>
+                        <motion.p
+                            className={styles.sectionBodyText}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.2}
+                        >
+                            Ready to build with us? Fill in the form to start your journey with The Design Theory.
+                            We review all applications and will be in touch if there&#39;s a match.
+                        </motion.p>
+                        <motion.p
+                            className={styles.formNote}
+                            variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            custom={0.3}
+                        >
+                            You can also email us directly at&nbsp;
+                            <a href="mailto:careers@thedesigntheory.in" className={styles.formLink}>
+                                careers@thedesigntheory.in
+                            </a>
+                        </motion.p>
                     </div>
 
-                    {/* ── INTERNSHIPS ── */}
-                    <div className={styles.internshipBlock}>
-                        <h2 className={styles.headingSoft}>Internship Opportunities</h2>
-                        <p className={styles.bodyText} style={{ maxWidth: "700px", margin: "0 auto" }}>
-                            We also welcome enthusiastic design students who are eager to
-                            learn and gain real-world experience in architecture and interior
-                            design projects. Send your portfolio to the email above with
-                            "Internship Application" in the subject line.
-                        </p>
-                    </div>
+                    <motion.div
+                        className={styles.formCol}
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        custom={0.15}
+                    >
+                        {status === "success" ? (
+                            <div className={styles.successBox}>
+                                <span className={styles.successIcon}>✦</span>
+                                <h3 className={styles.successTitle}>Application Received</h3>
+                                <p className={styles.successText}>
+                                    Thank you for your interest in joining The Design Theory. We will review your
+                                    application and reach out if there&#39;s a suitable opportunity.
+                                </p>
+                                <button
+                                    className={styles.resetBtn}
+                                    onClick={() => setStatus("idle")}
+                                >
+                                    Submit Another Application
+                                </button>
+                            </div>
+                        ) : (
+                            <form className={styles.form} onSubmit={handleSubmit} noValidate>
+                                <div className={styles.fieldRow}>
+                                    <div className={styles.fieldGroup}>
+                                        <label className={styles.label} htmlFor="name">Full Name *</label>
+                                        <input
+                                            id="name"
+                                            name="name"
+                                            type="text"
+                                            className={styles.input}
+                                            placeholder="Rachitha Modupalli"
+                                            value={form.name}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className={styles.fieldGroup}>
+                                        <label className={styles.label} htmlFor="contact">Contact Number *</label>
+                                        <input
+                                            id="contact"
+                                            name="contact"
+                                            type="tel"
+                                            className={styles.input}
+                                            placeholder="+91 98765 43210"
+                                            value={form.contact}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                </div>
 
-                    {/* ── CONTACT CTA ── */}
-                    <div className={styles.contactCtaBlock}>
-                        <h3 className={styles.contactCtaText}>
-                            Don’t see a suitable opening? <br />
-                            <a href="mailto:careers@thedesigntheory.in" className={styles.goldLink}>Send us your portfolio anyway.</a>
-                        </h3>
-                    </div>
+                                <div className={styles.fieldRow}>
+                                    <div className={styles.fieldGroup}>
+                                        <label className={styles.label} htmlFor="email">Email Address *</label>
+                                        <input
+                                            id="email"
+                                            name="email"
+                                            type="email"
+                                            className={styles.input}
+                                            placeholder="you@email.com"
+                                            value={form.email}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className={styles.fieldGroup}>
+                                        <label className={styles.label} htmlFor="designation">Designation / Role *</label>
+                                        <input
+                                            id="designation"
+                                            name="designation"
+                                            type="text"
+                                            className={styles.input}
+                                            placeholder="e.g. Interior Designer"
+                                            value={form.designation}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className={styles.fieldGroup}>
+                                    <label className={styles.label} htmlFor="message">Cover Note (Optional)</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        className={styles.textarea}
+                                        rows={4}
+                                        placeholder="Tell us a little about yourself and your experience..."
+                                        value={form.message}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
+                                {/* File Attachment */}
+                                <div className={styles.fieldGroup}>
+                                    <label className={styles.label}>Resume / Portfolio *</label>
+                                    <div
+                                        className={styles.fileUploadBox}
+                                        onClick={() => fileInputRef.current?.click()}
+                                    >
+                                        <input
+                                            ref={fileInputRef}
+                                            type="file"
+                                            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                            className={styles.fileInput}
+                                            onChange={handleFileChange}
+                                        />
+                                        <div className={styles.fileUploadInner}>
+                                            <span className={styles.fileUploadIcon}>📎</span>
+                                            <span className={styles.fileUploadText}>
+                                                {fileName || "Click to attach your Resume or Portfolio"}
+                                            </span>
+                                            <span className={styles.fileUploadHint}>
+                                                PDF, DOC, or Image — Max 5MB
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {status === "error" && (
+                                    <p className={styles.errorMsg}>⚠ {errorMsg}</p>
+                                )}
+
+                                <button
+                                    type="submit"
+                                    className={styles.submitBtn}
+                                    disabled={status === "loading"}
+                                >
+                                    {status === "loading" ? "Submitting..." : "Submit Application"}
+                                    <span className={styles.submitArrow}>→</span>
+                                </button>
+                            </form>
+                        )}
+                    </motion.div>
                 </div>
             </section>
 
-            {/* ── CLOSING STATEMENT ── */}
-            <section className={styles.closingSection}>
-                <div className={styles.closingInner}>
-                    <p className={styles.closingText}>
-                        "At The Design Theory, we don’t just design spaces - we create experiences, stories, and environments that reflect individuality and purpose. We value dedication, creativity, and integrity, and we look forward to welcoming talented professionals who share our passion."
-                    </p>
-                </div>
-            </section>
         </main>
     );
 }

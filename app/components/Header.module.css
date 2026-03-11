@@ -262,93 +262,52 @@
     padding-left: 28px;
 }
 
-/* ── User Area ── */
-.userArea {
+/* ── Right Actions (Social + Credential) ── */
+.headerRightActions {
     position: absolute;
     right: 48px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
+    gap: 24px;
 }
 
-.iconBtn {
-    background: none;
-    border: none;
-    cursor: pointer;
+.headerSocials {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.headerSocials a {
     color: inherit;
+    transition: color 0.3s ease, transform 0.3s ease;
     display: flex;
     align-items: center;
-    padding: 0;
-    transition: color 0.3s ease;
 }
 
-.iconBtn:hover {
+.headerSocials a:hover {
     color: var(--header-yellow);
+    transform: translateY(-2px);
 }
 
-/* User Dropdown */
-.userDropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 12px;
-    background-color: var(--header-purple);
-    border: 1px solid rgba(232, 197, 71, 0.15);
-    min-width: 200px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-    z-index: 100;
-    animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.userDropdownLinks {
-    display: flex;
-    flex-direction: column;
-}
-
-.userDropdownLink {
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.credentialBtn {
+    background-color: transparent;
+    border: 1px solid var(--header-yellow);
+    color: var(--header-yellow);
+    padding: 8px 16px;
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: #e8e4f0;
     text-decoration: none;
     transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.userDropdownLink:last-child {
-    border-bottom: none;
-}
-
-.userDropdownLink:hover {
+.credentialBtn:hover {
     background-color: var(--header-yellow);
     color: var(--header-purple-dark);
-    padding-left: 24px;
-}
-
-.userDropdownLink svg {
-    transition: transform 0.3s ease;
-}
-
-.userDropdownLink:hover svg {
-    transform: translateX(3px);
 }
 
 /* ==========================================
@@ -555,8 +514,12 @@
         height: 64px;
     }
 
-    .userArea {
+    .headerRightActions {
         right: 56px;
+    }
+
+    .headerSocials {
+        display: none; /* Hide socials on tablet/mobile if needed to save space */
     }
 
     .logoImg {

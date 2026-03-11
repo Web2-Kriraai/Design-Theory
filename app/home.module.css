@@ -2,66 +2,53 @@
    HOME PAGE — The Design Theory
    ========================================== */
 
-/* ---- Shared Gold CTA ---- */
-.goldCta {
+/* ── Shared Utility ── */
+.sectionEyebrow {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent-purple, #31275c);
+    margin-bottom: 16px;
+    display: block;
+}
+
+.textCta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-sans);
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--text-primary);
+    color: var(--text-primary, #3A3530);
     text-decoration: none;
-    position: relative;
+    border-bottom: 1px solid var(--text-primary, #3A3530);
     padding-bottom: 4px;
-    transition: color 0.3s ease;
-    width: fit-content;
-    border-bottom: none;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    margin-top: 32px;
 }
 
-.goldCta::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--accent-purple);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-}
-
-.goldCta:hover {
-    color: var(--accent-purple);
-}
-
-.goldCta:hover::after {
-    transform: scaleX(1);
-}
-
-.goldCta:hover .ctaArrow {
-    transform: translateX(5px);
-}
-
-.ctaArrow {
-    transition: transform 0.3s ease;
-    display: inline-block;
+.textCta:hover {
+    color: var(--accent-purple, #31275c);
+    border-color: var(--accent-purple, #31275c);
 }
 
 /* ==========================================
-   SECTION 1 — HERO
+   HERO
    ========================================== */
 .hero {
     position: relative;
     width: 100%;
     height: 100vh;
+    min-height: 600px;
     overflow: hidden;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 0 clamp(24px, 6vw, 100px) clamp(60px, 10vh, 120px);
 }
 
 .heroImageWrap {
@@ -71,558 +58,529 @@
 }
 
 .heroImg {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
+    object-position: center;
 }
 
 .heroOverlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg,
-            rgba(0, 0, 0, 0.25) 0%,
-            rgba(0, 0, 0, 0.08) 40%,
-            rgba(0, 0, 0, 0.35) 100%);
+    background: linear-gradient(
+        to top,
+        rgba(20, 16, 14, 0.75) 0%,
+        rgba(20, 16, 14, 0.3) 50%,
+        rgba(20, 16, 14, 0.1) 100%
+    );
     z-index: 1;
 }
 
 .heroText {
     position: relative;
     z-index: 2;
-    text-align: center;
-    color: #ffffff;
-    animation: heroFadeIn 1.2s ease both;
+    max-width: 800px;
 }
 
-@keyframes heroFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.heroEyebrow {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 20px;
+    display: block;
 }
 
 .heroTitle {
-    font-family: var(--font-serif);
-    font-size: 4.5rem;
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(3rem, 7vw, 6.5rem);
     font-weight: 300;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    font-style: normal;
     color: #ffffff;
-    line-height: 1.1;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 40px;
 }
 
-.heroTagline {
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-weight: 300;
-    font-style: normal;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.85;
-    color: #ffffff;
-    margin: 0;
-}
-
-/* Hero Indicators */
-.heroIndicators {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 12px;
-    z-index: 10;
-}
-
-.heroDot {
-    width: 30px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    padding: 0;
-}
-
-.heroDotActive {
-    background: #ffffff;
-    width: 50px;
-}
-
-/* ==========================================
-   SECTION 2 — INTRO TEXT
-   ========================================== */
-.intro {
-    padding: 120px 48px;
-    background: var(--bg-primary);
-}
-
-.introInner {
-    max-width: 780px;
-    margin: 0 auto;
-    text-align: center;
-    animation: fadeSlideUp 0.8s ease both;
-}
-
-@keyframes fadeSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(28px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.introText {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    font-weight: 300;
-    line-height: 2;
-    color: var(--text-muted);
+.heroTitle em {
     font-style: italic;
-    text-transform: none;
-    letter-spacing: 0.01em;
+    color: rgba(255, 255, 255, 0.85);
 }
 
-/* ==========================================
-   SECTION 3 — FEATURED PROJECTS
-   ========================================== */
-.featuredProjects {
-    padding: 100px 48px;
-    background: #ffffff;
-}
-
-.fpInner {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.fpImages {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.heroCtas {
+    display: flex;
+    align-items: center;
     gap: 24px;
-    margin-bottom: 56px;
+    flex-wrap: wrap;
 }
 
-.fpImageWrap {
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-    position: relative;
-}
-
-.fpImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.fpImageWrap:hover .fpImg {
-    transform: scale(1.04);
-}
-
-.fpContent {
-    max-width: 600px;
-    animation: fadeSlideUp 0.8s ease 0.2s both;
-}
-
-.sectionLabel {
-    font-family: var(--font-sans);
-    font-size: 0.68rem;
+.heroBtnPrimary {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent-purple);
-    margin-bottom: 12px;
+    color: #2D2926;
+    background: #fff;
+    text-decoration: none;
+    padding: 16px 36px;
+    display: inline-block;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-.serifHeading {
-    font-family: var(--font-serif);
-    font-size: 2.8rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary);
-    margin-bottom: 20px;
-    text-transform: none;
-    letter-spacing: normal;
-    line-height: 1.2;
+.heroBtnPrimary:hover {
+    background: var(--accent-purple, #31275c);
+    color: #fff;
 }
 
-.bodyText {
-    font-family: var(--font-sans);
-    font-size: 0.88rem;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--text-muted);
-    margin-bottom: 32px;
-    text-transform: none;
-    letter-spacing: 0.02em;
+.heroBtnSecondary {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 4px;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.heroBtnSecondary:hover {
+    border-color: #fff;
 }
 
 /* ==========================================
-   SECTION 4 — DESIGN PHILOSOPHY
+   ABOUT COMPANY
    ========================================== */
-.philosophy {
-    padding: 120px 48px;
-    background: var(--bg-primary);
+.aboutCompany {
+    padding: clamp(80px, 10vw, 140px) clamp(24px, 6vw, 100px);
+    background: #fff;
 }
 
-.philoInner {
-    max-width: 1200px;
+.aboutCompanyInner {
+    max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 72px;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+}
+
+.aboutCompanyTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 300;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.15;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.aboutCompanyBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.aboutCompanyBody p {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   ABOUT FOUNDER
+   ========================================== */
+.aboutFounder {
+    padding: clamp(80px, 10vw, 140px) clamp(24px, 6vw, 100px);
+    background: var(--bg-primary, #F9F8F6);
+}
+
+.founderInner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(40px, 6vw, 100px);
     align-items: center;
 }
 
-.philoImages {
+.founderImageCol {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
-.philoImgWrap {
-    overflow: hidden;
+.founderImageWrap {
     position: relative;
-}
-
-.philoImgWrap:first-child {
-    max-width: 85%;
-}
-
-.philoImgWrap:last-child {
-    max-width: 85%;
-    align-self: flex-end;
-}
-
-.philoImg {
     width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s ease;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
 }
 
-.philoImgWrap:hover .philoImg {
+.founderImage {
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.8s ease;
+}
+
+.founderImageWrap:hover .founderImage {
     transform: scale(1.03);
 }
 
-.philoText {
-    animation: fadeSlideUp 0.8s ease 0.15s both;
+.founderCaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 4px;
 }
 
-/* ==========================================
-   SECTION 5 — TESTIMONIALS
-   ========================================== */
-.testimonials {
-    padding: 120px 48px;
-    background: var(--bg-soft, #E8E1D7);
-}
-
-.testiInner {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.testiHeading {
-    font-family: var(--font-serif);
-    font-size: 2.8rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary);
-    margin-bottom: 56px;
-    text-transform: none;
+.founderName {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-primary, #3A3530);
     letter-spacing: normal;
-}
-
-.testiSlider {
-    position: relative;
-    min-height: 220px;
-}
-
-.testiSlide {
-    animation: fadeSlideUp 0.6s ease both;
-}
-
-.testiQuote {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 2;
-    color: var(--text-muted);
-    margin-bottom: 32px;
     text-transform: none;
-    letter-spacing: 0.01em;
-    position: relative;
 }
 
-.testiQuote::before {
-    content: '"';
-    font-size: 4rem;
-    color: var(--accent-purple);
-    position: absolute;
-    top: -28px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--font-serif);
-    line-height: 1;
-    opacity: 0.5;
-}
-
-.testiAuthor {
-    font-family: var(--font-sans);
-    font-size: 0.78rem;
+.founderRole {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--text-primary);
-    margin-bottom: 4px;
+    color: var(--accent-purple, #31275c);
 }
 
-.testiRole {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    letter-spacing: 0.06em;
-    text-transform: none;
-    margin: 0;
-}
-
-.testiDots {
+.founderTextCol {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    margin-top: 40px;
 }
 
-.testiDot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid var(--accent-purple);
-    background: transparent;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    padding: 0;
-}
-
-.testiDotActive {
-    background: var(--accent-purple);
-}
-
-/* ==========================================
-   SECTION 6 — FEATURED PROJECT
-   ========================================== */
-.featuredProject {
-    padding: 120px 48px;
-    background: var(--bg-primary);
-}
-
-.fpSingleInner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 72px;
-    align-items: center;
-}
-
-.fpSingleImgWrap {
-    overflow: hidden;
-    position: relative;
-}
-
-.fpSingleImg {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s ease;
-}
-
-.fpSingleImgWrap:hover .fpSingleImg {
-    transform: scale(1.03);
-}
-
-.fpSingleText {
-    animation: fadeSlideUp 0.8s ease 0.15s both;
-}
-
-/* ==========================================
-   SECTION 7 — ABOUT TEASER (uses component)
-   ========================================== */
-
-/* ==========================================
-   SECTION 8 — UTILITY GRID
-   ========================================== */
-.utilityGrid {
-    padding: 100px 48px;
-    background: #ffffff;
-}
-
-.ugInner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-}
-
-.ugBlock {
-    padding: 56px 48px;
-    border: 1px solid var(--border-color);
-    margin: -0.5px;
-    transition: background-color 0.3s ease;
-    animation: fadeSlideUp 0.6s ease both;
-}
-
-.ugBlock:nth-child(2) {
-    animation-delay: 0.1s;
-}
-
-.ugBlock:nth-child(3) {
-    animation-delay: 0.2s;
-}
-
-.ugBlock:nth-child(4) {
-    animation-delay: 0.3s;
-}
-
-.ugBlock:hover {
-    background-color: var(--bg-primary);
-}
-
-.ugHeading {
-    font-family: var(--font-serif);
-    font-size: 1.6rem;
+.founderHeading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
     font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary);
-    margin-bottom: 16px;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.15;
+    margin-bottom: 28px;
     text-transform: none;
     letter-spacing: normal;
 }
 
-.ugBody {
-    font-family: var(--font-sans);
+.founderHeading em {
+    font-style: italic;
+}
+
+.founderBio {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: clamp(0.88rem, 1.4vw, 1rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   PORTFOLIO
+   ========================================== */
+.portfolioSection {
+    background: #fff;
+}
+
+.portfolioHeader {
+    text-align: center;
+    padding: clamp(60px, 8vw, 100px) clamp(24px, 6vw, 100px) 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.portfolioTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.1;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-bottom: 0;
+}
+
+.portfolioCategory {
+    padding: clamp(40px, 6vw, 80px) clamp(24px, 6vw, 100px);
+    border-top: 1px solid var(--border-color, #E8E3DB);
+}
+
+.portfolioCategoryAlt {
+    background: var(--bg-primary, #F9F8F6);
+}
+
+.portfolioCategoryInner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: clamp(32px, 5vw, 80px);
+    align-items: center;
+}
+
+.portfolioCategoryAlt .portfolioCategoryInner {
+    grid-template-columns: 1fr 1.6fr;
+}
+
+.portfolioCategoryAlt .portfolioImages {
+    order: 2;
+}
+
+.portfolioCategoryAlt .portfolioCategoryText {
+    order: 1;
+}
+
+.portfolioImages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.portfolioImageWrap {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.portfolioImages .portfolioImageWrap:first-child {
+    margin-top: 32px;
+}
+
+.portfolioImage {
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.portfolioImageWrap:hover .portfolioImage {
+    transform: scale(1.05);
+}
+
+.portfolioCategoryText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px 0;
+}
+
+.portfolioCategoryLabel {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: none;
+    margin-bottom: 24px;
+}
+
+.viewMoreBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-primary, #3A3530);
+    text-decoration: none;
+    border: 1px solid var(--border-color, #E8E3DB);
+    padding: 14px 28px;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.viewMoreBtn:hover {
+    background: var(--accent-purple, #31275c);
+    color: #fff;
+    border-color: var(--accent-purple, #31275c);
+}
+
+/* ==========================================
+   DESIGN PHILOSOPHY + WORKFLOW
+   ========================================== */
+.philosophySection {
+    background: var(--bg-primary, #F9F8F6);
+    padding: clamp(80px, 10vw, 140px) clamp(24px, 6vw, 100px);
+    border-top: 1px solid var(--border-color, #E8E3DB);
+}
+
+.philosophyInner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+}
+
+.philosophyText {
+    position: sticky;
+    top: 130px;
+}
+
+.philosophyHeading {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.philosophyHeading em {
+    font-style: italic;
+}
+
+.philosophyBody {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: clamp(0.88rem, 1.4vw, 1rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+}
+
+/* Workflow Steps */
+.workflowSteps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.workflowStep {
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border-color, #E8E3DB);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 32px;
+    row-gap: 8px;
+    align-items: start;
+}
+
+.workflowStep:first-child {
+    border-top: 1px solid var(--border-color, #E8E3DB);
+}
+
+.workflowConnector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-top: 4px;
+}
+
+.workflowNum {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--accent-purple, #31275c);
+    opacity: 0.35;
+    line-height: 1;
+}
+
+.workflowLine {
+    display: none; /* kept for future horizontal layout toggle */
+}
+
+.workflowTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: none;
+    grid-column: 2;
+    margin-bottom: 4px;
+}
+
+.workflowDesc {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
     font-size: 0.85rem;
     font-weight: 300;
     line-height: 1.8;
-    color: var(--text-muted);
-    margin-bottom: 28px;
-    text-transform: none;
-    letter-spacing: 0.02em;
+    color: var(--text-muted, #6B6560);
+    grid-column: 2;
 }
 
 /* ==========================================
    RESPONSIVE
    ========================================== */
 @media (max-width: 1024px) {
-    .heroTitle {
-        font-size: 3.2rem;
-    }
-
-    .serifHeading,
-    .testiHeading {
-        font-size: 2.2rem;
-    }
-
-    .philoInner,
-    .fpSingleInner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        height: 85vh;
-    }
-
-    .heroTitle {
-        font-size: 2.2rem;
-        letter-spacing: 0.08em;
-    }
-
-    .heroTagline {
-        font-size: 0.78rem;
-    }
-
-    .intro {
-        padding: 80px 24px;
-    }
-
-    .introText {
-        font-size: 1.05rem;
-    }
-
-    .featuredProjects,
-    .philosophy,
-    .testimonials,
-    .featuredProject,
-    .utilityGrid {
-        padding: 80px 24px;
-    }
-
-    .fpImages {
-        grid-template-columns: 1fr;
-    }
-
-    .philoInner,
-    .fpSingleInner {
+    .aboutCompanyInner,
+    .philosophyInner {
         grid-template-columns: 1fr;
         gap: 40px;
     }
 
-    .ugInner {
+    .philosophyText {
+        position: static;
+    }
+
+    .founderInner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroCtas {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .portfolioCategoryInner,
+    .portfolioCategoryAlt .portfolioCategoryInner {
         grid-template-columns: 1fr;
     }
 
-    .ugBlock {
-        padding: 40px 28px;
+    .portfolioCategoryAlt .portfolioImages {
+        order: 1;
     }
 
-    .serifHeading {
-        font-size: 2rem;
+    .portfolioCategoryAlt .portfolioCategoryText {
+        order: 2;
     }
 
-    .testiHeading {
-        font-size: 2rem;
+    .portfolioImages .portfolioImageWrap:first-child {
+        margin-top: 0;
     }
 
-    .testiQuote {
-        font-size: 1.1rem;
+    .workflowStep {
+        grid-template-columns: 48px 1fr;
+        column-gap: 16px;
     }
 }
 
 @media (max-width: 480px) {
     .heroTitle {
-        font-size: 1.6rem;
+        font-size: 2.8rem;
     }
 
-    .heroTagline {
-        font-size: 0.72rem;
+    .aboutCompanyTitle,
+    .founderHeading,
+    .philosophyHeading {
+        font-size: 2.2rem;
     }
 
-    .introText {
-        font-size: 0.95rem;
+    .portfolioImages {
+        grid-template-columns: 1fr;
     }
 
-    .serifHeading {
-        font-size: 1.7rem;
+    .portfolioImages .portfolioImageWrap:first-child {
+        margin-top: 0;
     }
 }

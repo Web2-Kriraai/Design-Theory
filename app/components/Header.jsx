@@ -3,33 +3,19 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "./AnimatedImage";
 import { usePathname } from "next/navigation";
-import { useSession, signOut } from "next-auth/react";
 import styles from "./Header.module.css";
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
-    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const pathname = usePathname();
-    const { data: session } = useSession();
-    const userMenuRef = React.useRef(null);
     const isHomePage = pathname === "/";
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 30);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
-                setIsUserMenuOpen(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
     // Lock body scroll when mobile menu open
@@ -103,23 +89,6 @@ export default function Header() {
 
                 {/* Right Navigation */}
                 <nav className={`${styles.navRight} ${styles.desktopNav}`}>
-                    {/* Inspiration (dropdown) */}
-                    <div
-                        className={styles.navItem}
-                        onMouseEnter={() => handleMouseEnter('inspiration')}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        <button className={styles.navBtn} onClick={() => toggleDropdown('inspiration')}>
-                            Inspiration
-                            <svg className={styles.chevron} width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
-                        </button>
-                        <div className={`${styles.dropdownContent} ${activeDropdown === 'inspiration' ? styles.showDropdown : ''}`}>
-                            <Link href="/blog">Blog</Link>
-                            <a href="https://www.instagram.com/the.designtheory/?hl=en" target="_blank" rel="noopener noreferrer">Instagram</a>
-                            <a href="https://in.linkedin.com/company/the-design-theory-in" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                        </div>
-                    </div>
-
                     {/* Contact */}
                     <div className={styles.navItem}>
                         <Link href="/contact">Contact</Link>
@@ -131,44 +100,28 @@ export default function Header() {
                     </div>
                 </nav>
 
-                {/* User icon — far right */}
-                <div className={styles.userArea} ref={userMenuRef}>
-                    <button
-                        className={styles.iconBtn}
-                        onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    >
-                        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg>
-                    </button>
-
-                    {isUserMenuOpen && (
-                        <div className={styles.userDropdown}>
-                            <div className={styles.userDropdownLinks}>
-                                {session ? (
-                                    <>
-                                        {session?.user?.role === "admin" && (
-                                            <Link href="/dashboard" className={styles.userDropdownLink} onClick={() => setIsUserMenuOpen(false)}>
-                                                <span>Studio Dashboard</span>
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                                            </Link>
-                                        )}
-                                        <button
-                                            onClick={() => signOut({ callbackUrl: "/auth" })}
-                                            className={styles.userDropdownLink}
-                                            style={{ width: "100%", background: "transparent", border: "none", outline: "none", cursor: "pointer", textAlign: "left", color: "#c0392b", padding: "12px 16px" }}
-                                        >
-                                            <span>Sign Out</span>
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></svg>
-                                        </button>
-                                    </>
-                                ) : (
-                                    <Link href="/auth" className={styles.userDropdownLink} onClick={() => setIsUserMenuOpen(false)}>
-                                        <span>Login / Sign-up</span>
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" /></svg>
-                                    </Link>
-                                )}
-                            </div>
-                        </div>
-                    )}
+                {/* Social & Credential — far right */}
+                <div className={styles.headerRightActions}>
+                    <div className={styles.headerSocials}>
+                        <a href="https://www.facebook.com/studiodesigntheory/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/the.designtheory/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="https://in.linkedin.com/company/the-design-theory-in" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.989v-10.1c0-7.865-8.801-7.601-10.132-5.127v-1.173z" />
+                            </svg>
+                        </a>
+                    </div>
+                    {/* <a href="https://credentials.thedesigntheory.in" target="_blank" rel="noopener noreferrer" className={styles.credentialBtn}>
+                        Dashboard
+                    </a> */}
                 </div>
 
             </div>
@@ -207,43 +160,16 @@ export default function Header() {
 
                     <Link href="/portfolio" className={styles.mobileNavLink} onClick={toggleMobileMenu}>Portfolio</Link>
 
-                    <div className={styles.mobileNavItem}>
-                        <div className={styles.mobileNavTitle} onClick={() => toggleDropdown('inspiration')}>
-                            Inspiration <span className={styles.toggleIcon}>{activeDropdown === 'inspiration' ? '−' : '+'}</span>
-                        </div>
-                        {activeDropdown === 'inspiration' && (
-                            <div className={styles.mobileSubNav}>
-                                <Link href="/blog" onClick={toggleMobileMenu}>Blog</Link>
-                                <a href="https://www.instagram.com/the.designtheory/?hl=en" target="_blank" rel="noopener noreferrer" onClick={toggleMobileMenu}>Instagram</a>
-                                <a href="https://in.linkedin.com/company/the-design-theory-in" target="_blank" rel="noopener noreferrer" onClick={toggleMobileMenu}>LinkedIn</a>
-                            </div>
-                        )}
-                    </div>
-
                     <Link href="/contact" className={styles.mobileNavLink} onClick={toggleMobileMenu}>Contact</Link>
                     <Link href="/careers" className={styles.mobileNavLink} onClick={toggleMobileMenu}>Careers</Link>
                 </div>
 
                 <div className={styles.mobileFooter}>
-                    {session ? (
-                        <div className={styles.mobileFooterActions}>
-                            {session?.user?.role === "admin" && (
-                                <Link href="/dashboard" className={styles.mobileAccessBtn} onClick={toggleMobileMenu}>
-                                    Studio Dashboard
-                                </Link>
-                            )}
-                            <button
-                                className={`${styles.mobileAccessBtn} ${styles.mobileSignOut}`}
-                                onClick={() => { toggleMobileMenu(); signOut({ callbackUrl: "/auth" }); }}
-                            >
-                                Sign Out
-                            </button>
-                        </div>
-                    ) : (
-                        <Link href="/auth" className={styles.mobileAccessBtn} onClick={toggleMobileMenu}>
-                            Login / Sign-up
-                        </Link>
-                    )}
+                    <div className={styles.mobileFooterActions}>
+                        <a href="https://credentials.thedesigntheory.in" target="_blank" rel="noopener noreferrer" className={styles.mobileAccessBtn} onClick={toggleMobileMenu}>
+                            Studio Dashboard
+                        </a>
+                    </div>
                 </div>
             </div>
         </header>

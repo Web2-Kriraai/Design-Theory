@@ -25,7 +25,6 @@ export default function AboutTeaser() {
                 {/* Text Side */}
                 <div className={styles.textWrap}>
                     <p className={styles.label}>The Design Theory</p>
-                    <h2 className={styles.heading}>About</h2>
                     <p className={styles.body}>
                         Founded by <strong>Rachitha Modupalli</strong>, an ambitious B.Arch
                         graduate, The Design Theory was created with a vision to design

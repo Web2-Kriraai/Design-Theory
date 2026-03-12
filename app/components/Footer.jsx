@@ -34,7 +34,7 @@ export default function Footer() {
                                     </svg>
                                 </span>
                                 <span>
-                                    1-64/205,Block-B, <br />Begumpet,Guttala Begumpet,<br />Kavuri Hills, Madhapur,<br />Hyderabad,Telangana-500081
+                                    1-64/205, Block-B, <br />Begumpet,Guttala Begumpet,<br />Kavuri Hills, Madhapur,<br />Hyderabad,Telangana-500081 <br /> India.
                                 </span>
                             </div>
                             <div className={styles.addressRow}>

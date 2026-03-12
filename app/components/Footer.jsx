@@ -34,9 +34,7 @@ export default function Footer() {
                                     </svg>
                                 </span>
                                 <span>
-                                    1st Floor, Krishnaveer's Euphoria<br />
-                                    Jubilee Enclave, Madhapur<br />
-                                    Hyderabad, Telangana, India – 500084
+                                    1-64/205,Block-B, <br />Begumpet,Guttala Begumpet,<br />Kavuri Hills, Madhapur,<br />Hyderabad,Telangana-500081
                                 </span>
                             </div>
                             <div className={styles.addressRow}>

@@ -109,11 +109,11 @@ export default function ContactPage() {
                             </span>
                             <address className={styles.address}>
                                 <strong>The Design Theory</strong><br />
-                                Block-B, Plot No. 1-64/205<br />
-                                Kavuri Hills Road<br />
-                                Kavuri Hills, Madhapur<br />
-                                Hyderabad, Telangana – 500033<br />
-                                India
+                                1-64/205, Block-B, <br />
+                                Begumpet, Guttala Begumpet, <br />
+                                Kavuri Hills, Madhapur, <br />
+                                Hyderabad, Telangana-500081<br />
+                                India.
                             </address>
                         </div>
 

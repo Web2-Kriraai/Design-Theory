@@ -99,7 +99,7 @@ const ServiceBlock = ({ section, index }) => {
                             <span className={styles.edIndex}>0{index + 1}</span>
                             <span className={styles.edLabel}>{section.label}</span>
                         </div>
-                        
+
                         <h2 className={styles.edTitle}>{section.title}</h2>
                         <p className={styles.edDescription}>{section.description}</p>
 
@@ -157,15 +157,54 @@ export default function ServicesPage() {
                     transition={{ delay: 0.2 }}
                     className={styles.title}
                 >
-                    Design <i>Philosophy</i>
+                    Our <i>Expertise</i>
                 </motion.h1>
-                <div className={styles.introText}>
-                    <p>At The Design Theory, architecture and interior design are seamlessly interwoven to create spaces that are thoughtful, functional, and visually compelling. We believe a well-designed space begins with strong architectural planning and evolves through carefully curated interiors that reflect the client's personality and lifestyle.</p>
-                    <p style={{ marginTop: '1rem' }}>Our approach focuses on designing spaces that are not only aesthetically refined but also practical and sustainable. From conceptual planning and space optimisation to detailed interior styling and execution, we ensure that every element works harmoniously to create a cohesive design narrative.</p>
-                    <p style={{ marginTop: '1rem' }}>We collaborate closely with our clients throughout the design journey, translating their vision into spaces that are timeless, comfortable, and inspiring. Whether designing residential homes, luxury villas, apartments, or commercial workspaces, our team delivers tailor-made solutions that balance creativity with functionality.</p>
-                    <p style={{ marginTop: '1rem' }}>Our expertise covers layout planning, material selection, lighting design, furniture planning, colour consultation, and complete project execution. We pay meticulous attention to detailing, ensuring that every corner of the space contributes to a unified and sophisticated outcome.</p>
-                    <p style={{ marginTop: '1rem' }}>At The Design Theory, we believe that architecture forms the foundation, while interiors bring life, warmth, and identity to the space — together creating environments that elevate everyday living.</p>
-                </div>
+                <motion.div
+                    className={styles.fourBoxGrid}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                >
+                    {/* ROW 1 */}
+                    <div className={`${styles.textWrap} ${styles.text1}`}>
+                        <p className={styles.boxDesc}>We begin by understanding your unique vision, lifestyle, and operational needs to develop a comprehensive structural blueprint.</p>
+                    </div>
+                    <div className={`${styles.coloredBox} ${styles.boxPurple} ${styles.box1}`}>
+                        <div className={styles.boxIcon}>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        </div>
+                        <h3 className={styles.boxHeadline}>Consultation</h3>
+                    </div>
+                    <div className={`${styles.coloredBox} ${styles.boxDark} ${styles.box2}`}>
+                        <div className={styles.boxIcon}>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        </div>
+                        <h3 className={styles.boxHeadline}>Architecture</h3>
+                    </div>
+                    <div className={`${styles.textWrap} ${styles.text2}`}>
+                        <p className={styles.boxDesc}>Our approach focuses on designing environments that are aesthetically refined and built upon a foundation of structural harmony.</p>
+                    </div>
+
+                    {/* ROW 2 */}
+                    <div className={`${styles.textWrap} ${styles.text3}`}>
+                        <p className={styles.boxDesc}>From bespoke furnishings and curated materials to precise lighting design, we meticulously execute every detail.</p>
+                    </div>
+                    <div className={`${styles.coloredBox} ${styles.boxLight} ${styles.box3}`}>
+                        <div className={styles.boxIcon}>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg>
+                        </div>
+                        <h3 className={styles.boxHeadline}>Execution</h3>
+                    </div>
+                    <div className={`${styles.coloredBox} ${styles.boxGold} ${styles.box4}`}>
+                        <div className={styles.boxIcon}>
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                        </div>
+                        <h3 className={styles.boxHeadline}>Impressions</h3>
+                    </div>
+                    <div className={`${styles.textWrap} ${styles.text4}`}>
+                        <p className={styles.boxDesc}>We focus on the emotional resonance of a space, crafting environments that leave a striking impact and elevate everyday experiences.</p>
+                    </div>
+                </motion.div>
             </header>
 
             {/* Editorial Sections */}

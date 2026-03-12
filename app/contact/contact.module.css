@@ -30,7 +30,7 @@
 }
 
 .pageLabel {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.22em;
@@ -179,7 +179,7 @@
 }
 
 .label {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.75rem;
     text-transform: uppercase;
     font-weight: 700;
@@ -192,9 +192,9 @@
 }
 
 .input {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.85rem;
-    font-weight: 300;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 400;
     color: var(--text-primary, #3A3530);
     background: transparent;
     border: none;
@@ -206,7 +206,6 @@
     letter-spacing: 0.02em;
     text-transform: none;
     border-radius: 0;
-    appearance: none;
 }
 
 .input::placeholder {
@@ -243,7 +242,7 @@
     gap: 10px;
     background: var(--text-primary, #3A3530);
     color: #fff;
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.18em;

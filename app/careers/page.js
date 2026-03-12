@@ -259,7 +259,7 @@ export default function CareersPage() {
             </section>
 
             {/* ── CURRENT OPENINGS ── */}
-            <section className={styles.openingsSection}>
+            {/* <section className={styles.openingsSection}>
                 <div className={styles.openingsInner}>
                     <motion.p
                         className={styles.sectionEyebrow}
@@ -298,7 +298,7 @@ export default function CareersPage() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* ── APPLICATION FORM ── */}
             <section id="apply" className={styles.formSection}>

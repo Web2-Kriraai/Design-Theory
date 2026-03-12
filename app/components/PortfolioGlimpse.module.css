@@ -1,0 +1,129 @@
+/* ==========================================
+   PORTFOLIO GLIMPSE
+   ========================================== */
+
+.glimpseSection {
+    background: #fff;
+    padding: clamp(60px, 8vw, 100px) 0;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid #EAE6DF;
+}
+
+.glimpseHeader {
+    text-align: center;
+    margin-bottom: clamp(40px, 6vw, 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+}
+
+.glimpseTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--text-primary, #3A3530);
+    line-height: 1.15;
+    margin: 0;
+}
+
+.glimpseLink {
+    font-family: var(--font-accent, 'Didot', serif);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-primary, #3A3530);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-primary, #3A3530);
+    padding-bottom: 4px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.glimpseLink:hover {
+    color: var(--accent-purple, #31275c);
+    border-color: var(--accent-purple, #31275c);
+}
+
+.marqueeContainer {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+}
+
+.marqueeTrack {
+    display: inline-flex;
+    gap: 24px;
+    padding-right: 24px;
+    animation: scroll 45s linear infinite;
+}
+
+.reverseTrack {
+    animation-direction: reverse;
+    animation-duration: 55s; /* slightly slower for visual variety */
+}
+
+/* Hover pauses the animation (optional but good for UX) */
+.marqueeContainer:hover .marqueeTrack {
+    animation-play-state: paused;
+}
+
+.imageCard {
+    position: relative;
+    width: clamp(260px, 20vw, 400px);
+    aspect-ratio: 4 / 3;
+    flex-shrink: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #F9F7F2;
+    transition: transform 0.4s ease;
+}
+
+/* Alternate row sizes or aspect ratios for masonry feel */
+.reverseTrack .imageCard {
+    aspect-ratio: 3 / 4;
+    width: clamp(220px, 16vw, 320px);
+}
+
+.imageCard:hover {
+    transform: scale(0.98);
+}
+
+.image {
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
+}
+
+.imageCard:hover .image {
+    transform: scale(1.05);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .marqueeTrack {
+        gap: 16px;
+        padding-right: 16px;
+    }
+    .imageCard {
+        width: 220px;
+    }
+    .reverseTrack .imageCard {
+        width: 180px;
+    }
+}

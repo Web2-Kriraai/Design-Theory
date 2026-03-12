@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400&family=Prata&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -12,9 +12,10 @@
   --accent-yellow: #EAB308;
   --border-color: #D6CDC4;
 
-  /* ── Typography ── */
-  --font-serif: 'Cormorant Garamond', serif;
-  --font-sans: 'Montserrat', sans-serif;
+  /* ── Typography (Editorial All-Serif Stack) ── */
+  --font-serif: 'Canela', 'Playfair Display', serif;
+  --font-sans: 'Cormorant Garamond', serif; /* Body text mapped to standard font-sans variable */
+  --font-accent: 'Didot', 'Bodoni Moda', 'Prata', serif;
   --font-script: 'Great Vibes', cursive;
 
   /* ── Transitions ── */
@@ -38,11 +39,13 @@ html {
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-sans);
-  font-size: 15px;
-  letter-spacing: 0.02em;
-  line-height: 1.7;
+  font-family: var(--font-sans); /* Actually Cormorant Garamond now */
+  font-size: 16px; /* Slightly bumped for serif readability */
+  letter-spacing: 0.01em;
+  line-height: 1.6;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,

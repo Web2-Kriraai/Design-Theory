@@ -60,6 +60,17 @@ function DetailModal({ item, type, onClose }) {
             { label: "Message", value: item.message },
             { label: "Submitted", value: item.createdAt ? new Date(item.createdAt).toLocaleString() : "—" },
         ]
+        : type === "career"
+            ? [
+                { label: "Name", value: item.name },
+                { label: "Email", value: item.email },
+                { label: "Contact", value: item.contact },
+                { label: "Designation", value: item.designation },
+                { label: "Status", value: item.status },
+                { label: "Message", value: item.message },
+                { label: "Resume/CV", value: item.attachmentUrl ? <a href={item.attachmentUrl} target="_blank" rel="noopener noreferrer" style={{ color: "#31275c", textDecoration: "underline" }}>View Attachment</a> : "None" },
+                { label: "Submitted", value: item.createdAt ? new Date(item.createdAt).toLocaleString() : "—" },
+            ]
         : type === "user"
             ? [
                 { label: "Name", value: item.name },
@@ -235,7 +246,13 @@ export default function DashboardPage() {
     );
     const portfolioProjects = portfolioData?.projects || [];
 
-    const loadingTab = loadingEnquiries || loadingUsers || loadingSubscribers || loadingPortfolio;
+    const { data: careersData, isLoading: loadingCareers } = useSWR(
+        shouldFetchTab("careers") ? "/api/careers" : null,
+        fetcher
+    );
+    const careers = careersData?.applications || [];
+
+    const loadingTab = loadingEnquiries || loadingUsers || loadingSubscribers || loadingPortfolio || loadingCareers;
 
     const deleteEnquiry = async (id) => {
         if (!confirm("Delete this enquiry?")) return;
@@ -252,6 +269,28 @@ export default function DashboardPage() {
             await fetch(`/api/users?id=${id}`, { method: "DELETE" });
             return fetcher("/api/users");
         }, { optimisticData: { users: users.filter(u => u._id !== id) } });
+    };
+
+    const deleteCareer = async (id) => {
+        if (!confirm("Delete this career application?")) return;
+        mutate("/api/careers", async () => {
+            await fetch(`/api/careers?id=${id}`, { method: "DELETE" });
+            return fetcher("/api/careers");
+        }, { optimisticData: { applications: careers.filter(c => c._id !== id) } });
+        mutate("/api/dashboard/stats");
+    };
+
+    const updateCareerStatus = async (id, newStatus) => {
+        try {
+            await fetch(`/api/careers/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: newStatus }),
+            });
+            mutate("/api/careers");
+        } catch (error) {
+            console.error("Error updating career status: ", error);
+        }
     };
 
     const deleteSubscriber = async (id) => {
@@ -298,6 +337,7 @@ export default function DashboardPage() {
         { key: "enquiries", label: `Enquiries${stats.totalEnquiries ? ` (${stats.totalEnquiries})` : ""}` },
         { key: "users", label: "Users" },
         { key: "subscribers", label: `Subscribers${stats.totalSubscribers ? ` (${stats.totalSubscribers})` : ""}` },
+        { key: "careers", label: `Career Apps${stats.totalCareers ? ` (${stats.totalCareers})` : ""}` },
     ];
 
     if (isAdmin) {
@@ -316,6 +356,24 @@ export default function DashboardPage() {
         { key: "email", label: "Email" },
         { key: "phoneNumber", label: "Phone" },
         { key: "projectType", label: "Project" },
+        { key: "createdAt", label: "Date", render: v => v ? new Date(v).toLocaleDateString() : "—" },
+    ];
+
+    const careerCols = [
+        { key: "name", label: "Applicant" },
+        { key: "designation", label: "Role" },
+        { key: "status", label: "Status", render: (v, r) => (
+            <select
+                value={v || "pending"}
+                onChange={(e) => updateCareerStatus(r._id, e.target.value)}
+                style={{ padding: "4px 8px", fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: "0.1em", border: "1px solid #EAE6DF", background: v === "reviewed" ? "#e0f2fe" : v === "shortlisted" ? "#dcfce7" : v === "rejected" ? "#fee2e2" : "#fef3c7" }}
+            >
+                <option value="pending">Pending</option>
+                <option value="reviewed">Reviewed</option>
+                <option value="shortlisted">Shortlisted</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        )},
         { key: "createdAt", label: "Date", render: v => v ? new Date(v).toLocaleDateString() : "—" },
     ];
 
@@ -389,9 +447,9 @@ export default function DashboardPage() {
                     style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "20px", marginBottom: "48px" }}
                 >
                     <motion.div variants={item}><StatCard icon={<MessageSquare size={20} />} label="Enquiries" value={stats.totalEnquiries} dark /></motion.div>
+                    <motion.div variants={item}><StatCard icon={<Briefcase size={20} />} label="Applications" value={stats.totalCareers || 0} /></motion.div>
                     <motion.div variants={item}><StatCard icon={<Bell size={20} />} label="Subscribers" value={stats.totalSubscribers} /></motion.div>
-                    <motion.div variants={item}><StatCard icon={<Users size={20} />} label="Registered Users" value={stats.totalUsers || 0} gold /></motion.div>
-                    <motion.div variants={item}><StatCard icon={<Activity size={20} />} label="Admin Role" value={session?.user?.role || "admin"} /></motion.div>
+                    <motion.div variants={item}><StatCard icon={<Users size={20} />} label="Users" value={stats.totalUsers || 0} gold /></motion.div>
                 </motion.div>
 
                 {/* ── TABS ── */}
@@ -468,7 +526,7 @@ export default function DashboardPage() {
                                             </p>
                                         </div>
                                         <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginTop: "24px" }}>
-                                            {[["enquiries", "View Enquiries"], ["users", "Manage Users"], ["subscribers", "Subscribers"]].map(([tab, lbl]) => (
+                                            {[["enquiries", "View Enquiries"], ["users", "Manage Users"], ["careers", "Career Apps"]].map(([tab, lbl]) => (
                                                 <button key={tab} onClick={() => setActiveTab(tab)}
                                                     style={{ padding: "12px 16px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", fontFamily: "sans-serif", fontSize: "0.6rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.3em", cursor: "pointer", textAlign: "left", transition: "all 0.2s" }}
                                                     onMouseEnter={e => e.currentTarget.style.background = "rgba(49, 39, 92, 0.2)"}
@@ -559,6 +617,26 @@ export default function DashboardPage() {
                                         onDelete={deleteSubscriber}
                                         loading={loadingTab}
                                         emptyText="No subscribers yet."
+                                    />
+                                </div>
+                            </motion.div>
+                        )}
+
+                        {/* ── CAREERS TAB ── */}
+                        {activeTab === "careers" && (
+                            <motion.div key="careers" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}>
+                                <div style={{ background: "white", border: "1px solid #EAE6DF" }}>
+                                    <div style={{ padding: "24px 32px", borderBottom: "1px solid #EAE6DF" }}>
+                                        <h2 style={{ fontFamily: "var(--font-primary, serif)", fontSize: "1.4rem", color: "#2D2926", margin: 0 }}>Career Applications</h2>
+                                        <p style={{ fontFamily: "sans-serif", fontSize: "0.7rem", color: "#999", margin: "4px 0 0", letterSpacing: "0.05em" }}>{careers.length} applications received</p>
+                                    </div>
+                                    <DataTable
+                                        rows={careers}
+                                        columns={careerCols}
+                                        onDelete={deleteCareer}
+                                        onView={r => { setSelectedItem(r); setSelectedType("career"); }}
+                                        loading={loadingTab}
+                                        emptyText="No career applications yet."
                                     />
                                 </div>
                             </motion.div>

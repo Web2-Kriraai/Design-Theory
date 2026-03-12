@@ -4,28 +4,225 @@
 
 .page {
     background: var(--bg-primary, #F9F8F6);
-    min-height: 100vh;
+    overflow: hidden;
 }
 
-/* ── PAGE HEADER ── */
-.pageHeader {
-    text-align: center;
-    padding: 160px 48px 80px;
-    max-width: 900px;
-    margin: 0 auto;
-    animation: fadeUp 0.8s ease both;
+/* ── SNAP SCROLLING CONTAINER ── */
+.snapWrapper {
+    /* height: 100vh; */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
 }
 
+/* Each section is one full viewport slide on desktop */
+.snapSection {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #ffffff;
+}
+
+/* ── KEYFRAMES ── */
 @keyframes fadeUp {
     from {
         opacity: 0;
         transform: translateY(24px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ══════════════════════════════════════════
+   EXTRACTED PHOTO SIZES & DIMENSIONS
+   ══════════════════════════════════════════ */
+
+/* IMAGE SIZE REFERENCE:
+   ==========================================
+   Desktop (≥ 1024px):
+   - Standard image sections: 100vh height, 50vw width
+   - Founder image: 100vh height, 50vw width
+   - Object-fit: cover (crops to fill)
+   - Object-position: center center (standard) / top center (founder)
+   
+   Tablet (≤ 1024px):
+   - Standard image sections: 60vw height (min 300px)
+   - Founder image: 80vw height (min 320px)
+   
+   Mobile (≤ 480px):
+   - Standard image sections: 70vw height
+   - Founder image: 100vw height
+   ========================================== */
+
+/* ══════════════════════════════════════════
+   SECTION 1: STATS INTRO
+   ══════════════════════════════════════════ */
+.statsSection {
+    background: #ffffff;
+    align-items: center;
+}
+
+.statsInner {
+    width: 100%;
+    height: 100%;
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+    padding: 0 7%;
+    align-items: center;
+}
+
+.statsLeft {
+    padding-right: 8%;
+    border-right: 1px solid var(--border-color, #E8E3DB);
+}
+
+.statsTitle {
+    font-family: var(--font-accent, 'Didot', 'Cormorant Garamond', serif);
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    font-weight: 400;
+    color: var(--header-yellow, #C19A5B);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+}
+
+.statsRight {
+    padding-left: 8%;
+    overflow-y: auto;
+    max-height: 90vh;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.statsIntroText {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    line-height: 1.8;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 20px;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 48px;
+}
+
+.statBox {
+    padding: 36px 32px 36px 0;
+    border-top: 1px solid var(--border-color, #E8E3DB);
+}
+
+.statBox:nth-child(even) {
+    padding-left: 32px;
+    padding-right: 0;
+    border-left: 1px solid var(--border-color, #E8E3DB);
+}
+
+.statNumber {
+    font-family: var(--font-accent, 'Didot', serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    color: var(--header-yellow, #C19A5B);
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.statLabel {
+    font-family: var(--font-accent, 'Didot', serif);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 400;
+    color: var(--header-yellow, #C19A5B);
+    line-height: 1.05;
+    margin-bottom: 12px;
+}
+
+.statDesc {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.82rem;
+    color: var(--text-primary, #3A3530);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════
+   SECTIONS 2 & 3: CONTAINED IMAGE + TEXT
+   Matches reference: centered box, image left,
+   text right, white margins, fixed image height.
+   ══════════════════════════════════════════ */
+.section {
+    background: #ffffff;
+}
+
+.sectionAlt {
+    background: var(--bg-primary, #F9F8F6);
+}
+
+/* CONTAINED 50/50 GRID — centered max-width, image + text side by side */
+.inner,
+.innerRev {
+    display: grid;
+    grid-template-columns: 1fr 1fr;    /* 50/50 split */
+    width: 100%;
+    max-width: 1200px;                 /* Contained, not full-bleed */
+    margin: 0 auto;                    /* Centered */
+    gap: 80px;                         /* Gap between image and text */
+    align-items: center;               /* Vertically center text beside image */
+    padding: 0 48px;                   /* Side breathing room */
+    height: 100%;                      /* Fill snap section height */
+    align-self: center;                /* Center inside snap section grid */
+}
+
+.innerRev {
+    direction: rtl;
+}
+
+.innerRev > * {
+    direction: ltr;
+}
+
+/* IMAGE — fixed height, naturally sized (NOT viewport bleed) */
+.imageWrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 3 / 4;               /* Portrait-style like the reference image */
+    max-height: 75vh;                  /* Never taller than most of the screen */
+    border-radius: 2px;                /* Subtle rounding */
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.imageWrapHover:hover .image {
+    transform: scale(1.04);
+}
+
+.image {
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 0.7s ease;
+}
+
+/* TEXT CONTENT — natural left-aligned block */
+.textContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;                        /* No extra padding — gap handles spacing */
+    overflow-y: visible;
 }
 
 .pageLabel {
@@ -38,216 +235,28 @@
     margin-bottom: 12px;
 }
 
-.pageTitle {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 3.8rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary, #3A3530);
-    margin-bottom: 32px;
-    text-transform: none;
-    letter-spacing: 0.02em;
-    line-height: 1.15;
-}
-
-.introText {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--text-muted, #6B6560);
-    text-transform: none;
-    letter-spacing: 0.02em;
-    text-align: left;
-    margin-bottom: 24px;
-}
-
-/* ── SECTION: ZIG-ZAG LAYOUT ── */
-.section {
-    padding: 100px 48px;
-    background: #ffffff;
-}
-
-.sectionAlt {
-    padding: 100px 48px;
-    background: var(--bg-primary, #F9F8F6);
-}
-
-.inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-/* Reverse grid for alternate sections */
-.innerRev {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    direction: rtl;
-}
-
-.innerRev>* {
-    direction: ltr;
-    /* reset text direction */
-}
-
-/* TEXT CONTENT */
-.textContent {
-    animation: fadeUp 0.8s ease 0.15s both;
-}
-
 .heading {
     font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2.8rem;
+    font-size: clamp(2.2rem, 3.2vw, 3rem);
     font-weight: 300;
     font-style: italic;
     color: var(--text-primary, #3A3530);
-    margin-bottom: 24px;
-    text-transform: none;
-    letter-spacing: normal;
+    margin-bottom: 28px;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
 }
 
 .bodyText {
     font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.95rem;
+    font-size: clamp(0.87rem, 1.1vw, 0.97rem);
     font-weight: 300;
-    line-height: 1.9;
+    line-height: 2;
     color: var(--text-muted, #6B6560);
-    margin-bottom: 24px;
-    text-transform: none;
-    letter-spacing: 0.02em;
+    margin-bottom: 18px;
+    letter-spacing: 0.025em;
 }
 
-/* IMAGE WRAPPERS */
-.imageWrap {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    animation: fadeUp 0.8s ease both;
-}
-
-.imageWrapHover:hover .image {
-    transform: scale(1.03);
-}
-
-.image {
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-/* ── FOUNDER SECTION ── */
-.founderProfile {
-    padding: 120px 48px;
-    background: var(--bg-primary, #F9F8F6);
-}
-
-.founderInner {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-}
-
-.founderHeader {
-    text-align: left;
-    margin-top: 24px;
-}
-
-.founderTitle {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: 2.2rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--text-primary, #3A3530);
-    margin-bottom: 8px;
-    text-transform: none;
-    letter-spacing: normal;
-}
-
-.founderSubtitle {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent-purple, #31275c);
-    margin-bottom: 0;
-}
-
-.founderContent {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 80px;
-    align-items: flex-start;
-}
-
-.imageCol {
-    display: flex;
-    flex-direction: column;
-}
-
-.founderImageWrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-    border: 1px solid var(--border-color, #E5E2DE);
-    padding: 8px;
-    background: #fff;
-}
-
-.founderImageInner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* Gold corner accents */
-.cornerTL,
-.cornerBR {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.cornerTL {
-    top: 16px;
-    left: 16px;
-    border-top: 2px solid var(--accent-purple, #31275c);
-    border-left: 2px solid var(--accent-purple, #31275c);
-}
-
-.cornerBR {
-    bottom: 16px;
-    right: 16px;
-    border-bottom: 2px solid var(--accent-purple, #31275c);
-    border-right: 2px solid var(--accent-purple, #31275c);
-}
-
-.founderText p {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.95rem;
-    font-weight: 300;
-    line-height: 1.9;
-    color: var(--text-muted, #6B6560);
-    margin-bottom: 24px;
-    text-transform: none;
-    letter-spacing: 0.02em;
-}
-
-/* ---- CTA Link ---- */
+/* CTA Link */
 .goldCta {
     display: inline-flex;
     align-items: center;
@@ -261,10 +270,9 @@
     text-decoration: none;
     position: relative;
     padding-bottom: 4px;
-    transition: color 0.3s ease;
+    margin-top: 16px;
     width: fit-content;
-    border-bottom: none;
-    margin-top: 20px;
+    transition: color 0.3s ease;
 }
 
 .goldCta::after {
@@ -289,92 +297,267 @@
 }
 
 .ctaArrow {
-    transition: transform 0.3s ease;
     display: inline-block;
+    transition: transform 0.3s ease;
 }
 
 .goldCta:hover .ctaArrow {
     transform: translateX(5px);
 }
 
-/* ==========================================
-   RESPONSIVE
-   ========================================== */
-@media (max-width: 1024px) {
+/* ══════════════════════════════════════════
+   SECTION 4: FOUNDER
+   ══════════════════════════════════════════ */
+.founderProfile {
+    background: #ffffff;
+}
 
-    .inner,
-    .innerRev {
+/* Centered max-width wrapper — matches .inner/.innerRev layout */
+.founderInner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+    height: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Two columns: portrait on left, bio on right */
+.founderContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;                         /* Same as .inner gap */
+    align-items: center;
+    width: 100%;
+}
+
+/* Left column — image + name stacked */
+.imageCol {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Portrait image — same contained style as section images */
+.founderImageWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;               /* Portrait — same as imageWrap */
+    max-height: 70vh;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.founderImageInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Face stays visible — anchor to top */
+.founderImageWrap .image {
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.7s ease;
+}
+
+/* Name + title sit BELOW the portrait, not overlaid */
+.founderHeader {
+    position: static;                  /* No longer absolute overlay */
+    background: none;
+    padding: 0;
+    text-align: left;
+}
+
+.founderTitle {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(1.4rem, 2vw, 1.9rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary, #3A3530); /* Dark, not white — on white bg */
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+}
+
+.founderSubtitle {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-purple, #31275c); /* Brand purple, not white */
+}
+
+/* Right column — biography text */
+.founderText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;                        /* Gap handles spacing, same as .textContent */
+    overflow-y: visible;
+}
+
+.founderText p {
+    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted, #6B6560);
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+}
+
+/* Remove hidden corner elements */
+.cornerTL,
+.cornerBR {
+    display: none;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — TABLET + MOBILE (≤ 1024px)
+   ══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+    /* Disable snap scrolling */
+    .snapWrapper {
+        height: auto;
+        overflow-y: visible;
+        scroll-snap-type: none;
+    }
+
+    .snapSection {
+        height: auto;
+        min-height: auto;
+        flex-direction: column;
+        align-items: stretch;
+        overflow: visible;
+        scroll-snap-align: none;
+    }
+
+    /* STATS */
+    .statsInner {
+        grid-template-columns: 1fr;
+        padding: 80px 6%;
         gap: 48px;
     }
 
-    .founderContent {
-        gap: 60px;
-    }
-}
-
-@media (max-width: 768px) {
-    .pageHeader {
-        padding: 140px 24px 60px;
+    .statsLeft {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color, #E8E3DB);
+        padding-right: 0;
+        padding-bottom: 40px;
     }
 
-    .pageTitle {
+    .statsRight {
+        padding-left: 0;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .statsTitle {
         font-size: 2.8rem;
     }
 
+    /* ZIG-ZAG SECTIONS — IMAGE DIMENSIONS TABLET */
     .inner,
-    .innerRev,
-    .founderContent {
-        grid-template-columns: 1fr;
+    .innerRev {
+        grid-template-columns: 1fr; /* Stack vertically */
         direction: ltr;
-        /* reset */
-    }
-
-    .section,
-    .sectionAlt,
-    .founderProfile {
-        padding: 80px 24px;
-    }
-
-    .imageWrap {
-        aspect-ratio: 4 / 3;
-        order: -1;
-    }
-
-    .founderImageWrap {
-        max-width: 400px;
-        width: 100%;
+        height: auto;
+        gap: 0;           /* Stacked needs no gap, padding handles spacing */
+        padding: 0;
+        max-width: 100%;
         margin: 0;
     }
 
+    .imageWrap {
+        aspect-ratio: unset;  /* Remove portrait ratio, use natural height */
+        height: 62vw;
+        min-height: 300px;
+        max-height: none;
+        border-radius: 0;     /* Full width — no rounding when edge-to-edge */
+        order: -1;            /* Image always on top */
+    }
+
+    .textContent {
+        padding: 56px 7%;     /* Restore padding since gap is gone when stacked */
+        overflow-y: visible;
+        max-height: none;
+        justify-content: flex-start;
+    }
+
+    /* FOUNDER SECTION — TABLET */
+    .founderInner {
+        max-width: 100%;
+        padding: 0;           /* Remove side padding when stacked */
+    }
+
+    .founderContent {
+        grid-template-columns: 1fr;
+        gap: 0;               /* No gap when stacked */
+        height: auto;
+    }
+
     .imageCol {
-        order: -1;
-        align-items: center;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .founderImageWrap {
+        aspect-ratio: unset;  /* Natural height on mobile */
+        height: 80vw;
+        min-height: 320px;
+        max-height: none;
+        border-radius: 0;
+    }
+
+    /* founderHeader stays static — sits below the image */
+    .founderHeader {
+        padding: 16px 7% 0;
         text-align: center;
     }
 
-    .founderHeader {
-        text-align: center;
-        margin-top: 24px;
-        margin-bottom: 32px;
+    .founderText {
+        padding: 48px 7%;
+        overflow-y: visible;
+        justify-content: flex-start;
     }
 }
 
+/* ══════════════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 480px)
+   ══════════════════════════════════════════ */
 @media (max-width: 480px) {
-    .pageTitle {
+    .statsTitle {
         font-size: 2.2rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .statBox:nth-child(even) {
+        padding-left: 0;
+        border-left: none;
     }
 
     .heading {
-        font-size: 2.2rem;
+        font-size: 1.9rem;
+    }
+
+    /* ZIG-ZAG SECTIONS — MOBILE */
+    .imageWrap {
+        height: 70vw;
+    }
+
+    /* FOUNDER SECTION — MOBILE */
+    .imageCol {
+        height: 100vw;
     }
 
     .founderTitle {
-        font-size: 1.8rem;
-    }
-
-    .introText,
-    .bodyText,
-    .founderText p {
-        font-size: 0.9rem;
+        font-size: 1.6rem;
     }
 }

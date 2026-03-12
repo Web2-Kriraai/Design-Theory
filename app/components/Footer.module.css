@@ -6,12 +6,12 @@
 .footer {
     background: linear-gradient(180deg, #31275c 0%, #31275c 100%);
     color: #c8c0d8;
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.85rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
     letter-spacing: 0.04em;
     position: relative;
     overflow: hidden;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /* subtle noise texture */
@@ -79,9 +79,8 @@
     }
 }
 
-/* ---- Column Title ---- */
 .colTitle {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.2em;

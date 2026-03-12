@@ -4,7 +4,7 @@
 
 /* ── Shared Utility ── */
 .sectionEyebrow {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.35em;
@@ -18,7 +18,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -46,9 +46,10 @@
     min-height: 600px;
     overflow: hidden;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    padding: 0 clamp(24px, 6vw, 100px) clamp(60px, 10vh, 120px);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 clamp(24px, 6vw, 100px);
 }
 
 .heroImageWrap {
@@ -65,56 +66,49 @@
 .heroOverlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(20, 16, 14, 0.75) 0%,
-        rgba(20, 16, 14, 0.3) 50%,
-        rgba(20, 16, 14, 0.1) 100%
-    );
+    background: linear-gradient(to top,
+            rgba(20, 16, 14, 0.75) 0%,
+            rgba(20, 16, 14, 0.3) 50%,
+            rgba(20, 16, 14, 0.1) 100%);
     z-index: 1;
 }
 
 .heroText {
     position: relative;
-    z-index: 2;
-    max-width: 800px;
+    z-index: 3;
+    text-align: center;
 }
 
 .heroEyebrow {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-size: clamp(3rem, 8vw, 7.5rem);
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
     margin-bottom: 20px;
     display: block;
 }
 
 .heroTitle {
-    font-family: var(--font-serif, 'Cormorant Garamond', serif);
-    font-size: clamp(3rem, 7vw, 6.5rem);
-    font-weight: 300;
-    color: #ffffff;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
+    font-family: var(--font-accent, 'Didot', serif);
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     margin-bottom: 40px;
 }
 
 .heroTitle em {
     font-style: italic;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.heroCtas {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.65);
 }
 
 .heroBtnPrimary {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -133,7 +127,7 @@
 }
 
 .heroBtnSecondary {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -161,9 +155,15 @@
     max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: clamp(40px, 6vw, 100px);
-    align-items: start;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(60px, 8vw, 120px);
+    align-items: center;
+}
+
+.aboutCompanyText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .aboutCompanyTitle {
@@ -174,21 +174,39 @@
     line-height: 1.15;
     text-transform: none;
     letter-spacing: normal;
+    margin-bottom: 30px;
 }
 
 .aboutCompanyBody {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .aboutCompanyBody p {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-    font-weight: 300;
-    line-height: 1.9;
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.8;
     color: var(--text-muted, #6B6560);
     margin-bottom: 20px;
+}
+
+.aboutCompanyImage {
+    position: relative;
+    width: 100%;
+}
+
+.aboutImgWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #EAE6DF;
+}
+
+.aboutImg {
+    object-fit: cover;
+    object-position: center;
 }
 
 /* ==========================================
@@ -248,7 +266,7 @@
 }
 
 .founderRole {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.15em;
@@ -278,12 +296,12 @@
 }
 
 .founderBio {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-sans);
     font-size: clamp(0.88rem, 1.4vw, 1rem);
     font-weight: 300;
     line-height: 1.9;
     color: var(--text-muted, #6B6560);
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 /* ==========================================
@@ -388,7 +406,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.2em;
@@ -445,10 +463,10 @@
 }
 
 .philosophyBody {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: clamp(0.88rem, 1.4vw, 1rem);
-    font-weight: 300;
-    line-height: 1.9;
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.8;
     color: var(--text-muted, #6B6560);
 }
 
@@ -491,7 +509,8 @@
 }
 
 .workflowLine {
-    display: none; /* kept for future horizontal layout toggle */
+    display: none;
+    /* kept for future horizontal layout toggle */
 }
 
 .workflowTitle {
@@ -507,10 +526,10 @@
 }
 
 .workflowDesc {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
-    font-size: 0.85rem;
-    font-weight: 300;
-    line-height: 1.8;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.7;
     color: var(--text-muted, #6B6560);
     grid-column: 2;
 }
@@ -519,6 +538,7 @@
    RESPONSIVE
    ========================================== */
 @media (max-width: 1024px) {
+
     .aboutCompanyInner,
     .philosophyInner {
         grid-template-columns: 1fr;

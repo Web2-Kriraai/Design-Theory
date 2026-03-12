@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import styles from "./home.module.css";
 
 const HomeContact = dynamic(() => import("./components/HomeContact"));
+const PortfolioGlimpse = dynamic(() => import("./components/PortfolioGlimpse"));
 
 /* ── Workflow Steps ── */
 const WORKFLOW = [
@@ -71,76 +72,87 @@ export default function Home() {
                     transition={{ duration: 1, delay: 0.4, ease: [0.215, 0.61, 0.355, 1] }}
                     className={styles.heroText}
                 >
-                    <p className={styles.heroEyebrow}>The Design Theory</p>
-                    <h1 className={styles.heroTitle}>
+                    <h1 className={styles.heroEyebrow}>The Design Theory</h1>
+                    <p className={styles.heroTitle}>
                         Designing Thoughtful<br /><em>Spaces for Modern Living</em>
-                    </h1>
-                    <div className={styles.heroCtas}>
-                        <Link href="/portfolio" className={styles.heroBtnPrimary}>View Portfolio</Link>
-                        <Link href="/contact" className={styles.heroBtnSecondary}>Get in Touch</Link>
-                    </div>
+                    </p>
                 </motion.div>
             </section>
 
             {/* ============================================
-                ABOUT COMPANY — Full-width, editorial text
-            ============================================ */}
+            ABOUT COMPANY — Side by side Layout
+        ============================================ */}
             <section className={styles.aboutCompany}>
                 <div className={styles.aboutCompanyInner}>
-                    <motion.p
-                        className={styles.sectionEyebrow}
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        Who We Are
-                    </motion.p>
-                    <motion.h2
-                        className={styles.aboutCompanyTitle}
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        custom={0.1}
-                    >
-                        A Contemporary Studio<br />Rooted in Thoughtful Design
-                    </motion.h2>
-                    <div className={styles.aboutCompanyBody}>
-                        <motion.p
+
+                    {/* Left Side: Text Box */}
+                    <div className={styles.aboutCompanyText}>
+                        <motion.h2
+                            className={styles.aboutCompanyTitle}
                             variants={fadeUp}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
-                            custom={0.2}
+                            custom={0.1}
                         >
-                            The Design Theory is a young, dynamic interior and architectural design studio based in
-                            Hyderabad, India. We specialise in creating refined residential and commercial spaces
-                            that balance aesthetics, functionality, and individuality.
-                        </motion.p>
-                        <motion.p
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.3}
-                        >
-                            Led by a deep understanding of design principles and client aspirations, our work is
-                            rooted in thoughtful planning, attention to detail, and timeless design sensibility.
-                            We deliver spaces that feel personal, purposeful, and enduring.
-                        </motion.p>
-                        <motion.div
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            custom={0.4}
-                        >
-                            <Link href="/about-us" className={styles.textCta}>
-                                Our Story <span>→</span>
-                            </Link>
-                        </motion.div>
+                            A Contemporary Studio<br />Rooted in Thoughtful Design
+                        </motion.h2>
+                        <div className={styles.aboutCompanyBody}>
+                            <motion.p
+                                variants={fadeUp}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                custom={0.2}
+                            >
+                                The Design Theory is a young, dynamic interior and architectural design studio based in
+                                Hyderabad, India. We specialise in creating refined residential and commercial spaces
+                                that balance aesthetics, functionality, and individuality.
+                            </motion.p>
+                            <motion.p
+                                variants={fadeUp}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                custom={0.3}
+                            >
+                                Led by a deep understanding of design principles and client aspirations, our work is
+                                rooted in thoughtful planning, attention to detail, and timeless design sensibility.
+                                We deliver spaces that feel personal, purposeful, and enduring.
+                            </motion.p>
+                            <motion.div
+                                variants={fadeUp}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                custom={0.4}
+                            >
+                                <Link href="/about-us" className={styles.textCta}>
+                                    Our Story <span>→</span>
+                                </Link>
+                            </motion.div>
+                        </div>
                     </div>
+
+                    {/* Right Side: Image Box */}
+                    <motion.div
+                        className={styles.aboutCompanyImage}
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, ease: [0.215, 0.61, 0.355, 1] }}
+                    >
+                        <div className={styles.aboutImgWrapper}>
+                            <Image
+                                src="/assets/testimonial/avatar1.jpg"
+                                alt="The Design Theory Studio"
+                                fill
+                                className={styles.aboutImg}
+                                sizes="(max-width: 768px) 100vw, 45vw"
+                            />
+                        </div>
+                    </motion.div>
+
                 </div>
             </section>
 
@@ -236,15 +248,6 @@ export default function Home() {
             ============================================ */}
             <section className={styles.portfolioSection}>
                 <div className={styles.portfolioHeader}>
-                    <motion.p
-                        className={styles.sectionEyebrow}
-                        variants={fadeUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        Our Work
-                    </motion.p>
                     <motion.h2
                         className={styles.portfolioTitle}
                         variants={fadeUp}
@@ -314,15 +317,6 @@ export default function Home() {
             <section className={styles.philosophySection}>
                 <div className={styles.philosophyInner}>
                     <div className={styles.philosophyText}>
-                        <motion.p
-                            className={styles.sectionEyebrow}
-                            variants={fadeUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                        >
-                            Our Approach
-                        </motion.p>
                         <motion.h2
                             className={styles.philosophyHeading}
                             variants={fadeUp}
@@ -386,9 +380,14 @@ export default function Home() {
             </section>
 
             {/* ============================================
-                ENQUIRY FORM
+                ENQUIRY FORM — HomeContact matches /contact
             ============================================ */}
             <HomeContact />
+
+            {/* ============================================
+                PORTFOLIO GLIMPSE — Auto-scrolling Masonry
+            ============================================ */}
+            <PortfolioGlimpse />
 
         </div>
     );

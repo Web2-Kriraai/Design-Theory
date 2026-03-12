@@ -153,10 +153,9 @@
     transform: scale(1.06);
 }
 
-/* ── Nav Items ── */
 .navItem {
     position: relative;
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -247,7 +246,7 @@
     display: block;
     padding: 10px 24px;
     color: #e8e4f0;
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.75rem;
     font-weight: 400;
     letter-spacing: 0.08em;
@@ -435,7 +434,7 @@
 }
 
 .mobileSubNav a {
-    font-family: var(--font-sans, 'Montserrat', sans-serif);
+    font-family: var(--font-accent, 'Didot', serif);
     font-size: 0.85rem;
     font-weight: 400;
     letter-spacing: 0.06em;

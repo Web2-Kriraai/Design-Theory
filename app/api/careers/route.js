@@ -49,3 +49,27 @@ export async function GET() {
         return NextResponse.json({ error: 'Failed to fetch applications.' }, { status: 500 });
     }
 }
+
+// DELETE — Remove a job application
+export async function DELETE(req) {
+    try {
+        await connectMongo();
+        const { searchParams } = new URL(req.url);
+        const id = searchParams.get('id');
+
+        if (!id) {
+            return NextResponse.json({ error: 'ID is required to delete.' }, { status: 400 });
+        }
+
+        const deletedApplication = await Career.findByIdAndDelete(id);
+
+        if (!deletedApplication) {
+            return NextResponse.json({ error: 'Application not found.' }, { status: 404 });
+        }
+
+        return NextResponse.json({ success: true, message: 'Application deleted successfully.' });
+    } catch (error) {
+        console.error('Career DELETE error:', error);
+        return NextResponse.json({ error: 'Failed to delete application.' }, { status: 500 });
+    }
+}
